@@ -1,0 +1,15 @@
+.partyContainer {
+  width: 100%;
+  padding-right: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.activeItem {
+  opacity: 0.5;
+}
+
+.applyingItem .character {
+  
+}

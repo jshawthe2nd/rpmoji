@@ -1,0 +1,36 @@
+@font-face {
+  font-family: "Minitel";
+  src: local("Minitel"), url('./fonts/minitel.ttf') format('truetype');
+}
+
+body {
+  background: #222;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  background: #222;
+  height: 100%;
+}
+
+.App h1 {
+  font-family: "Minitel";
+  color: white;
+  text-shadow: 2px 4px 2px #000;
+  font-size: 4em;
+  margin: 0 auto;
+}
+
+.App > p {
+  font-family: "Minitel";
+  color: white;
+  text-shadow: 2px 2px 2px #000;
+  font-size: 15px;
+  margin: 15px auto;
+  max-width: 720px;
+  text-align: center;
+}

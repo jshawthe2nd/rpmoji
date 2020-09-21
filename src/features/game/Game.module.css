@@ -1,0 +1,14 @@
+.gameContainer {
+    width: 720px;    
+    height: 480px;
+    min-height: 480px;
+    max-height: 480px;
+    display: flex;
+    border-radius: 3px;
+    border: 1px solid #222;
+    background: linear-gradient(to bottom, #666 0%, #444 64%, #111 100%);    
+    overflow: hidden;
+    justify-content: space-between;
+    margin: auto;
+  }
+  
