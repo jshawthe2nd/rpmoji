@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { selectChars, selectActiveItem } from "./partySlice";
+import { selectChars, selectActiveItem, selectApplyingItem } from "./partySlice";
 
 import { Character } from '../character/Character';
 
@@ -16,12 +16,13 @@ export function Party({ children }) {
   const party = useSelector(selectChars);
 
   const activeItem = useSelector(selectActiveItem);
+  const applyingItem = useSelector(selectApplyingItem);
   const onCharacterSelect = () => {
 
   }
 
   return (
-    <div id="partyContainer" className={`${styles.partyContainer} ${activeItem !== null ? styles.activeItem : ``}`}>
+    <div id="partyContainer" className={`${styles.partyContainer} ${applyingItem ? `applyingItem` : ``}`}>
       {party.map((char, index) => {
         
         return (
@@ -30,6 +31,7 @@ export function Party({ children }) {
             char={char} 
             onCharacterSelect={onCharacterSelect} 
             itemToUse={activeItem}
+            applyingItem={applyingItem}
           />
         )
       })}

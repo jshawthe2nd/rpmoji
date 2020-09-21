@@ -9,14 +9,18 @@ import { OPEN_MENU } from "../menu/types";
 
 import { getCharacterSymbolPath, getCharacterIconLabel, canItemBeUsed } from './utils';
 
-export function Character({ char, onCharacterSelect, itemToUse = null }) {
+export function Character({ 
+  char, onCharacterSelect, applyingItem, itemToUse = null 
+}) {
   
   const dispatch = useDispatch();
 
-  console.log(canItemBeUsed(char, itemToUse));
+  console.log(applyingItem);
   
   return (
-    <div className={`${styles.character} ${(!canItemBeUsed(char, itemToUse)) ? styles.dimCharacter : ``}`} onClick={() => onCharacterSelect()}>
+    <div 
+    className={`${styles.character} ${(applyingItem && !canItemBeUsed(char, itemToUse)) ? styles.dimCharacter : ``}`} 
+    onClick={() => onCharacterSelect()}>
       <div className={styles.charIcon}>
         <Icon symbol={getCharacterSymbolPath(char)} label={getCharacterIconLabel(char)} />        
         {char.status && <Icon status={char.status} symbol={`status.${char.status}`} label={`${char.status}`} />}

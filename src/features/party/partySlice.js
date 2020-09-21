@@ -173,6 +173,11 @@ export const slice = createSlice({
           qty: 4,
         },
         {
+          symbol: "item.ether",
+          label: "Ether",
+          qty: 2,
+        },
+        {
           symbol: "item.antidote",
           label: "Antidote",
           qty: 2,
@@ -225,7 +230,8 @@ export const slice = createSlice({
       ]
     },
     gold: 666,
-    activeItem: null
+    activeItem: null,
+    applyingItem: false
   },
   reducers: {
     incrementItemQty: (state, action) => {
@@ -243,6 +249,9 @@ export const slice = createSlice({
     activateItem: (state, action) => {
        
        state.activeItem = state.inventory.item[action.payload.item];
+    },
+    setApplyItem: (state, action) => {
+      state.applyingItem = action.payload.applying;
     }
   }
 });
@@ -253,6 +262,7 @@ export const {
   removeFromInventory, 
   addToInventory, 
   activateItem,
+  setApplyItem
 } = slice.actions;
 
 
@@ -282,6 +292,10 @@ export const selectItems = state => {
 
 export const selectActiveItem = state => { 
   return state.party.activeItem;
+}
+
+export const selectApplyingItem = state => {
+  return state.party.applyingItem;
 }
 
 export default slice.reducer;

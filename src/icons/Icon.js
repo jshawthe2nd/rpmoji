@@ -104,6 +104,7 @@ export const symbols = {
       poison: `⚗️`
     },
     potion: `🧃`,
+    ether: `🧴`,
     elixir: `🧪`,
     antidote: `💊`
   },
@@ -114,10 +115,10 @@ function getSymbol(symbolPath) {
   return (symbolPath) ? symbolPath.split(".").reduce((o, i) => o[i], symbols) : ``;
 }
 
-export function Icon({ symbol, label, status = false }) {
+export function Icon({ symbol, label, cssClass, status = false }) {
   return (
     <span
-      className={`icon ${symbol} ${(status) ? `status` : ``}`}
+      className={`icon ${getSymbol(symbol)} ${(status) ? `status` : ``} ${cssClass}`}
       role="img"
       aria-label={label ? label : ``}
       aria-hidden={label ? "false" : "true"}

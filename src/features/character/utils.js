@@ -57,11 +57,15 @@ export const canItemBeUsed = (char, item) => {
   if(!item) return false;
   switch(item.label) {
     case `Potion`:
-      console.log(char);
+      
       return char.stats.hp.current < char.stats.hp.max;
+    case `Ether`:
+      return char.stats.mp.current < char.stats.mp.max;
     case `Antidote`:
-      return char.stats.status === 'poison';
+      return char.status === 'poison';
     case `Elixir`:
       return char.stats.status === 'ko';
+    default:
+      return false;
   }
 }
