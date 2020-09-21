@@ -53,15 +53,15 @@ export const getCharacterIconLabel = (char) => {
 }
 
 export const canItemBeUsed = (char, item) => {
+  
+  if(!item) return false;
   switch(item.label) {
     case `Potion`:
+      console.log(char);
       return char.stats.hp.current < char.stats.hp.max;
-    break;
     case `Antidote`:
       return char.stats.status === 'poison';
-    break;
     case `Elixir`:
       return char.stats.status === 'ko';
-    break;
   }
 }

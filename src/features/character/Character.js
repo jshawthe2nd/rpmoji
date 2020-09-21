@@ -3,20 +3,20 @@ import { useDispatch } from "react-redux";
 import { openMenu } from "../menu/menuSlice";
 
 import styles from "./Character.module.css";
-import { activeItem }  from '../party/Party.module.css';
 
 import { Icon } from "../../icons/Icon";
 import { OPEN_MENU } from "../menu/types";
 
-import { getCharacterSymbolPath, getCharacterIconLabel } from './utils';
+import { getCharacterSymbolPath, getCharacterIconLabel, canItemBeUsed } from './utils';
 
 export function Character({ char, onCharacterSelect, itemToUse = null }) {
   
   const dispatch = useDispatch();
 
+  console.log(canItemBeUsed(char, itemToUse));
   
   return (
-    <div className={`${styles.character} ${itemToUse ? activeItem : ``}`} onClick={() => onCharacterSelect()}>
+    <div className={`${styles.character} ${(!canItemBeUsed(char, itemToUse)) ? styles.dimCharacter : ``}`} onClick={() => onCharacterSelect()}>
       <div className={styles.charIcon}>
         <Icon symbol={getCharacterSymbolPath(char)} label={getCharacterIconLabel(char)} />        
         {char.status && <Icon status={char.status} symbol={`status.${char.status}`} label={`${char.status}`} />}

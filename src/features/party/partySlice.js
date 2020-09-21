@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import * as partyReducers from './partyReducers';
 
 export const slice = createSlice({
   name: 'party',
@@ -242,7 +241,7 @@ export const slice = createSlice({
       
     },
     activateItem: (state, action) => {
-       console.log(action);
+       
        state.activeItem = state.inventory.item[action.payload.item];
     }
   }
