@@ -1,21 +1,39 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { openMenu } from "../menu/menuSlice";
-
-import styles from "./Character.module.css";
-
 import { Icon } from "../../icons/Icon";
+
+import { openMenu } from "../menu/menuSlice";
+import { recoverHP, recoverMP, clearStatus } from './characterSlice';
+
 import { OPEN_MENU } from "../menu/types";
 
 import { getCharacterSymbolPath, getCharacterIconLabel, canItemBeUsed } from './utils';
 
+import styles from "./Character.module.css";
+import { CLEAR_STATUS, RECOV_HP, RECOV_MP } from "./types";
+
 export function Character({ 
-  char, onCharacterSelect, applyingItem, itemToUse = null 
+  char, applyingItem, itemToUse = null 
 }) {
   
   const dispatch = useDispatch();
-
-  console.log(applyingItem);
+  
+  const onCharacterSelect = (itemToUse) => {
+    switch(itemToUse.label) {
+      case `Potion`:
+        dispatch(recoverHP({type: RECOV_HP, charId: char.id}));
+        break;
+      case `Ether`:
+        dispatch(recoverMP({type: RECOV_MP, charId: char.id}));
+        break;
+      case `Antidote`:
+      case `Elixir`:
+        dispatch(clearStatus({type: CLEAR_STATUS, charId: char.id}));
+        break;
+      default:
+        return;
+    }
+  }
   
   return (
     <div 
