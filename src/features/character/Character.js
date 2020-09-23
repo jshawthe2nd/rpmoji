@@ -19,8 +19,9 @@ export function Character({
   
   return (
     <div 
-    className={`${styles.character} ${(applyingItem && !canItemBeUsed(char, itemToUse)) ? styles.dimCharacter : ``}`} 
-    onClick={() => onCharacterSelect()}>
+      className={`${styles.character} ${(applyingItem && !canItemBeUsed(char, itemToUse)) ? styles.dimCharacter : ``}`} 
+      onClick={() => onCharacterSelect(itemToUse)}
+    >
       <div className={styles.charIcon}>
         <Icon symbol={getCharacterSymbolPath(char)} label={getCharacterIconLabel(char)} />        
         {char.status && <Icon status={char.status} symbol={`status.${char.status}`} label={`${char.status}`} />}

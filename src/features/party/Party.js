@@ -17,8 +17,8 @@ export function Party({ children }) {
 
   const activeItem = useSelector(selectActiveItem);
   const applyingItem = useSelector(selectApplyingItem);
-  const onCharacterSelect = () => {
-
+  const onCharacterSelect = (itemToUse) => {
+    
   }
 
   return (
