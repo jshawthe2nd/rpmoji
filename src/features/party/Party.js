@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectChars, selectActiveItem, selectApplyingItem } from "./partySlice";
 
 import { Character } from '../character/Character';
@@ -12,8 +12,7 @@ import styles from "./Party.module.css";
  * the inventory and the party pieces of state
  */
 export function Party({ children }) {
-  const dispatch = useDispatch();
-  
+    
   const party = useSelector(selectChars);
 
   const activeItem = useSelector(selectActiveItem);

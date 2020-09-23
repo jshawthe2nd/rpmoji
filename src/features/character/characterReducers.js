@@ -8,8 +8,14 @@ export default {
   levelUp: state => { },
   gainExp: state => { },
   afflictStatus: state => { },
-  clearStatus: state => { },
+  clearStatus: (state, action) => { 
+
+  },
   openSubMenu: state => { },
-  recoverHP: state => { },
-  recoverMP: state => { }
-};
+  recoverHP: (state, action) => {
+    console.log(state, action);
+  },
+  recoverMP: (state, action) => {
+
+  }
+}

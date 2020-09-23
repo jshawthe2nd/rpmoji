@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import * as characterReducers from "./characterReducers";
+import {default as characterReducers } from "./characterReducers";
 
 export const slice = createSlice({
   name: "character",
@@ -45,6 +45,7 @@ export const slice = createSlice({
   },
 });
 
+console.log({...characterReducers});
 
 export const {
   attack,
@@ -56,7 +57,7 @@ export const {
   afflictStatus,
   clearStatus,
   recoverHP,
-  recoverMP
+  recoverMP,
 } = slice.actions;
 
 export const selectWeapon = (state) => {};

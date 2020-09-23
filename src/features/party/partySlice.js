@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import { default as partyReducers } from './partyReducers';
+
 export const slice = createSlice({
   name: 'party',
   initialState: {
@@ -234,25 +236,7 @@ export const slice = createSlice({
     applyingItem: false
   },
   reducers: {
-    incrementItemQty: (state, action) => {
-      console.log(action);
-    },
-    decrementItemQty: (state, action) => {
-      console.log(action);
-    },
-    removeFromInventory: (state, action) => {
-      console.log(action);
-    },
-    addToInventory: (state, action) => {
-      
-    },
-    activateItem: (state, action) => {
-       
-       state.activeItem = state.inventory.item[action.payload.item];
-    },
-    setApplyItem: (state, action) => {
-      state.applyingItem = action.payload.applying;
-    }
+    ...partyReducers
   }
 });
 
