@@ -1,6 +1,5 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { SET_ACTIVE_ITEM, SET_APPLY_ITEM } from './types';
 import { activateItem, selectItems, setApplyItem } from '../party/partySlice';
 import styles from "./Menu.module.css";
 
@@ -13,8 +12,8 @@ export function ItemMenu() {
   const dispatch = useDispatch();
 
   const onItemClick = (index) => {
-    dispatch(setApplyItem({type: SET_APPLY_ITEM, applying: true}));
-    dispatch(activateItem({type: SET_ACTIVE_ITEM, item: index}));
+    dispatch(setApplyItem({applying: true}));
+    dispatch(activateItem({item: index}));
     
   }
   return (

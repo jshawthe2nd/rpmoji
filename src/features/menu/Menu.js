@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import styles from "./Menu.module.css";
 
 import { selectMenu, openMenu, closeMenu } from "./menuSlice";
-import { OPEN_MENU } from "./types";
 
 import { WeaponMenu } from "./WeaponMenu";
 import { ArmorMenu } from "./ArmorMenu";
@@ -42,7 +41,7 @@ export function Menu() {
                 key={index}
                 className={styles.menuOption}
                 onClick={() => {
-                  dispatch(openMenu({ type: OPEN_MENU, menu: entry }));
+                  dispatch(openMenu({ menu: entry }));
                 }}
               >
                 {menuOptions[entry].label}

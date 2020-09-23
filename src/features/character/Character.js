@@ -5,12 +5,9 @@ import { Icon } from "../../icons/Icon";
 import { openMenu } from "../menu/menuSlice";
 import { recoverHP, recoverMP, clearStatus } from './characterSlice';
 
-import { OPEN_MENU } from "../menu/types";
-
 import { getCharacterSymbolPath, getCharacterIconLabel, canItemBeUsed } from './utils';
 
 import styles from "./Character.module.css";
-import { CLEAR_STATUS, RECOV_HP, RECOV_MP } from "./types";
 
 export function Character({ 
   char, applyingItem, itemToUse = null 
@@ -21,14 +18,14 @@ export function Character({
   const onCharacterSelect = (itemToUse) => {
     switch(itemToUse.label) {
       case `Potion`:
-        dispatch(recoverHP({type: RECOV_HP, charId: char.id}));
+        dispatch(recoverHP({charId: char.id}));
         break;
       case `Ether`:
-        dispatch(recoverMP({type: RECOV_MP, charId: char.id}));
+        dispatch(recoverMP({charId: char.id}));
         break;
       case `Antidote`:
       case `Elixir`:
-        dispatch(clearStatus({type: CLEAR_STATUS, charId: char.id}));
+        dispatch(clearStatus({charId: char.id}));
         break;
       default:
         return;
@@ -67,7 +64,7 @@ export function Character({
             <div
               className={styles.weapon}
               onClick={(e) => {
-                dispatch(openMenu({ type: OPEN_MENU, menu: "weapons" }));
+                dispatch(openMenu({ menu: "weapons" }));
               }}
             >
               <Icon symbol="item.weapon.sword" label="sword" /> Wood
@@ -75,7 +72,7 @@ export function Character({
             <div
               className={styles.armor}
               onClick={(e) => {
-                dispatch(openMenu({ type: OPEN_MENU, menu: "armor" }));
+                dispatch(openMenu({ menu: "armor" }));
               }}
             >
               <Icon symbol="item.armor" label="armor" /> Leather

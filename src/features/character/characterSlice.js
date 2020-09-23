@@ -45,7 +45,6 @@ export const slice = createSlice({
   },
 });
 
-console.log({...characterReducers});
 
 export const {
   attack,
