@@ -7,7 +7,7 @@ export const slice = createSlice({
   },
   reducers: {
     openMenu: (state, action) => {
-      console.log(state);
+      
       state.menu = action.payload.menu;
     },
     closeMenu: (state, action) => {

@@ -13,6 +13,8 @@ Game Menu:
     ☐ UI Updates
     ☐ State Updates
   ☐ UI Fine-tuning
+    - Show hand on hovered Character
+    - When clicking BackOption clear Character 'select' state
 
 World Map: 
 
