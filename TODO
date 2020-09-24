@@ -1,6 +1,5 @@
 
-Todo: 
-  Game menu 
+Game Menu: 
   ☐ Post-item usage
       ☐ UI updates
       ☐ State updates
@@ -15,21 +14,23 @@ Todo:
     ☐ State Updates
   ☐ UI Fine-tuning
 
-Todo: 
-  World Map
+World Map: 
 
-Todo:
-  Battle System
+Battle System:
 
-Todo:
-  Quest
-    ☐ State Updates
 
-Todo:
-  IndexedDB
+Quest:
+  ☐ State Updates
+
+IndexedDB:
   ☐ DB Creation
   ☐ Interaction Layer
 
-Todo:
-  Saving Game State
+Saving Game:
   ☐ DB Data 
+
+Coding:
+  ☐ Maybe PropTypes?
+  ☐ 
+Bugfixes:
+  ☐ make sure onCharacterSelect only fires when applying item not when selecting for weapon or armor
