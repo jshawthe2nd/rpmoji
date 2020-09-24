@@ -1,0 +1,35 @@
+
+Todo: 
+  Game menu 
+  ☐ Post-item usage
+      ☐ UI updates
+      ☐ State updates
+  ☐ Weapon Equip
+    ☐ UI Updates
+    ☐ State Updates
+  ☐ Armor Equip
+    ☐ UI Updates
+    ☐ State Updates
+  ☐ Scroll/Spell Usage
+    ☐ UI Updates
+    ☐ State Updates
+  ☐ UI Fine-tuning
+
+Todo: 
+  World Map
+
+Todo:
+  Battle System
+
+Todo:
+  Quest
+    ☐ State Updates
+
+Todo:
+  IndexedDB
+  ☐ DB Creation
+  ☐ Interaction Layer
+
+Todo:
+  Saving Game State
+  ☐ DB Data 
