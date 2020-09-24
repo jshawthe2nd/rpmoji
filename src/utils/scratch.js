@@ -22,3 +22,7 @@ function calculateXPToNextLevel(xp, currentLevel) {
   const xpToNext = n + 1 * 50 + (currentLevel * 50);
   
 }
+
+export const determineAmountToRecover = (charLevel, recoveryCost) => {
+  return ((charLevel * 10 / 2 ) + (recoveryCost / 2));
+}

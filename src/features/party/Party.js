@@ -16,8 +16,7 @@ export function Party({ children }) {
   const party = useSelector(selectChars);
 
   const activeItem = useSelector(selectActiveItem);
-  const applyingItem = useSelector(selectApplyingItem);
-  
+  const applyingItem = useSelector(selectApplyingItem);  
 
   return (
     <div id="partyContainer" className={`${styles.partyContainer} ${applyingItem ? `applyingItem` : ``}`}>
@@ -26,7 +25,7 @@ export function Party({ children }) {
         return (
           <Character 
             key={char.id} 
-            char={char} 
+            charId={char.id} 
             itemToUse={activeItem}
             applyingItem={applyingItem}
           />

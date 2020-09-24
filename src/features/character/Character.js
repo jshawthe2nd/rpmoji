@@ -1,19 +1,24 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Icon } from "../../icons/Icon";
 
 import { openMenu } from "../menu/menuSlice";
-import { recoverHP, recoverMP, clearStatus } from './characterSlice';
+import { recoverHP, recoverMP, clearStatus } from '../party/partySlice';
 
 import { getCharacterSymbolPath, getCharacterIconLabel, canItemBeUsed } from './utils';
 
 import styles from "./Character.module.css";
 
 export function Character({ 
-  char, applyingItem, itemToUse = null 
+  charId, 
+  applyingItem, 
+  itemToUse = null 
 }) {
   
   const dispatch = useDispatch();
+
+  const char = useSelector(state => state.party.chars.find(c => c.id === charId));
+  
   
   const onCharacterSelect = (itemToUse) => {
     switch(itemToUse.label) {
@@ -38,8 +43,16 @@ export function Character({
       onClick={() => onCharacterSelect(itemToUse)}
     >
       <div className={styles.charIcon}>
-        <Icon symbol={getCharacterSymbolPath(char)} label={getCharacterIconLabel(char)} />        
-        {char.status && <Icon status={char.status} symbol={`status.${char.status}`} label={`${char.status}`} />}
+        <Icon 
+          symbol={getCharacterSymbolPath(char)} 
+          label={getCharacterIconLabel(char)} 
+        />        
+        {char.status && 
+        <Icon 
+          status={char.status} 
+          symbol={`status.${char.status}`} 
+          label={`${char.status}`} 
+        />}
       </div>
       <div className={styles.charDetails}>
         <h2>
