@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Icon } from "../../icons/Icon";
 
 import { openMenu } from "../menu/menuSlice";
-import { recoverHP, recoverMP, clearStatus } from '../party/partySlice';
+import { recoverHP, recoverMP, clearStatus, decrementItemQty } from '../party/partySlice';
 
 import { getCharacterSymbolPath, getCharacterIconLabel, canItemBeUsed } from './utils';
 
@@ -24,6 +24,7 @@ export function Character({
     switch(itemToUse.label) {
       case `Potion`:
         dispatch(recoverHP({charId: char.id}));
+        
         break;
       case `Ether`:
         dispatch(recoverMP({charId: char.id}));
@@ -35,6 +36,7 @@ export function Character({
       default:
         return;
     }
+    dispatch(decrementItemQty({itemUsed: itemToUse}));
   }
   
   return (
