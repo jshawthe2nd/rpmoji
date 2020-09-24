@@ -12,7 +12,10 @@ export default {
     
   },
   activateItem: (state, action) => {
-     console.log(action);
-     return state;
+     
+     state.activeItem = state.inventory.item[action.payload.item];
+  },
+  setApplyItem: (state, action) => {
+    state.applyingItem = action.payload.applying;
   }
-};
+}

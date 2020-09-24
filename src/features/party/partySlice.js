@@ -1,5 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import partyReducers from './partyReducers';
+import characterReducers from '../character/characterReducers';
+
 export const slice = createSlice({
   name: 'party',
   initialState: {
@@ -170,7 +173,7 @@ export const slice = createSlice({
         {
           symbol: "item.potion",
           label: "Potion",
-          qty: 4,
+          qty: 4
         },
         {
           symbol: "item.ether",
@@ -234,25 +237,8 @@ export const slice = createSlice({
     applyingItem: false
   },
   reducers: {
-    incrementItemQty: (state, action) => {
-      console.log(action);
-    },
-    decrementItemQty: (state, action) => {
-      console.log(action);
-    },
-    removeFromInventory: (state, action) => {
-      console.log(action);
-    },
-    addToInventory: (state, action) => {
-      
-    },
-    activateItem: (state, action) => {
-       
-       state.activeItem = state.inventory.item[action.payload.item];
-    },
-    setApplyItem: (state, action) => {
-      state.applyingItem = action.payload.applying;
-    }
+    ...partyReducers,
+    ...characterReducers
   }
 });
 
@@ -262,15 +248,18 @@ export const {
   removeFromInventory, 
   addToInventory, 
   activateItem,
-  setApplyItem
+  setApplyItem,
+  recoverHP,
+  recoverMP,
+  clearStatus
 } = slice.actions;
-
 
 export const selectInventory = state => state.party.inventory;
 
 export const selectChars = state => {
   return state.party.chars;
 }
+
 
 export const selectGold = state => state.gold;
 
@@ -291,6 +280,7 @@ export const selectItems = state => {
 };
 
 export const selectActiveItem = state => { 
+  
   return state.party.activeItem;
 }
 

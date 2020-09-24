@@ -1,21 +1,41 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { openMenu } from "../menu/menuSlice";
-
-import styles from "./Character.module.css";
-
+import { useSelector, useDispatch } from "react-redux";
 import { Icon } from "../../icons/Icon";
-import { OPEN_MENU } from "../menu/types";
+
+import { openMenu } from "../menu/menuSlice";
+import { recoverHP, recoverMP, clearStatus } from '../party/partySlice';
 
 import { getCharacterSymbolPath, getCharacterIconLabel, canItemBeUsed } from './utils';
 
+import styles from "./Character.module.css";
+
 export function Character({ 
-  char, onCharacterSelect, applyingItem, itemToUse = null 
+  charId, 
+  applyingItem, 
+  itemToUse = null 
 }) {
   
   const dispatch = useDispatch();
 
-  console.log(applyingItem);
+  const char = useSelector(state => state.party.chars.find(c => c.id === charId));
+  
+  
+  const onCharacterSelect = (itemToUse) => {
+    switch(itemToUse.label) {
+      case `Potion`:
+        dispatch(recoverHP({charId: char.id}));
+        break;
+      case `Ether`:
+        dispatch(recoverMP({charId: char.id}));
+        break;
+      case `Antidote`:
+      case `Elixir`:
+        dispatch(clearStatus({charId: char.id}));
+        break;
+      default:
+        return;
+    }
+  }
   
   return (
     <div 
@@ -23,8 +43,16 @@ export function Character({
       onClick={() => onCharacterSelect(itemToUse)}
     >
       <div className={styles.charIcon}>
-        <Icon symbol={getCharacterSymbolPath(char)} label={getCharacterIconLabel(char)} />        
-        {char.status && <Icon status={char.status} symbol={`status.${char.status}`} label={`${char.status}`} />}
+        <Icon 
+          symbol={getCharacterSymbolPath(char)} 
+          label={getCharacterIconLabel(char)} 
+        />        
+        {char.status && 
+        <Icon 
+          status={char.status} 
+          symbol={`status.${char.status}`} 
+          label={`${char.status}`} 
+        />}
       </div>
       <div className={styles.charDetails}>
         <h2>
@@ -49,7 +77,7 @@ export function Character({
             <div
               className={styles.weapon}
               onClick={(e) => {
-                dispatch(openMenu({ type: OPEN_MENU, menu: "weapons" }));
+                dispatch(openMenu({ menu: "weapons" }));
               }}
             >
               <Icon symbol="item.weapon.sword" label="sword" /> Wood
@@ -57,7 +85,7 @@ export function Character({
             <div
               className={styles.armor}
               onClick={(e) => {
-                dispatch(openMenu({ type: OPEN_MENU, menu: "armor" }));
+                dispatch(openMenu({ menu: "armor" }));
               }}
             >
               <Icon symbol="item.armor" label="armor" /> Leather
