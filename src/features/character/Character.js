@@ -12,7 +12,7 @@ import styles from "./Character.module.css";
 export function Character({ 
   charId, 
   applyingItem, 
-  itemToUse = null 
+  itemToUse = null
 }) {
   
   const dispatch = useDispatch();
@@ -20,29 +20,32 @@ export function Character({
   const char = useSelector(state => state.party.chars.find(c => c.id === charId));
   
   
-  const onCharacterSelect = (itemToUse) => {
-    switch(itemToUse.label) {
-      case `Potion`:
-        dispatch(recoverHP({charId: char.id}));
-        
-        break;
-      case `Ether`:
-        dispatch(recoverMP({charId: char.id}));
-        break;
-      case `Antidote`:
-      case `Elixir`:
-        dispatch(clearStatus({charId: char.id}));
-        break;
-      default:
-        return;
+  const onCharacterSelect = (event, itemToUse) => {
+    
+    if(itemToUse !== null) {
+      switch(itemToUse.label) {
+        case `Potion`:
+          dispatch(recoverHP({charId: char.id}));
+          break;
+        case `Ether`:
+          dispatch(recoverMP({charId: char.id}));
+          break;
+        case `Antidote`:
+        case `Elixir`:
+          dispatch(clearStatus({charId: char.id}));
+          break;
+        default:
+          return;
+      }
+      dispatch(decrementItemQty({itemUsed: itemToUse}));
     }
-    dispatch(decrementItemQty({itemUsed: itemToUse}));
+    
   }
   
   return (
     <div 
       className={`${styles.character} ${(applyingItem && !canItemBeUsed(char, itemToUse)) ? styles.dimCharacter : ``}`} 
-      onClick={() => onCharacterSelect(itemToUse)}
+      onClick={(e) => onCharacterSelect(e, itemToUse)}
     >
       <div className={styles.charIcon}>
         <Icon 
@@ -67,9 +70,10 @@ export function Character({
             <span>
               HP:{char.stats.hp.current}/{char.stats.hp.max}
             </span>
-            <span>
+            {char.charType === 2 && <span>
               MP:{char.stats.mp.current}/{char.stats.mp.max}
             </span>
+            }
             <span>
               XP:{char.stats.level.exp}/{char.stats.level.next}
             </span>
@@ -79,6 +83,8 @@ export function Character({
             <div
               className={styles.weapon}
               onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
                 dispatch(openMenu({ menu: "weapons" }));
               }}
             >
@@ -87,6 +93,8 @@ export function Character({
             <div
               className={styles.armor}
               onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
                 dispatch(openMenu({ menu: "armor" }));
               }}
             >
