@@ -35,4 +35,4 @@ Coding:
   ☐ Maybe PropTypes?
   ☐ 
 Bugfixes:
-  ☐ make sure onCharacterSelect only fires when applying item not when selecting for weapon or armor
+  ✔ make sure onCharacterSelect only fires when applying item not when selecting for weapon or armor @done(20-09-23 22:24)
