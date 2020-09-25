@@ -173,22 +173,26 @@ export const slice = createSlice({
         {
           symbol: "item.potion",
           label: "Potion",
-          qty: 4
+          qty: 4,
+          using: false
         },
         {
           symbol: "item.ether",
           label: "Ether",
           qty: 2,
+          using: false
         },
         {
           symbol: "item.antidote",
           label: "Antidote",
           qty: 2,
+          using: false
         },
         {
           symbol: "item.elixir",
           label: "Elixir",
           qty: 1,
+          using: false
         },
       ],
       weapon: [

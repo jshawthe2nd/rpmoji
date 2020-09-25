@@ -30,16 +30,12 @@
   position: relative;
 }
 
-.backToMain {
-  font-size: 14px;
-  padding-left: 11px;
-  cursor: pointer;
-  position: absolute;
-  bottom: 110px;
-}
 
 .subMenuOption span {
-  margin-right: 8px;
+  display: inline-block;
+  vertical-align: middle;
+  width: 28px;
+  height: 28px;
 }
 
 .menuOption:hover::before,
@@ -49,6 +45,27 @@
   top: -4px;
   content: '👉';
   text-shadow: 1px 1px 1px #222;
+}
+
+.usingItem {
+  color: yellow;
+}
+
+.usingItem::before {
+  position: absolute;
+  left: -8px;
+  top: -4px;
+  content: '👉';
+  text-shadow: 1px 1px 1px #222;
+}
+
+
+.backToMain {
+  font-size: 14px;
+  padding-left: 11px;
+  cursor: pointer;
+  position: absolute;
+  bottom: 110px;
 }
 
 .backToMain:hover::after {

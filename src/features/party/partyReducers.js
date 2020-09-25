@@ -24,6 +24,7 @@ export default {
   activateItem: (state, action) => {
      
      state.activeItem = state.inventory.item[action.payload.item];
+     state.inventory.item[action.payload.item].using = true;
   },
   setApplyItem: (state, action) => {
     state.applyingItem = action.payload.applying;
