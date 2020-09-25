@@ -67,16 +67,18 @@ export function Character({
         
         <div className={styles.charStats}>
           <div className={styles.mainCharStats}>
-            <span>
-              HP:{char.stats.hp.current}/{char.stats.hp.max}
-            </span>
-            {char.charType === 2 && <span>
-              MP:{char.stats.mp.current}/{char.stats.mp.max}
-            </span>
-            }
-            <span>
-              XP:{char.stats.level.exp}/{char.stats.level.next}
-            </span>
+            <div className="hp-mp">
+              <span>HP:{char.stats.hp.current}/{char.stats.hp.max}</span>
+              {char.charType === 2 && <span>MP:{char.stats.mp.current}/{char.stats.mp.max}</span>}
+            </div>
+            
+            <div className="xp">
+              <span>
+                XP:{char.stats.level.exp}/{char.stats.level.next}
+              </span>
+            </div>
+            
+            
             
           </div>
           <div className={styles.gear}>
