@@ -2,7 +2,6 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   activateItem,
-  selectActiveItem,
   selectItems,
   setApplyItem,
 } from "../party/partySlice";
@@ -12,7 +11,6 @@ import { Icon } from "../../icons/Icon";
 
 export function ItemMenu() {
   const items = useSelector(selectItems);
-  const activeItem = useSelector(selectActiveItem);
   const dispatch = useDispatch();
 
   const onItemClick = (index) => {

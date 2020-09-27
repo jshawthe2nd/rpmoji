@@ -1,5 +1,7 @@
 
 Game Menu: 
+  ✔ Only one item selectable at a time @done(20-09-27 14:40)
+  ☐ Clicking Back in the menu should undo applying item effects
   ☐ Post-item usage
       ☐ UI updates
       ☐ State updates

@@ -252,6 +252,7 @@ export const {
   removeFromInventory, 
   addToInventory, 
   activateItem,
+  deactivateItem,
   setApplyItem,
   recoverHP,
   recoverMP,

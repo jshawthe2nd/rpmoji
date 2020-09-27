@@ -25,9 +25,19 @@ export default {
      console.log(state);
      state.inventory.item.map((item, index) => {
        state.inventory.item[index].using = false;
+       return true;
      });
      state.activeItem = state.inventory.item[action.payload.item];
      state.inventory.item[action.payload.item].using = true;
+  },
+  deactivateItem: (state, action) => {
+    state.inventory.item.map((item, index) => {
+      
+      state.inventory.item[index].using = false;
+      return true;
+    });
+    state.activeItem = null;
+    
   },
   setApplyItem: (state, action) => {
     state.applyingItem = action.payload.applying;
