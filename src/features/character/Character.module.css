@@ -9,13 +9,16 @@
   min-height: 90px;
 }
 
-.highlighted {
-  opacity: 1;
+.character:not(.dimCharacter):hover {
+  cursor: pointer;
+  
+  background: linear-gradient(to bottom, #999 0%, #666 64%, rgb(18, 20, 37) 100%);
 }
 
 .dimCharacter {
   opacity: 0.6;
 }
+
 
 .charIcon {
   display: flex;
