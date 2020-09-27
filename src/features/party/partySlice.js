@@ -14,7 +14,7 @@ export const slice = createSlice({
         gender: 1,
         stats: {
           hp: {
-            current: 45,
+            current: 50,
             max: 50
           },
           mp: {
