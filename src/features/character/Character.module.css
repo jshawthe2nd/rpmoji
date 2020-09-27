@@ -13,11 +13,14 @@
   cursor: pointer;
   
   background: linear-gradient(to bottom, #999 0%, #666 64%, rgb(18, 20, 37) 100%);
+  transition: ease 0.5s;
 }
 
 .dimCharacter {
   opacity: 0.6;
 }
+
+
 
 
 .charIcon {
@@ -138,4 +141,9 @@
   margin-top: -3px;
   font-size: 20px;
   text-shadow: 1px 1px 1px #333;
+}
+
+.applyingToChar .gear div:hover::after {
+  cursor: default;
+  content: '';
 }

@@ -3,6 +3,7 @@ Game Menu:
   ✔ Only one item selectable at a time @done(20-09-27 14:40)
   ✔ Clicking Back in the menu should undo applying item effects @done(20-09-27 15:16)
   ✔ Clicking the active item should deactivate it @done(20-09-27 15:30)
+  ✔ When applying item, deactivate states for the weapon/armor menu @done(20-09-27 15:58)
   ☐ Post-item usage
       ☐ UI updates
        
@@ -17,8 +18,8 @@ Game Menu:
     ☐ UI Updates
     ☐ State Updates
   ☐ UI Fine-tuning
-    - Show hand on hovered Character
-    - When clicking BackOption clear Character 'select' state
+    ✔ Show hand on hovered Character (changed to showing color) @done(20-09-27 15:49)
+    ✔ When clicking BackOption clear Character 'select' state @done(20-09-27 15:49)
 
 World Map: 
 

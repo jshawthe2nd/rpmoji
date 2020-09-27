@@ -44,7 +44,7 @@ export function Character({
   
   return (
     <div 
-      className={`${styles.character} ${(applyingItem && !canItemBeUsed(char, itemToUse)) ? styles.dimCharacter : ``}`} 
+      className={`${styles.character} ${(applyingItem && !canItemBeUsed(char, itemToUse)) ? styles.dimCharacter : ``} ${(applyingItem && canItemBeUsed(char, itemToUse)) ? styles.applyingToChar : ``}`} 
       onClick={(e) => onCharacterSelect(e, itemToUse)}
     >
       <div className={styles.charIcon}>
