@@ -22,11 +22,15 @@ export default {
     
   },
   activateItem: (state, action) => {
-     
+     console.log(state);
+     state.inventory.item.map((item, index) => {
+       state.inventory.item[index].using = false;
+     });
      state.activeItem = state.inventory.item[action.payload.item];
      state.inventory.item[action.payload.item].using = true;
   },
   setApplyItem: (state, action) => {
     state.applyingItem = action.payload.applying;
-  }
+  },
+  
 }
