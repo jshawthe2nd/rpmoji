@@ -4,6 +4,8 @@ import {
   activateItem,
   selectItems,
   setApplyItem,
+  selectActiveItem,
+  deactivateItem
 } from "../party/partySlice";
 import styles from "./Menu.module.css";
 
@@ -11,11 +13,18 @@ import { Icon } from "../../icons/Icon";
 
 export function ItemMenu() {
   const items = useSelector(selectItems);
+  const activeItem = useSelector(selectActiveItem);
   const dispatch = useDispatch();
 
   const onItemClick = (index) => {
-    dispatch(setApplyItem({ applying: true }));
-    dispatch(activateItem({ item: index }));
+    if(!activeItem) {
+      dispatch(setApplyItem({ applying: true }));
+      dispatch(activateItem({ item: index }));
+    } else {
+      dispatch(deactivateItem({}));
+      dispatch(setApplyItem({ applying: false }));
+    }
+    
   };
   return (
     <div>

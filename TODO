@@ -1,9 +1,11 @@
 
 Game Menu: 
   ✔ Only one item selectable at a time @done(20-09-27 14:40)
-  ☐ Clicking Back in the menu should undo applying item effects
+  ✔ Clicking Back in the menu should undo applying item effects @done(20-09-27 15:16)
+  ✔ Clicking the active item should deactivate it @done(20-09-27 15:30)
   ☐ Post-item usage
       ☐ UI updates
+       
       ☐ State updates
   ☐ Weapon Equip
     ☐ UI Updates
