@@ -9,8 +9,9 @@ Game Menu:
        
       ☐ State updates
         - when item qty reaches 0:
-        deactivate item
-        disable menu option
+        ✔ deactivate item @done(20-09-27 17:32)
+        ✔ disable menu option @done(20-09-27 17:32)
+        make sure Character components know to clear their CSS classes (eg, figure out where to properly use SetApplyingItem(false))
 
   ☐ Weapon Equip
     ☐ UI Updates
