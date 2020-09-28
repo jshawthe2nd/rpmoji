@@ -12,6 +12,7 @@ Game Menu:
         ✔ deactivate item @done(20-09-27 17:32)
         ✔ disable menu option @done(20-09-27 17:32)
         make sure Character components know to clear their CSS classes (eg, figure out where to properly use SetApplyingItem(false))
+        maybe make the characters react to the qty value in the current item used?
 
   ☐ Weapon Equip
     ☐ UI Updates

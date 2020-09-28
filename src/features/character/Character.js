@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Icon } from "../../icons/Icon";
 
 import { openMenu } from "../menu/menuSlice";
-import { recoverHP, recoverMP, clearStatus, decrementItemQty } from '../party/partySlice';
+import { recoverHP, recoverMP, clearStatus, decrementItemQty, selectApplyingItem, selectActiveItem, setApplyItem, deactivateItem } from '../party/partySlice';
 
 import { getCharacterSymbolPath, getCharacterIconLabel, canItemBeUsed } from './utils';
 
@@ -11,13 +11,14 @@ import styles from "./Character.module.css";
 
 export function Character({ 
   charId, 
-  applyingItem, 
   itemToUse = null
 }) {
   
   const dispatch = useDispatch();
 
   const char = useSelector(state => state.party.chars.find(c => c.id === charId));
+  // const activeItem = useSelector(selectActiveItem);
+  const applyingItem = useSelector(selectApplyingItem);
   
   console.log(applyingItem);
   
@@ -39,6 +40,10 @@ export function Character({
           return;
       }
       dispatch(decrementItemQty({itemUsed: itemToUse}));
+      if(itemToUse.qty < 1) {
+        dispatch(setApplyItem({applying: false}));
+        dispatch(deactivateItem({}));
+      }
     }
     
   }

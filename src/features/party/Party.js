@@ -27,7 +27,6 @@ export function Party({ children }) {
             key={char.id} 
             charId={char.id} 
             itemToUse={activeItem}
-            applyingItem={applyingItem}
           />
         )
       })}
