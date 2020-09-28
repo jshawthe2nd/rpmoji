@@ -32,7 +32,7 @@ export function ItemMenu() {
         return (
           <div
             key={index}
-            className={`${styles.subMenuOption} ${(item.using) ? styles.usingItem : ``}`} 
+            className={`${styles.subMenuOption} ${(item.using) ? styles.usingItem : ``} ${(item.qty < 1) ? styles.disableOption : ``}`} 
             onClick={(e) => {
               if(item.qty > 0) {
                 onItemClick(index);

@@ -9,6 +9,10 @@ export default {
     state.inventory.item.map((item, index) => {
       if(item.label === itemUsed.label) {
         state.inventory.item[index].qty = (state.inventory.item[index].qty - 1 < 0) ? 0 : state.inventory.item[index].qty - 1;
+        if(state.inventory.item[index].qty < 1) {
+          
+          state.inventory.item[index].using = false;
+        }
         return true;
       }
       return false;

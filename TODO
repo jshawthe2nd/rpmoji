@@ -8,6 +8,10 @@ Game Menu:
       ☐ UI updates
        
       ☐ State updates
+        - when item qty reaches 0:
+        deactivate item
+        disable menu option
+
   ☐ Weapon Equip
     ☐ UI Updates
     ☐ State Updates

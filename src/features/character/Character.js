@@ -19,6 +19,7 @@ export function Character({
 
   const char = useSelector(state => state.party.chars.find(c => c.id === charId));
   
+  console.log(applyingItem);
   
   const onCharacterSelect = (event, itemToUse) => {
     
