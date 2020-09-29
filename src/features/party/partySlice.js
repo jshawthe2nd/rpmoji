@@ -289,6 +289,10 @@ export const selectActiveItem = state => {
   return state.party.activeItem;
 }
 
+export const selectActiveItemQty = state => {
+  return (state.party.activeItem) ? state.party.activeItem.qty : null;
+}
+
 export const selectApplyingItem = state => {
   return state.party.applyingItem;
 }

@@ -11,8 +11,12 @@ Game Menu:
         - when item qty reaches 0:
         ✔ deactivate item @done(20-09-27 17:32)
         ✔ disable menu option @done(20-09-27 17:32)
-        make sure Character components know to clear their CSS classes (eg, figure out where to properly use SetApplyingItem(false))
-        maybe make the characters react to the qty value in the current item used?
+        clearing the classes on Character components:
+          when decrementItemQty gets used, need to be
+          able to tell store to deactivateItem
+          could we use a general React hook to watch
+          the store for any item's qty reaching 0 and
+          dispatch the deactivateItem action?
 
   ☐ Weapon Equip
     ☐ UI Updates

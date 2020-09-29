@@ -17,7 +17,7 @@ export function Party({ children }) {
 
   const activeItem = useSelector(selectActiveItem);
   const applyingItem = useSelector(selectApplyingItem);  
-  console.log(applyingItem);
+  
   return (
     <div id="partyContainer" className={`${styles.partyContainer} ${applyingItem ? `applyingItem` : ``}`}>
       {party.map((char, index) => {

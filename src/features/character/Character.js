@@ -3,89 +3,106 @@ import { useSelector, useDispatch } from "react-redux";
 import { Icon } from "../../icons/Icon";
 
 import { openMenu } from "../menu/menuSlice";
-import { recoverHP, recoverMP, clearStatus, decrementItemQty, selectApplyingItem, selectActiveItem, setApplyItem, deactivateItem } from '../party/partySlice';
+import {
+  recoverHP,
+  recoverMP,
+  clearStatus,
+  decrementItemQty,
+  selectApplyingItem,
+  selectActiveItemQty,
+  setApplyItem,
+  deactivateItem,
+} from "../party/partySlice";
 
-import { getCharacterSymbolPath, getCharacterIconLabel, canItemBeUsed } from './utils';
+import {
+  getCharacterSymbolPath,
+  getCharacterIconLabel,
+  canItemBeUsed,
+} from "./utils";
 
 import styles from "./Character.module.css";
 
-export function Character({ 
-  charId, 
-  itemToUse = null
-}) {
-  
+export function Character({ charId, itemToUse = null }) {
   const dispatch = useDispatch();
 
-  const char = useSelector(state => state.party.chars.find(c => c.id === charId));
-  // const activeItem = useSelector(selectActiveItem);
+  const char = useSelector((state) =>
+    state.party.chars.find((c) => c.id === charId)
+  );
+  const activeItemQty = useSelector(selectActiveItemQty);
   const applyingItem = useSelector(selectApplyingItem);
-  
+
   console.log(applyingItem);
-  
+
   const onCharacterSelect = (event, itemToUse) => {
-    
-    if(itemToUse !== null) {
-      switch(itemToUse.label) {
+    if (itemToUse !== null) {
+      switch (itemToUse.label) {
         case `Potion`:
-          dispatch(recoverHP({charId: char.id}));
+          dispatch(recoverHP({ charId: char.id }));
           break;
         case `Ether`:
-          dispatch(recoverMP({charId: char.id}));
+          dispatch(recoverMP({ charId: char.id }));
           break;
         case `Antidote`:
         case `Elixir`:
-          dispatch(clearStatus({charId: char.id}));
+          dispatch(clearStatus({ charId: char.id }));
           break;
         default:
           return;
       }
-      dispatch(decrementItemQty({itemUsed: itemToUse}));
-      if(itemToUse.qty < 1) {
-        dispatch(setApplyItem({applying: false}));
-        dispatch(deactivateItem({}));
-      }
+      dispatch(decrementItemQty({ itemUsed: itemToUse }));
+      console.log(activeItemQty);
     }
-    
-  }
-  
+  };
+
   return (
-    <div 
-      className={`${styles.character} ${(applyingItem && !canItemBeUsed(char, itemToUse)) ? styles.dimCharacter : ``} ${(applyingItem && canItemBeUsed(char, itemToUse)) ? styles.applyingToChar : ``}`} 
+    <div
+      className={`${styles.character} ${
+        applyingItem && !canItemBeUsed(char, itemToUse)
+          ? styles.dimCharacter
+          : ``
+      } ${
+        applyingItem && canItemBeUsed(char, itemToUse)
+          ? styles.applyingToChar
+          : ``
+      }`}
       onClick={(e) => onCharacterSelect(e, itemToUse)}
     >
       <div className={styles.charIcon}>
-        <Icon 
-          symbol={getCharacterSymbolPath(char)} 
-          label={getCharacterIconLabel(char)} 
-        />        
-        {char.status && 
-        <Icon 
-          status={char.status} 
-          symbol={`status.${char.status}`} 
-          label={`${char.status}`} 
-        />}
+        <Icon
+          symbol={getCharacterSymbolPath(char)}
+          label={getCharacterIconLabel(char)}
+        />
+        {char.status && (
+          <Icon
+            status={char.status}
+            symbol={`status.${char.status}`}
+            label={`${char.status}`}
+          />
+        )}
       </div>
       <div className={styles.charDetails}>
         <h2>
           {char.name} L.<span>{char.stats.level.current}</span>
-          
         </h2>
-        
+
         <div className={styles.charStats}>
           <div className={styles.mainCharStats}>
             <div className="hp-mp">
-              <span>HP:{char.stats.hp.current}/{char.stats.hp.max}</span>
-              {char.charType === 2 && <span>MP:{char.stats.mp.current}/{char.stats.mp.max}</span>}
+              <span>
+                HP:{char.stats.hp.current}/{char.stats.hp.max}
+              </span>
+              {char.charType === 2 && (
+                <span>
+                  MP:{char.stats.mp.current}/{char.stats.mp.max}
+                </span>
+              )}
             </div>
-            
+
             <div className="xp">
               <span>
                 XP:{char.stats.level.exp}/{char.stats.level.next}
               </span>
             </div>
-            
-            
-            
           </div>
           <div className={styles.gear}>
             <div
@@ -111,7 +128,6 @@ export function Character({
           </div>
         </div>
       </div>
-      
     </div>
   );
 }

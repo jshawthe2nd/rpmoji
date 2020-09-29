@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   activateItem,
@@ -15,6 +15,7 @@ export function ItemMenu() {
   const items = useSelector(selectItems);
   const activeItem = useSelector(selectActiveItem);
   const dispatch = useDispatch();
+  
 
   const onItemClick = (index) => {
     if(!activeItem) {
@@ -26,6 +27,14 @@ export function ItemMenu() {
     }
     
   };
+
+  if(activeItem && activeItem.qty < 1) {
+    dispatch(setApplyItem({applying: false}));
+    dispatch(deactivateItem({}));
+  }
+
+  
+
   return (
     <div>
       {items.map((item, index) => {
