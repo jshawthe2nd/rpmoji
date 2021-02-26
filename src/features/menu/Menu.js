@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import styles from "./Menu.module.css";
 
 import { selectMenu, openMenu, closeMenu } from "./menuSlice";
+import { deactivateItem, setApplyItem } from '../party/partySlice';
 
 import { WeaponMenu } from "./WeaponMenu";
 import { ArmorMenu } from "./ArmorMenu";
@@ -31,6 +32,13 @@ export function Menu() {
   const menu = useSelector(selectMenu);
   const SubMenu = !menu ? false : menuOptions[menu].component;
   const dispatch = useDispatch();
+
+  const onMenuClosed = () => {
+    dispatch(closeMenu({}));
+    dispatch(deactivateItem({}));
+    dispatch(setApplyItem({applying: false}))
+  };
+
   return (
     <div className={styles.menu}>
       {SubMenu
@@ -48,7 +56,7 @@ export function Menu() {
               </div>
             );
           })}
-      {menu && <BackOption dispatch={dispatch} action={closeMenu} />}
+      {menu && <BackOption onMenuClosed={onMenuClosed} />}
       <div className={styles.metaInfo}>
         <p>
           <Icon symbol="menu.gold" label="gold" /> 666

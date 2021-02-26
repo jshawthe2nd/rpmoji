@@ -14,7 +14,7 @@ export const slice = createSlice({
         gender: 1,
         stats: {
           hp: {
-            current: 45,
+            current: 50,
             max: 50
           },
           mp: {
@@ -173,22 +173,26 @@ export const slice = createSlice({
         {
           symbol: "item.potion",
           label: "Potion",
-          qty: 4
+          qty: 4,
+          using: false
         },
         {
           symbol: "item.ether",
           label: "Ether",
           qty: 2,
+          using: false
         },
         {
           symbol: "item.antidote",
           label: "Antidote",
           qty: 2,
+          using: false
         },
         {
           symbol: "item.elixir",
           label: "Elixir",
           qty: 1,
+          using: false
         },
       ],
       weapon: [
@@ -248,6 +252,7 @@ export const {
   removeFromInventory, 
   addToInventory, 
   activateItem,
+  deactivateItem,
   setApplyItem,
   recoverHP,
   recoverMP,
@@ -259,7 +264,6 @@ export const selectInventory = state => state.party.inventory;
 export const selectChars = state => {
   return state.party.chars;
 }
-
 
 export const selectGold = state => state.gold;
 
@@ -282,6 +286,10 @@ export const selectItems = state => {
 export const selectActiveItem = state => { 
   
   return state.party.activeItem;
+}
+
+export const selectActiveItemQty = state => {
+  return (state.party.activeItem) ? state.party.activeItem.qty : null;
 }
 
 export const selectApplyingItem = state => {

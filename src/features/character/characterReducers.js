@@ -23,8 +23,8 @@ export default {
 
     state.chars.map((char, index) => {
       if (char.id === charId) {
-        state.chars[index].stats.hp.current =
-          char.stats.hp.current + (char.stats.level.current * 10) / 2;
+        const healing = char.stats.hp.current + (char.stats.level.current * 10) / 2;
+        state.chars[index].stats.hp.current = (healing > char.stats.hp.max) ? char.stats.hp.max : healing;
         return true;
       }
       return false;
@@ -35,9 +35,12 @@ export default {
 
     state.chars.map((char, index) => {
       if (char.id === charId) {
-        state.chars[index].stats.mp.current =
-          char.stats.mp.current +
-          Math.floor((char.stats.level.current * 5) / 2);
+
+        const healing = char.stats.mp.current +
+        Math.floor( ( char.stats.level.current * 5 ) / 2 );
+
+        state.chars[index].stats.mp.current = ( healing > char.stats.mp.max ) ? char.stats.mp.max : healing;
+          
         return true;
       }
 

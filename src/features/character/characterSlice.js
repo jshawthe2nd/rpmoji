@@ -21,8 +21,8 @@ export const selectMP = (state) => {};
 
 export const selectExp = (state) => {};
 
-export const selectChar = (state) => {
-  
-}
+export const selectChar = (state) => {};
+
+export const selectStats = ( state ) => {};
 
 export default slice.reducer;
