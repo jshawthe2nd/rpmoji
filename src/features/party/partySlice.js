@@ -265,7 +265,6 @@ export const selectChars = state => {
   return state.party.chars;
 }
 
-
 export const selectGold = state => state.gold;
 
 export const selectItem = (state, action) => {

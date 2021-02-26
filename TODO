@@ -6,17 +6,21 @@ Game Menu:
   ✔ When applying item, deactivate states for the weapon/armor menu @done(20-09-27 15:58)
   ☐ Post-item usage
       ☐ UI updates
+      clearing the classes on Character components:
+        So I handled the item quantity case for the UI,
+        but now I need to figure out how to properly have
+        the Character watch itself for when its stats values
+        have been restored to max, and disable the classes
+        appropriately to return the UI to where
+        it needs to be.
+        update: pretty sure I can rely on the
+        canItemBeUsed paradigm to dispatch necessary
+        actions
        
       ☐ State updates
         - when item qty reaches 0:
         ✔ deactivate item @done(20-09-27 17:32)
-        ✔ disable menu option @done(20-09-27 17:32)
-        clearing the classes on Character components:
-          when decrementItemQty gets used, need to be
-          able to tell store to deactivateItem
-          could we use a general React hook to watch
-          the store for any item's qty reaching 0 and
-          dispatch the deactivateItem action?
+        ✔ disable menu option @done(20-09-27 17:32)        
 
   ☐ Weapon Equip
     ☐ UI Updates

@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   activateItem,
   selectItems,
-  setApplyItem,
   selectActiveItem,
   deactivateItem
 } from "../party/partySlice";
@@ -17,22 +16,28 @@ export function ItemMenu() {
   const dispatch = useDispatch();
   
 
-  const onItemClick = (index) => {
+  const onItemClick = (index) => {    
+
     if(!activeItem) {
-      dispatch(setApplyItem({ applying: true }));
+
+      //dispatch(setApplyItem({ applying: true }));
       dispatch(activateItem({ item: index }));
+
     } else {
+
       dispatch(deactivateItem({}));
-      dispatch(setApplyItem({ applying: false }));
+      //dispatch(setApplyItem({ applying: false }));
+
     }
     
   };
 
   if(activeItem && activeItem.qty < 1) {
-    dispatch(setApplyItem({applying: false}));
+    
+    //dispatch(setApplyItem({applying: false}));
     dispatch(deactivateItem({}));
-  }
 
+  }
   
 
   return (
