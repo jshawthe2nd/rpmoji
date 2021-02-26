@@ -16,11 +16,18 @@ Game Menu:
         update: pretty sure I can rely on the
         canItemBeUsed paradigm to dispatch necessary
         actions
+        In the end, what I ended up doing was writing an action
+        creator that returned a function that received a dispatch
+        and getState function as arguments, and used those to check
+        state of the character stat and deactivate the item to return
+        the UI to its regular state.
        
       ☐ State updates
         - when item qty reaches 0:
         ✔ deactivate item @done(20-09-27 17:32)
-        ✔ disable menu option @done(20-09-27 17:32)        
+        ✔ disable menu option @done(20-09-27 17:32)
+        - when char stat current value equals max value:
+        ✔ dispatch deactivateItem @done(21-02-26 03:14)
 
   ☐ Weapon Equip
     ☐ UI Updates
@@ -56,3 +63,4 @@ Coding:
   ☐ 
 Bugfixes:
   ✔ make sure onCharacterSelect only fires when applying item not when selecting for weapon or armor @done(20-09-23 22:24)
+  ✔ Fixed a bug where I wasn't properly checking the current character's state in Redux and therefore couldn't properly react to state changes and decide if we needed to deactivate the current item because the character's current stat value had met or exceeded their max value. @done(21-02-26 03:12)
