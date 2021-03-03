@@ -1,7 +1,48 @@
 export default {
   attack: (state) => {},
   defend: (state) => {},
-  equip: (state) => {},
+  equip: ( state, action ) => {
+
+    const { charId, gearItem } = action.payload;
+
+    state.chars.map( ( char, index ) => {
+
+      if( char.id === charId ) {
+
+        switch( gearItem.type ) {
+
+          case `sword`:
+          case `axe`:
+          case `dagger`:
+          case `bow`:
+
+
+          break;
+
+          case `armor`:
+          case `robe`:
+
+             
+
+          break;
+
+          case `scroll`:
+
+          break;
+
+          default:
+
+          break;
+
+        }
+
+      }
+
+      return true;
+
+    } )
+
+  },
   levelUp: (state) => {},
   gainExp: (state) => {},
   afflictStatus: (state) => {},
@@ -20,6 +61,11 @@ export default {
   openSubMenu: (state) => {},
   recoverHP: (state, action) => {
     const { charId } = action.payload;
+
+    //TODO: The below will be easier to do once the State shape changes to be
+    //      a chars object keyed by character ID, that way we can be clearer
+    //      about setting new values
+    //
 
     state.chars.map((char, index) => {
       if (char.id === charId) {

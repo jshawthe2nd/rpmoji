@@ -78,3 +78,8 @@ Coding:
 Bugfixes:
   ✔ make sure onCharacterSelect only fires when applying item not when selecting for weapon or armor @done(20-09-23 22:24)
   ✔ Fixed a bug where I wasn't properly checking the current character's state in Redux and therefore couldn't properly react to state changes and decide if we needed to deactivate the current item because the character's current stat value had met or exceeded their max value. @done(21-02-26 03:12)
+
+
+!IMPORTANT:
+  ☐ <Pause/> component, for bootstrapping/setting up <Party/>, <Character/>s and <Menu/>
+  ☐ 

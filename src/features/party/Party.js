@@ -1,6 +1,6 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { selectChars, selectActiveItem, deactivateItem } from "./partySlice";
+import { useSelector } from "react-redux";
+import { selectChars, selectActiveItem } from "./partySlice";
 
 import { Character } from '../character/Character';
 
@@ -16,8 +16,6 @@ import styles from "./Party.module.css";
 export function Party( { children } ) {
     
   const party = useSelector( selectChars );
-
-  const dispatch = useDispatch();
 
   const activeItem = useSelector( selectActiveItem );  
   

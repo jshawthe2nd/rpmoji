@@ -39,6 +39,10 @@ export const checkCharacterStatus = ( charId, itemType, deactivateItem ) => {
 
             break;
 
+            default:
+
+            return;
+
         }
 
     };

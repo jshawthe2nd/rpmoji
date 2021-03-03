@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Icon } from "../../icons/Icon";
 
@@ -11,7 +11,6 @@ import {
   selectActiveItem,
   deactivateItem,
 } from "../party/partySlice";
-
 
 import {
   getCharacterSymbolPath,
