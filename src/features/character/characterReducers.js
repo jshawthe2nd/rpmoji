@@ -43,6 +43,11 @@ export default {
     } )
 
   },
+  setWeaponToEquip: ( state, action ) => {
+
+    
+
+  },
   levelUp: (state) => {},
   gainExp: (state) => {},
   afflictStatus: (state) => {},

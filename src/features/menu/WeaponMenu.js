@@ -11,7 +11,25 @@ import { selectAllWeapons } from '../party/partySlice';
 
 export function WeaponMenu() {
 
-  const weapons = useSelector( selectAllWeapons );
+  const dispatch  = useDispatch();
+
+  const weapons   = useSelector( selectAllWeapons );
+
+  const weaponToEquip   = useSelector( selectWeaponToEquip );
+
+  const onWeaponClick   = ( ) => {
+
+    if( !weaponToEquip ) {
+
+      dispatch( setWeaponToEquip() );
+
+    } else {
+
+      dispatch( clearWeaponToEquip() );
+
+    }
+
+  };
 
 
   return (
