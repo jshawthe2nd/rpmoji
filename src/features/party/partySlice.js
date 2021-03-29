@@ -199,21 +199,25 @@ export const slice = createSlice({
         {
           name: 'Stone',
           type: 'sword',
+          symbol: 'item.weapon.sword',
           qty: 1
         },
         {
           name: 'Stone',
           type: 'axe',
+          symbol: 'item.weapon.axe',
           qty: 1
         },
         {
           name: 'Branch',
           type: 'bow',
+          symbol: 'item.weapon.bow',
           qty: 1
         },
         {
           name: 'Stone',
           type: 'dagger',
+          symbol: 'item.weapon.dagger',
           qty: 1
         }
       ],
@@ -275,8 +279,20 @@ export const selectWeapon = (state, action) => {
   console.log(action);
 }
 
+export const selectAllWeapons = ( state ) => {
+
+  return state.party.inventory.weapon;
+
+}
+
 export const selectArmor = (state, action) => {
   console.log(action);
+}
+
+export const selectAllArmor = ( state ) => {
+
+  return state.party.inventory.armor;
+
 }
 
 export const selectItems = state => {

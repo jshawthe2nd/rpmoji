@@ -1,3 +1,9 @@
+!IMPORTANT:
+  ☐ <Pause/> component, for bootstrapping/setting up <Party/>, <Character/>s and <Menu/>
+  ☐ Update /store/Store.js with initStore() method for help in bootstrapping
+      https://stackoverflow.com/questions/60999058/load-initialstate-dynamically-with-createslice-in-redux-toolkit
+  ☐ 
+
 
 Game Menu: 
   ✔ Only one item selectable at a time @done(20-09-27 14:40)
@@ -45,6 +51,8 @@ Game Menu:
           - Take the name & type from the setWeaponToEquip, apply damage calculation
           - Spread new object data into char.gear.weapon
     Do weapons have their own innate damage, or do different types have a formula that then gets calculated when equipped to the character to know how much damage it does? If we do have a formula, what should it be? I feel like damage and armor should adjust to the level of the character equipping it. We could even have a scaling boost factor based on, maybe, item rarity? Or some kind of power level?
+  ✔ Weapon menu pulling from partySlice @done(21-03-29 08:27)
+  ✔ Armor menu pulling from partySlice @done(21-03-29 08:27)
   ☐ Armor Equip
     ☐ UI Updates
     ☐ State Updates
@@ -79,7 +87,3 @@ Bugfixes:
   ✔ make sure onCharacterSelect only fires when applying item not when selecting for weapon or armor @done(20-09-23 22:24)
   ✔ Fixed a bug where I wasn't properly checking the current character's state in Redux and therefore couldn't properly react to state changes and decide if we needed to deactivate the current item because the character's current stat value had met or exceeded their max value. @done(21-02-26 03:12)
 
-
-!IMPORTANT:
-  ☐ <Pause/> component, for bootstrapping/setting up <Party/>, <Character/>s and <Menu/>
-  ☐ 
