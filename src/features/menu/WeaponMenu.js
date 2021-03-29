@@ -5,7 +5,7 @@ import styles from './Menu.module.css';
 
 import { Icon } from '../../icons/Icon';
 
-import { selectAllWeapons } from '../party/partySlice';
+import { selectAllWeapons, selectWeaponToEquip } from '../party/partySlice';
 
 
 

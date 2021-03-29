@@ -171,15 +171,17 @@ export const slice = createSlice({
     inventory: {
       item: [
         {
+          id:     '501',
           symbol: "item.potion",
-          label: "Potion",
-          qty: 4,
+          label:  "Potion",
+          qty:    4,
           using: false
         },
         {
+          id:     '502',
           symbol: "item.ether",
-          label: "Ether",
-          qty: 2,
+          label:  "Ether",
+          qty:    2,
           using: false
         },
         {
@@ -189,54 +191,62 @@ export const slice = createSlice({
           using: false
         },
         {
+          id:     '503',
           symbol: "item.elixir",
-          label: "Elixir",
-          qty: 1,
+          label:  "Elixir",
+          qty:    1,
           using: false
         },
       ],
       weapon: [
         {
-          name: 'Stone',
-          type: 'sword',
+          id:     '601',
+          name:   'Stone',
+          type:   'sword',
           symbol: 'item.weapon.sword',
-          qty: 1
+          qty:    1
         },
         {
-          name: 'Stone',
-          type: 'axe',
+          id:     '602',
+          name:   'Stone',
+          type:   'axe',
           symbol: 'item.weapon.axe',
-          qty: 1
+          qty:    1
         },
         {
-          name: 'Branch',
-          type: 'bow',
+          id:     '603',
+          name:   'Branch',
+          type:   'bow',
           symbol: 'item.weapon.bow',
-          qty: 1
+          qty:    1
         },
         {
-          name: 'Stone',
-          type: 'dagger',
+          id:     '604',
+          name:   'Stone',
+          type:   'dagger',
           symbol: 'item.weapon.dagger',
-          qty: 1
+          qty:    1
         }
       ],
       armor: [
         {
-          name: 'Leather',
-          type: 'armor',
-          qty: 1
+          id:     '701',
+          name:   'Leather',
+          type:   'armor',
+          qty:    1
         },
         {
-          name: 'Burlap',
-          type: 'robe',
-          qty: 1
+          id:     '703',
+          name:   'Burlap',
+          type:   'robe',
+          qty:    1
         },
       ],
       scroll: [
         {
+          id:   '801',
           name: 'Cure',
-          qty: 1
+          qty:   1
         }
       ]
     },
