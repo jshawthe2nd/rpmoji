@@ -242,7 +242,9 @@ export const slice = createSlice({
     },
     gold: 666,
     activeItem: null,
-    applyingItem: false
+    applyingItem: false,
+    weaponToEquip: false,
+    armorToEquip: false
   },
   reducers: {
     ...partyReducers,
@@ -282,6 +284,12 @@ export const selectWeapon = (state, action) => {
 export const selectAllWeapons = ( state ) => {
 
   return state.party.inventory.weapon;
+
+}
+
+export const selectWeaponToEquip = ( state ) => {
+
+  return state.party.weaponToEquip;
 
 }
 
