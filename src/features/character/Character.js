@@ -38,6 +38,8 @@ export function Character( { charId, ...props } ) {
 
   const doesItemApplyToChar = canItemBeUsed( char, itemToUse ); 
 
+  //const isGearEquippable    = canGearBeEquipped( char, gearToUse );
+
   const onCharacterSelect = ( event ) => {
     //if( applyingItem ) {
 

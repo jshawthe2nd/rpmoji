@@ -204,6 +204,9 @@ export const slice = createSlice({
           name:   'Stone',
           type:   'sword',
           symbol: 'item.weapon.sword',
+          dmg:    5,
+          crit:   0.25,
+          cdmg:   0.5,
           qty:    1
         },
         {
@@ -211,6 +214,7 @@ export const slice = createSlice({
           name:   'Stone',
           type:   'axe',
           symbol: 'item.weapon.axe',
+          dmg:    5,
           qty:    1
         },
         {
@@ -218,6 +222,7 @@ export const slice = createSlice({
           name:   'Branch',
           type:   'bow',
           symbol: 'item.weapon.bow',
+          dmg:    4,
           qty:    1
         },
         {
@@ -225,6 +230,7 @@ export const slice = createSlice({
           name:   'Stone',
           type:   'dagger',
           symbol: 'item.weapon.dagger',
+          dmg:    4,
           qty:    1
         }
       ],

@@ -9,12 +9,15 @@ export default {
 
       if( char.id === charId ) {
 
+        //
+
         switch( gearItem.type ) {
 
           case `sword`:
           case `axe`:
           case `dagger`:
           case `bow`:
+
 
 
           break;

@@ -20,13 +20,11 @@ export function ItemMenu() {
 
     if(!activeItem) {
 
-      //dispatch(setApplyItem({ applying: true }));
       dispatch(activateItem({ item: index }));
 
     } else {
 
       dispatch(deactivateItem({}));
-      //dispatch(setApplyItem({ applying: false }));
 
     }
     
@@ -34,7 +32,6 @@ export function ItemMenu() {
 
   if(activeItem && activeItem.qty < 1) {
     
-    //dispatch(setApplyItem({applying: false}));
     dispatch(deactivateItem({}));
 
   }
@@ -42,26 +39,32 @@ export function ItemMenu() {
 
   return (
     <div>
-      {items.map((item, index) => {
+      { items.map( ( item, index ) => {
         return (
           <div
-            key={index}
-            className={`${styles.subMenuOption} ${(item.using) ? styles.usingItem : ``} ${(item.qty < 1) ? styles.disableOption : ``}`} 
-            onClick={(e) => {
-              if(item.qty > 0) {
-                onItemClick(index);
+            key={ index }
+            className={ 
+
+              `${ styles.subMenuOption } 
+              ${ ( item.using ) ? styles.usingItem : ``} 
+              ${ ( item.qty < 1 ) ? styles.disableOption : ``}`
+
+            } 
+            onClick={ ( e ) => {
+              if( item.qty > 0 ) {
+                onItemClick( index );
               }
-            }}
+            } }
           >
             <Icon
-              cssClass={`in-menu`}
-              symbol={item.symbol}
-              label={item.label}
+              cssClass={ `in-menu` }
+              symbol={ item.symbol }
+              label={ item.label }
             />
-            {item.label} &times; {item.qty}
+            { item.label } &times; { item.qty }
           </div>
         );
-      })}
+      } ) }
     </div>
   );
 }

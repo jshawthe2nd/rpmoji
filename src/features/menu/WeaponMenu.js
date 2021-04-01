@@ -19,24 +19,29 @@ export function WeaponMenu() {
 
   const onWeaponClick   = ( ) => {
 
-    if( !weaponToEquip ) {
+    // if( !weaponToEquip ) {
 
-      dispatch( setWeaponToEquip() );
+    //   dispatch( setWeaponToEquip() );
 
-    } else {
+    // } else {
 
-      dispatch( clearWeaponToEquip() );
+    //   dispatch( clearWeaponToEquip() );
 
-    }
+    // }
 
   };
 
 
   return (
     <div>
-      {weapons.map((weapon, index) => {
-        return (<div key={index} className={styles.subMenuOption}><Icon symbol={weapon.symbol} label={weapon.name} />{weapon.name} &times; {weapon.qty}</div>)
-      })}
+      { weapons.map( ( weapon, index ) => {
+        return (
+          <div key={ index } className={ styles.subMenuOption }>
+            <Icon symbol={ weapon.symbol } label={ weapon.name } />
+            { weapon.name } &times; { weapon.qty }
+          </div>
+        )
+      } ) }
     </div>
   );
 }

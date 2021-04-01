@@ -49,8 +49,12 @@ Game Menu:
         - onCharacterSelect, if weaponToEquip is truthy, and its a weapon type for the character, dispatch equip()
         - characterReducers.equip() should
           - Take the name & type from the setWeaponToEquip, apply damage calculation
+          Do weapons have their own innate damage, or do different types have a formula that then gets calculated when equipped to the character to know how much damage it does? If we do have a formula, what should it be? I feel like damage and armor should adjust to the level of the character equipping it. We could even have a scaling boost factor based on, maybe, item rarity? Or some kind of power level?
+          For now let's just say damage per character is level + damage.
+          Crit chance can be flat 25%. 
+          Crit damage can be flat 50%.
           - Spread new object data into char.gear.weapon
-    Do weapons have their own innate damage, or do different types have a formula that then gets calculated when equipped to the character to know how much damage it does? If we do have a formula, what should it be? I feel like damage and armor should adjust to the level of the character equipping it. We could even have a scaling boost factor based on, maybe, item rarity? Or some kind of power level?
+    
   ✔ Weapon menu pulling from partySlice @done(21-03-29 08:27)
   ✔ Armor menu pulling from partySlice @done(21-03-29 08:27)
   ☐ Armor Equip
