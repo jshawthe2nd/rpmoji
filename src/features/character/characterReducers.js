@@ -18,14 +18,14 @@ export default {
           case `dagger`:
           case `bow`:
 
-
+            state.chars[index].gear.weapon = { ...gearItem };
 
           break;
 
           case `armor`:
           case `robe`:
 
-             
+            state.chars[index].gear.armor = { ...gearItem };
 
           break;
 
@@ -55,50 +55,36 @@ export default {
   gainExp: (state) => {},
   afflictStatus: (state) => {},
   clearStatus: (state, action) => {
+
     const { charId } = action.payload;
 
-    state.chars.map((char, index) => {
-      if (char.id === charId) {
-        state.chars[index].status = false;
-        return true;
-      }
+    state.chars2[ charId ].status = false;
 
-      return false;
-    });
   },
+
   openSubMenu: (state) => {},
+
   recoverHP: (state, action) => {
+
     const { charId } = action.payload;
 
-    //TODO: The below will be easier to do once the State shape changes to be
-    //      a chars object keyed by character ID, that way we can be clearer
-    //      about setting new values
-    //
+    const char = { ...state.chars2[ charId ] };
 
-    state.chars.map((char, index) => {
-      if (char.id === charId) {
-        const healing = char.stats.hp.current + (char.stats.level.current * 10) / 2;
-        state.chars[index].stats.hp.current = (healing > char.stats.hp.max) ? char.stats.hp.max : healing;
-        return true;
-      }
-      return false;
-    });
+    const healing = char.stats.hp.current + Math.floor( ( char.stats.level.current * 10 ) / 2 );
+
+    state.chars2[ charId ].stats.hp.current = ( healing > char.stats.hp.max ) ? char.stats.hp.max : healing;
+
   },
+
   recoverMP: (state, action) => {
+    
     const { charId } = action.payload;
 
-    state.chars.map((char, index) => {
-      if (char.id === charId) {
+    const char = { ...state.chars2[ charId ] };
 
-        const healing = char.stats.mp.current +
-        Math.floor( ( char.stats.level.current * 5 ) / 2 );
+    const healing = char.stats.mp.current + Math.floor( ( char.stats.level.current * 5 ) / 2 );
 
-        state.chars[index].stats.mp.current = ( healing > char.stats.mp.max ) ? char.stats.mp.max : healing;
-          
-        return true;
-      }
+    state.chars2[ charId ].stats.mp.current = ( healing > char.stats.mp.max ) ? char.stats.mp.max : healing;
 
-      return false;
-    });
   },
 };

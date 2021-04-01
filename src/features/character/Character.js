@@ -19,10 +19,12 @@ import {
 } from "./utils";
 
 import {
-  checkCharacterStatus
+  checkCharacter
 } from './actions';
 
+
 import styles from "./Character.module.css";
+import { checkItem } from "../party/actions";
 
 export function Character( { charId, ...props } ) {
 
@@ -30,7 +32,7 @@ export function Character( { charId, ...props } ) {
 
   const char = useSelector( ( state ) => {
 
-    return state.party.chars.find( ( c ) => c.id === charId );
+    return state.party.chars2[ charId ];
 
   } ); 
 
@@ -41,30 +43,27 @@ export function Character( { charId, ...props } ) {
   //const isGearEquippable    = canGearBeEquipped( char, gearToUse );
 
   const onCharacterSelect = ( event ) => {
-    //if( applyingItem ) {
 
       if ( itemToUse !== null ) {
-
-        console.log(itemToUse);
 
         switch ( itemToUse.label ) {
 
           case `Potion`:
 
-            dispatch( recoverHP( { charId: char.id } ) );
+            dispatch( recoverHP( { charId } ) );
                         
             break;
 
           case `Ether`:
 
-            dispatch( recoverMP( { charId: char.id } ) );                
+            dispatch( recoverMP( { charId } ) );                
 
             break;
 
           case `Antidote`:
           case `Elixir`:
 
-            dispatch( clearStatus( { charId: char.id } ) );    
+            dispatch( clearStatus( { charId } ) );    
 
             break;
 
@@ -75,11 +74,11 @@ export function Character( { charId, ...props } ) {
         
         dispatch( decrementItemQty( { itemUsed: itemToUse } ) );
 
-        dispatch( checkCharacterStatus( char.id, itemToUse.label, deactivateItem ) );
+        dispatch( checkItem( itemToUse, deactivateItem ) );
+
+        dispatch( checkCharacter( charId, itemToUse, deactivateItem ) );
 
       }
-    
-    //}
 
   };
  

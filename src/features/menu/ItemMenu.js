@@ -1,40 +1,36 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+
+import styles from "./Menu.module.css";
+
+import { Icon } from "../../icons/Icon";
+
 import {
   activateItem,
   selectItems,
   selectActiveItem,
   deactivateItem
 } from "../party/partySlice";
-import styles from "./Menu.module.css";
 
-import { Icon } from "../../icons/Icon";
 
 export function ItemMenu() {
   const items = useSelector(selectItems);
   const activeItem = useSelector(selectActiveItem);
   const dispatch = useDispatch();
   
+  const onItemClick = ( index ) => {    
 
-  const onItemClick = (index) => {    
+    if( !activeItem ) {
 
-    if(!activeItem) {
-
-      dispatch(activateItem({ item: index }));
+      dispatch( activateItem( { item: index } ) );
 
     } else {
 
-      dispatch(deactivateItem({}));
+      dispatch( deactivateItem( {} ) );
 
-    }
-    
+    }   
+
   };
-
-  if(activeItem && activeItem.qty < 1) {
-    
-    dispatch(deactivateItem({}));
-
-  }
   
 
   return (
