@@ -77,6 +77,15 @@ Game Menu:
     ✔ Show hand on hovered Character (changed to showing color) @done(20-09-27 15:49)
     ✔ When clicking BackOption clear Character 'select' state @done(20-09-27 15:49)
     ✔ Adjusted areas of weapon/armor slots to be more mouse-friendly @done(20-09-27 16:05)
+    ☐ create CSS classes for Weapon & Armor menu items to dim themselves if they can't be equipped by the Character whose gear slot was clicked
+    ☐ Create a selector in menuSlice to get the menu.ref in Weapon/Armor menu
+    ☐ Import canGearBeEquipped function from Character utils to determine item's equippability by selected gear slot's owning Character
+    User Story - 
+    User clicks gear slot in particular Character
+    Dispatch openMenu() with `character` menu ref
+    selectMenuRef needs to be created so gear items know to check themselves and indicate if they can be equipped. 
+    Maybe additional payload data can be passing current character type, or,
+    also just dispatching something like `setCharacterForEquipping()`
 
 World Map: 
 
