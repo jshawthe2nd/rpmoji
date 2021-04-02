@@ -94,8 +94,6 @@ export function Character( { charId, ...props } ) {
 
       if( gearToEquip !== null ) {
 
-        dispatch( removeFromInventory( { gearItem: gearToEquip } ) );
-
         dispatch( equip( { charId, gearToEquip, dispatch } ) );
 
         let sendToInventory;
@@ -113,6 +111,8 @@ export function Character( { charId, ...props } ) {
           setWasArmorEquipped( true );
 
         }
+
+        dispatch( removeFromInventory( { gearItem: gearToEquip } ) );
 
         dispatch( addToInventory( 
           { 

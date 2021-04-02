@@ -60,7 +60,11 @@ export default {
 
     state.inventory[ gearType ].map( ( gear, index ) => {
 
-      state.inventory[ gearType ].splice( index, 1 );
+      if( gear.id === gearItem.id ) {
+
+        state.inventory[ gearType ].splice( index, 1 );
+
+      }
 
       return true;
 
