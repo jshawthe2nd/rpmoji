@@ -56,5 +56,20 @@ export default {
   setApplyItem: (state, action) => {
     state.applyingItem = action.payload.applying;
   },
+  setWeaponToEquip: ( state, action ) => {
+
+    state.gearToEquip = action.payload.weapon;
+
+  },
+  clearGearToEquip: ( state, action ) => {
+
+    state.gearToEquip = false;
+
+  },
+  setArmorToEquip: ( state, action ) => {
+
+    state.gearToEquip = action.payload.armor;
+
+  },
   
 }

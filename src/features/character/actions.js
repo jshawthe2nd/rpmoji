@@ -1,12 +1,12 @@
-export const checkCharacterStatus = ( charId, itemType, deactivateItem ) => {
+export const checkCharacter = ( charId, itemUsed, deactivateItem ) => {
     
     return( dispatch, getState ) => {
 
         const state = getState().party;
 
-        const char = state.chars.find( ( c ) => c.id === charId );
+        const char = state.chars2[ charId ];
 
-        switch( itemType ) {
+        switch( itemUsed.label ) {
 
             case `Potion`:
 
@@ -38,6 +38,10 @@ export const checkCharacterStatus = ( charId, itemType, deactivateItem ) => {
                 }
 
             break;
+
+            default:
+
+            return;
 
         }
 

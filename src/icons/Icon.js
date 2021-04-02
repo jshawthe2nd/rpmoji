@@ -111,19 +111,24 @@ export const symbols = {
   dialog: `💬`
 };
 
-function getSymbol(symbolPath) {
-  return (symbolPath) ? symbolPath.split(".").reduce((o, i) => o[i], symbols) : ``;
+function getSymbol( symbolPath ) {
+  return ( symbolPath ) ? symbolPath
+    .split( "." )
+    .reduce( ( o, i ) => o[ i ], symbols ) : ``;
 }
 
-export function Icon({ symbol, label, cssClass, status = false }) {
+export function Icon( { symbol, label, cssClass, status = false } ) {
   return (
     <span
-      className={`icon ${getSymbol(symbol)} ${(status) ? `status` : ``} ${cssClass}`}
+      className={ `icon 
+        ${ getSymbol( symbol ) } 
+        ${ ( status ) ? `status` : `` } 
+        ${ cssClass }`
+      }
       role="img"
       aria-label={label ? label : ``}
-      aria-hidden={label ? "false" : "true"}
     >
-      {getSymbol(symbol)}
+      { getSymbol( symbol ) }
     </span>
   );
 }

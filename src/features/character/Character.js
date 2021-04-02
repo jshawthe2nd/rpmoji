@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Icon } from "../../icons/Icon";
 
@@ -10,20 +10,25 @@ import {
   decrementItemQty,
   selectActiveItem,
   deactivateItem,
+  selectGearToEquip,
+  equip,
+  clearGearToEquip
 } from "../party/partySlice";
-
 
 import {
   getCharacterSymbolPath,
   getCharacterIconLabel,
-  canItemBeUsed
+  canItemBeUsed,
+  canGearBeEquipped
 } from "./utils";
 
 import {
-  checkCharacterStatus
+  checkCharacter
 } from './actions';
 
+
 import styles from "./Character.module.css";
+import { checkItem } from "../party/actions";
 
 export function Character( { charId, ...props } ) {
 
@@ -31,39 +36,42 @@ export function Character( { charId, ...props } ) {
 
   const char = useSelector( ( state ) => {
 
-    return state.party.chars.find( ( c ) => c.id === charId );
+    return state.party.chars2[ charId ];
 
   } ); 
 
-  const itemToUse = useSelector( selectActiveItem );
+  const itemToUse             = useSelector( selectActiveItem );
 
-  const doesItemApplyToChar = canItemBeUsed( char, itemToUse ); 
+  const doesItemApplyToChar   = canItemBeUsed( char, itemToUse ); 
+
+  const gearToEquip           = useSelector( selectGearToEquip );
+
+  const isGearEquippable      = canGearBeEquipped( char, gearToEquip );
+
+  const [ wasGearEquipped, setWasGearEquipped ] = useState( false );
 
   const onCharacterSelect = ( event ) => {
-    //if( applyingItem ) {
 
       if ( itemToUse !== null ) {
-
-        console.log(itemToUse);
 
         switch ( itemToUse.label ) {
 
           case `Potion`:
 
-            dispatch( recoverHP( { charId: char.id } ) );
+            dispatch( recoverHP( { charId } ) );
                         
             break;
 
           case `Ether`:
 
-            dispatch( recoverMP( { charId: char.id } ) );                
+            dispatch( recoverMP( { charId } ) );                
 
             break;
 
           case `Antidote`:
           case `Elixir`:
 
-            dispatch( clearStatus( { charId: char.id } ) );    
+            dispatch( clearStatus( { charId } ) );    
 
             break;
 
@@ -74,26 +82,52 @@ export function Character( { charId, ...props } ) {
         
         dispatch( decrementItemQty( { itemUsed: itemToUse } ) );
 
-        dispatch( checkCharacterStatus( char.id, itemToUse.label, deactivateItem ) );
+        dispatch( checkItem( itemToUse, deactivateItem ) );
+
+        dispatch( checkCharacter( charId, itemToUse, deactivateItem ) );
 
       }
-    
-    //}
+
+      if( gearToEquip !== null ) {
+
+        dispatch( equip( { charId, gearToEquip } ) );
+
+        dispatch( clearGearToEquip() );
+
+        setWasGearEquipped( true );
+
+      }
 
   };
  
   
   return (
     <div
-      className={ `${ styles.character } ${
-        itemToUse && !doesItemApplyToChar
-          ? styles.dimCharacter
-          : ``
-      } ${
-        itemToUse && doesItemApplyToChar
-          ? styles.applyingToChar
-          : ``
-      }`}
+      className={ `
+
+        ${ styles.character } 
+        ${
+          itemToUse && !doesItemApplyToChar
+            ? styles.dimCharacter
+            : ``
+        } 
+        ${
+          itemToUse && doesItemApplyToChar
+            ? styles.applyingToChar
+            : ``
+        }
+        ${
+          gearToEquip && !isGearEquippable
+            ? styles.dimCharacter
+            : ``
+        }
+        ${
+          gearToEquip && isGearEquippable
+            ? styles.applyingToChar
+            : ``
+        }
+
+      ` }
 
       onClick={ onCharacterSelect }
     >
@@ -136,14 +170,21 @@ export function Character( { charId, ...props } ) {
           </div>
           <div className={ styles.gear }>
             <div
-              className={ styles.weapon }
+              className={ `
+                ${ styles.weapon }
+                ${ wasGearEquipped ? styles.flashGear : `` }
+                
+              ` }
               onClick={ ( e ) => {
                 e.preventDefault();
                 e.stopPropagation();
                 dispatch( openMenu( { menu: "weapons" } ) );
               } }
             >
-              <Icon symbol="item.weapon.sword" label="sword" /> Wood
+              <Icon 
+                symbol={ char.gear.weapon.symbol } 
+                label={ char.gear.weapon.label } 
+              /> { char.gear.weapon.name }
             </div>
             <div
               className={ styles.armor }
@@ -152,8 +193,11 @@ export function Character( { charId, ...props } ) {
                 e.stopPropagation();
                 dispatch( openMenu( { menu: "armor" } ) );
               } 
-              } >
-              <Icon symbol="item.armor" label="armor" /> Leather
+              }>
+              <Icon 
+                symbol={ char.gear.armor.symbol } 
+                label={ char.gear.armor.label } 
+              /> { char.gear.armor.name }
             </div>
           </div>
         </div>
