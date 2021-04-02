@@ -41,7 +41,7 @@ Game Menu:
         ✔ Character components determine if they can use the weapon, dim if not @done(21-04-01 19:19)
         ✔ User clicks Character component, weapon swaps... @done(21-04-01 19:19)
         ☐ ...Character flashes
-        ☐ Classes are removed, UI returns to normal
+        ✔ Classes are removed, UI returns to normal @done(21-04-01 20:08)
 
     State Updates:
         ✔ onClick handler, setGearToEquip() @done(21-04-01 19:19)
