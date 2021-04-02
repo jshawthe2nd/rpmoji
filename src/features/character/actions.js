@@ -4,7 +4,7 @@ export const checkCharacter = ( charId, itemUsed, deactivateItem ) => {
 
         const state = getState().party;
 
-        const char = state.chars2[ charId ];
+        const char = state.characters[ charId ];
 
         switch( itemUsed.label ) {
 

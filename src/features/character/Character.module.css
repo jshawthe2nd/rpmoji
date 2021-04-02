@@ -86,7 +86,7 @@
   text-align: left;
   color: #eee;
 
-  width: 85%;
+  width: 80%;
 }
 
 .mainCharStats div span {
@@ -97,14 +97,15 @@
 }
 
 .mainCharStats div span:nth-child(2) {
-  margin-left: 30px;
+  margin-left: 20px;
 }
 
 .gear {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  margin-top: -20px;
+  margin-top: -10px;
+  width: 50%;
 
 }
 
@@ -170,22 +171,32 @@
 
 }
 
+.openedMenu {
+
+  color: yellow;
+
+}
+
+.openedMenu::after {
+  position: absolute;
+  left: -25px;
+  top: -4px;
+  content: '👉';
+  font-size: 16px;
+  text-shadow: 1px 1px 1px #222;
+}
+
 @keyframes flash-gear {
   0% {
     color: yellow;
-    opacity: 1;
-    font-size: 12px;
+    transform: scale(1.0);
   }
-  22% {
-    color: yellow;
-    font-size: 14px;
-  }
-  77% {
-    font-size: 15px;
+  50% {
+    transform: scale(1.05);
     color: yellow;
   }
   100% {
-    font-size: 12px;
+    transform: scale(1.0);
     color: #eee;
   }
 }

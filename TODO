@@ -42,6 +42,7 @@ Game Menu:
         ✔ User clicks Character component, weapon swaps... @done(21-04-01 19:19)
         ✔ ...Character weapon flashes/pulses name @done(21-04-01 20:33)
         ✔ Classes are removed, UI returns to normal @done(21-04-01 20:08)
+        ☐ Highlight weapon name in yellow when clicking it direct to equip new weapon
 
     State Updates:
         ✔ onClick handler, setGearToEquip() @done(21-04-01 19:19)
@@ -52,16 +53,24 @@ Game Menu:
         Crit chance can be flat 25%. 
         Crit damage can be flat 50%.
         ✔ Spread new object data into char.gear.weapon @done(21-04-01 19:16)
+        ✔ Put previously-equipped weapon into inventory @done(21-04-02 08:31)
     
   ✔ Weapon menu pulling from partySlice @done(21-03-29 08:27)
   ✔ Armor menu pulling from partySlice @done(21-03-29 08:27)
 
   Armor Equip:
     UI Updates:
+      ✔ Ensure functionality is same as for Weapons @done(21-04-02 02:05)
+      ☐ Highlight armor in yellow when directly clicking to equip armor
     State Updates:
+      ✔ Ensure state updates similarly to Weapons @done(21-04-02 02:05)
+      ✔ Put previously-equipped armor into inventory @done(21-04-02 02:05)
 
   Scroll/Spell Equip:
     UI Updates:
+      ☐ Mostly same as weapons & armor but probably need something a lil different
+      ☐ Scroll disappears from inventory
+      ☐ Show pop up like, "${char.name} learned 'Cure'!"
     State Updates:
 
   UI Fine-tuning:
@@ -84,9 +93,17 @@ Saving Game:
   ☐ DB Data 
 
 Coding:
-  ☐ Maybe PropTypes?
-  ☐ Change State shape for characters to an id-based set of keys in an object
+  ✘ Maybe PropTypes? @cancelled(21-04-02 12:02)
+  ✔ Change State shape for characters to an id-based set of keys in an object @done(21-04-02 01:13)
       eg, party.chars[ $charId ].stats.hp, etc
+  ✔ Also need to adjust inventory stuffs to account for IDs, finally @done(21-04-02 02:05)
+  ☐ Generate IDs for items, gear
+  ☐ Reduce clicks needed to equip when clicking a gear slot directly on a character
+      User clicks weapon or armor slot
+      <WeaponMenu/> or <ArmorMenu/> opens
+      User clicks desired weapon or armor to equip
+      dispatch equip action for the given gearItem
+      dispatch methods for resetting UI
 
 Bugfixes:
   ✔ make sure onCharacterSelect only fires when applying item not when selecting for weapon or armor @done(20-09-23 22:24)

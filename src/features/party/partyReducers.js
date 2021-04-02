@@ -29,10 +29,77 @@ export default {
     });
     
   },
-  removeFromInventory: (state, action) => {
-    console.log(action);
+  removeFromInventory: ( state, action ) => {
+
+    let gearType;
+
+    const { gearItem } = action.payload;
+
+    switch( gearItem.type ) {
+
+      case `sword`:
+      case `axe`:
+      case `dagger`:
+      case `bow`:
+
+        gearType = 'weapon';
+
+      break;
+
+      case `armor`:
+      case `robe`:
+
+        gearType = 'armor';
+
+      break;
+
+      default:
+        break;
+
+    }
+
+    state.inventory[ gearType ].map( ( gear, index ) => {
+
+      if( gear.id === gearItem.id ) {
+
+        state.inventory[ gearType ].splice( index, 1 );
+
+      }
+
+      return true;
+
+    } );
+    
   },
-  addToInventory: (state, action) => {
+  addToInventory: ( state, action ) => {
+
+    const gearItem = { ...action.payload.gearItem };
+
+    console.log(gearItem);
+
+    switch( gearItem.type ) {
+
+      case `sword`:
+      case `axe`:
+      case `dagger`:
+      case `bow`:
+
+        //
+        //  TODO: in the event there's more than one in current inventory,
+        //  find a same item's qty to increment it, otherwise .push it
+        //
+
+        state.inventory.weapon.push( { ...gearItem, qty: 1 } );
+
+      break;
+      
+      default:
+
+        state.inventory.armor.push( { ...gearItem, qty: 1 } );
+
+      break;
+
+    }
     
   },
   activateItem: (state, action) => {
@@ -70,6 +137,6 @@ export default {
 
     state.gearToEquip = action.payload.armor;
 
-  },
+  }
   
 }

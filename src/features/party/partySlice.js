@@ -6,169 +6,7 @@ import characterReducers from '../character/characterReducers';
 export const slice = createSlice({
   name: 'party',
   initialState: {
-    chars: [
-      {
-        id: 123,
-        name: "Dirk",
-        charType: 1,
-        gender: 1,
-        stats: {
-          hp: {
-            current: 50,
-            max: 50
-          },
-          mp: {
-            current: 0,
-            max: 0
-          },
-          level: {
-            current: 1,
-            exp: 5,
-            next: 50,
-          },
-        },
-        gear: {
-          weapon: {
-            type: "sword",
-            dmg: 10,
-            name: "Wood"
-          },
-          armor: {
-            name: "Leather",
-            def: 5
-          }
-        },
-        status: "poison"
-      },
-      {
-        id: 124,
-        name: "Lara",
-        charType: 1,
-        gender: 2,
-        stats: {
-          hp: {
-            current: 42,
-            max: 50
-          },
-          mp: {
-            current: 0,
-            max: 0
-          },
-          level: {
-            current: 1,
-            exp: 5,
-            next: 50,
-          },
-        },
-        gear: {
-          weapon: {
-            type: "sword",
-            dmg: 10,
-            name: "Wood"
-          },
-          armor: {
-            name: "Leather",
-            def: 5
-          }
-        },
-        status: "poison"
-      },
-      {
-        id: 125,
-        name: "Zyzx",
-        charType: 2,
-        gender: 1,
-        stats: {
-          hp: {
-            current: 50,
-            max: 50
-          },
-          mp: {
-            current: 30,
-            max: 35
-          },
-          level: {
-            current: 1,
-            exp: 5,
-            next: 50,
-          },
-        },
-        gear: {
-          weapon: {
-            type: "dagger",
-            dmg: 4,
-            name: "Wood"
-          },
-          armor: {
-            name: "Burlap",
-            def: 2
-          },
-          spells: [
-            {
-              type: 'ice',
-              cost: 4,
-              dmg: 8              
-            },
-            {
-              type: 'cure',
-              cost: 6,
-              // possible formula for calculating heal:
-              // (level * 10 / 2) + (cost / 2) 
-              heal: ((1 * 10 /2 ) + (6 / 2)) + (Math.floor(Math.random() * Math.floor((1 * 10 / 2))))
-            }
-          ]
-        },
-        status: false
-      },
-      {
-        id: 126,
-        name: "Zyra",
-        charType: 2,
-        gender: 2,
-        stats: {
-          hp: {
-            current: 50,
-            max: 50
-          },
-          mp: {
-            current: 35,
-            max: 35
-          },
-          level: {
-            current: 1,
-            exp: 5,
-            next: 50,
-          },
-        },
-        gear: {
-          weapon: {
-            type: "dagger",
-            dmg: 4,
-            name: "Wood"
-          },
-          armor: {
-            name: "Burlap",
-            def: 2
-          },
-          spells: [
-            {
-              type: 'ice',
-              cost: 4,
-              dmg: 8              
-            },
-            {
-              type: 'cure',
-              cost: 6,
-              // possible formula for calculating heal:
-              // (level * 10 / 2) + (cost / 2) 
-              heal: ((1 * 10 /2 ) + (6 / 2)) + (Math.floor(Math.random() * Math.floor((1 * 10 / 2))))
-            }
-          ]
-        },
-        status: false
-      }
-    ],
-    chars2: {
+    characters: {
       123: {
         id: 123,
         name: "Dirk",
@@ -191,15 +29,18 @@ export const slice = createSlice({
         },
         gear: {
           weapon: {
-            type: "sword",
-            dmg: 10,
-            name: "Wood",
+            id:     605,
+            type:   "sword",
+            dmg:    10,
+            label:  "Wood",
             symbol: "item.weapon.sword"
           },
           armor: {
-            name: "Leather",
-            def: 5,
-            symbol: "item.armor"
+            id:     704,
+            label:  "Leather",
+            def:    5,
+            symbol: "item.armor",
+            type:   "armor"
           }
         },
         status: "poison"
@@ -226,15 +67,18 @@ export const slice = createSlice({
         },
         gear: {
           weapon: {
-            type: "sword",
-            dmg: 10,
-            name: "Wood",
+            id:     606,
+            type:   "sword",
+            dmg:    10,
+            label:  "Wood",
             symbol: "item.weapon.sword"
           },
           armor: {
-            name: "Leather",
-            def: 5,
-            symbol: "item.armor"
+            id:     705,
+            label:  "Leather",
+            def:    5,
+            symbol: "item.armor",
+            type:   "armor"
           }
         },
         status: "poison"
@@ -261,15 +105,18 @@ export const slice = createSlice({
         },
         gear: {
           weapon: {
-            type: "dagger",
-            dmg: 4,
-            name: "Wood",
+            id:     607,
+            type:   "dagger",
+            dmg:    4,
+            label:  "Wood",
             symbol: "item.weapon.dagger"
           },
           armor: {
-            name: "Burlap",
+            id:     706,
+            label: "Burlap",
             def: 2,
-            symbol: "item.robe"
+            symbol: "item.robe",
+            type:   "robe"
           },
           spells: [
             {
@@ -310,15 +157,18 @@ export const slice = createSlice({
         },
         gear: {
           weapon: {
-            type: "dagger",
-            dmg: 4,
-            name: "Wood",
+            id:     608,
+            type:   "dagger",
+            dmg:    4,
+            label:  "Wood",
             symbol: "item.weapon.dagger"
           },
           armor: {
-            name: "Burlap",
-            def: 2,
-            symbol: "item.robe"
+            id:     707,
+            label:  "Burlap",
+            def:    2,
+            symbol: "item.robe",
+            type:   "robe"
           },
           spells: [
             {
@@ -372,7 +222,7 @@ export const slice = createSlice({
       weapon: [
         {
           id:     601,
-          name:   'Stone',
+          label:  'Stone',
           type:   'sword',
           symbol: 'item.weapon.sword',
           dmg:    5,
@@ -382,7 +232,7 @@ export const slice = createSlice({
         },
         {
           id:     602,
-          name:   'Stone',
+          label:  'Stone',
           type:   'axe',
           symbol: 'item.weapon.axe',
           dmg:    5,
@@ -390,7 +240,7 @@ export const slice = createSlice({
         },
         {
           id:     603,
-          name:   'Branch',
+          label:  'Branch',
           type:   'bow',
           symbol: 'item.weapon.bow',
           dmg:    4,
@@ -398,7 +248,7 @@ export const slice = createSlice({
         },
         {
           id:     604,
-          name:   'Stone',
+          label:  'Stone',
           type:   'dagger',
           symbol: 'item.weapon.dagger',
           dmg:    4,
@@ -408,22 +258,25 @@ export const slice = createSlice({
       armor: [
         {
           id:     701,
-          name:   'Leather',
+          label:  'Leather',
           type:   'armor',
+          symbol: 'item.armor',
           qty:    1
         },
         {
           id:     703,
-          name:   'Burlap',
+          label:  'Hide',
           type:   'robe',
+          symbol: 'item.robe',
           qty:    1
         },
       ],
       scroll: [
         {
-          id:   801,
-          name: 'Cure',
-          qty:   1
+          id:     801,
+          name:   'Cure',
+          symbol: 'item.scroll',
+          qty:    1
         }
       ]
     },
@@ -450,29 +303,31 @@ export const {
   recoverMP,
   clearStatus,
   setWeaponToEquip,
+  setArmorToEquip,
   clearGearToEquip,
+  sendGearToInventory,
   equip
 } = slice.actions;
 
 export const selectInventory = state => state.party.inventory;
 
 export const selectChars = state => {
-  return state.party.chars2;
+  return state.party.characters;
 }
 
 export const selectCharacterIds = state => {
 
-  return [ ...Object.keys( state.party.chars2 ) ];
+  return [ ...Object.keys( state.party.characters ) ];
 
 }
 
 export const selectGold = state => state.gold;
 
-export const selectItem = (state, action) => {
+export const selectItem = ( state, action ) => {
   console.log(action);
 }
 
-export const selectWeapon = (state, action) => {
+export const selectWeapon = ( state, action ) => {
   console.log(action);
 }
 
@@ -482,13 +337,7 @@ export const selectAllWeapons = ( state ) => {
 
 }
 
-export const selectWeaponToEquip = ( state ) => {
-
-  return state.party.weaponToEquip;
-
-}
-
-export const selectArmor = (state, action) => {
+export const selectArmor = ( state, action ) => {
   console.log(action);
 }
 

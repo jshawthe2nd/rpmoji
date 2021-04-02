@@ -12,7 +12,9 @@ import {
   deactivateItem,
   selectGearToEquip,
   equip,
-  clearGearToEquip
+  clearGearToEquip,
+  addToInventory,
+  removeFromInventory
 } from "../party/partySlice";
 
 import {
@@ -36,7 +38,7 @@ export function Character( { charId, ...props } ) {
 
   const char = useSelector( ( state ) => {
 
-    return state.party.chars2[ charId ];
+    return state.party.characters[ charId ];
 
   } ); 
 
@@ -48,7 +50,13 @@ export function Character( { charId, ...props } ) {
 
   const isGearEquippable      = canGearBeEquipped( char, gearToEquip );
 
-  const [ wasGearEquipped, setWasGearEquipped ] = useState( false );
+  const [ wasWeaponEquipped, setWasWeaponEquipped ] = useState( false );
+
+  const [ wasArmorEquipped, setWasArmorEquipped ] = useState( false );
+
+  const [ openedWeaponMenu, setOpenedWeaponMenu ] = useState( false );
+
+  const [ openedArmorMenu, setOpenedArmorMenu ] = useState( false );
 
   const onCharacterSelect = ( event ) => {
 
@@ -90,11 +98,39 @@ export function Character( { charId, ...props } ) {
 
       if( gearToEquip !== null ) {
 
-        dispatch( equip( { charId, gearToEquip } ) );
+        dispatch( equip( { charId, gearToEquip, dispatch } ) );
+
+        let sendToInventory;
+
+        if( gearToEquip.symbol.indexOf( 'weapon' ) !== -1 ) {
+          
+          sendToInventory = 'weapon';
+          
+          setWasWeaponEquipped( true );
+
+        } else {
+
+          sendToInventory = 'armor';
+          
+          setWasArmorEquipped( true );
+
+        }
+
+        dispatch( removeFromInventory( { gearItem: gearToEquip } ) );
+
+        dispatch( addToInventory( 
+          { 
+            gearItem: { ...char.gear[ sendToInventory ] } 
+          }
+        ) );
 
         dispatch( clearGearToEquip() );
 
-        setWasGearEquipped( true );
+        //so the flashGear class is removed
+        setTimeout( () => {
+          setWasWeaponEquipped( false );
+          setWasArmorEquipped( false );
+        }, 1000 );
 
       }
 
@@ -171,33 +207,43 @@ export function Character( { charId, ...props } ) {
           <div className={ styles.gear }>
             <div
               className={ `
+
                 ${ styles.weapon }
-                ${ wasGearEquipped ? styles.flashGear : `` }
+                ${ wasWeaponEquipped ? styles.flashGear : `` }
+                ${ openedWeaponMenu ? styles.openedMenu : `` }
                 
               ` }
               onClick={ ( e ) => {
                 e.preventDefault();
                 e.stopPropagation();
-                dispatch( openMenu( { menu: "weapons" } ) );
+                setOpenedWeaponMenu( true );
+                dispatch( openMenu( { menu: "weapons", ref: 'character' } ) );
               } }
             >
               <Icon 
                 symbol={ char.gear.weapon.symbol } 
                 label={ char.gear.weapon.label } 
-              /> { char.gear.weapon.name }
+              /> { char.gear.weapon.label }
             </div>
             <div
-              className={ styles.armor }
+              className={ `
+
+                ${ styles.armor }
+                ${ wasArmorEquipped ? styles.flashGear : `` }
+                ${ openedArmorMenu ? styles.openedMenu : `` }
+                
+              ` }
               onClick={ ( e ) => {
                 e.preventDefault();
                 e.stopPropagation();
-                dispatch( openMenu( { menu: "armor" } ) );
+                setOpenedArmorMenu( true );
+                dispatch( openMenu( { menu: "armor", ref: 'character' } ) );
               } 
               }>
               <Icon 
                 symbol={ char.gear.armor.symbol } 
                 label={ char.gear.armor.label } 
-              /> { char.gear.armor.name }
+              /> { char.gear.armor.label }
             </div>
           </div>
         </div>

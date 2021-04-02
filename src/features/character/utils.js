@@ -126,7 +126,11 @@ export const canGearBeEquipped = ( char, gear ) => {
 
     case 1:
 
-      if( gear.type !== 'dagger' || gear.type !== 'robe' ) {
+      if( 
+        gear.type !== 'robe'    && 
+        gear.type !== 'dagger'  && 
+        gear.type !== 'scroll' 
+      ) {
 
         return true;
 
@@ -142,7 +146,7 @@ export const canGearBeEquipped = ( char, gear ) => {
         gear.type === 'robe'    || 
         gear.type === 'scroll' 
       ) {
-
+        
         return true;
 
       }
