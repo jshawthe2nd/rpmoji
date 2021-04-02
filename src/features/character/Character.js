@@ -96,6 +96,8 @@ export function Character( { charId, ...props } ) {
 
         dispatch( clearGearToEquip() );
 
+        
+
         if( gearToEquip.symbol.indexOf( 'weapon' ) ) {
 
           setWasWeaponEquipped( true );
@@ -105,6 +107,8 @@ export function Character( { charId, ...props } ) {
           setWasArmorEquipped( true );
 
         }
+
+        console.log(wasArmorEquipped, wasWeaponEquipped);
 
         //so the flashGear class is removed
         setTimeout( () => {

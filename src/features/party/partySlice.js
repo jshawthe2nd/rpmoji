@@ -210,7 +210,7 @@ export const slice = createSlice({
       weapon: [
         {
           id:     601,
-          label:   'Stone',
+          label:  'Stone',
           type:   'sword',
           symbol: 'item.weapon.sword',
           dmg:    5,
@@ -220,7 +220,7 @@ export const slice = createSlice({
         },
         {
           id:     602,
-          label:   'Stone',
+          label:  'Stone',
           type:   'axe',
           symbol: 'item.weapon.axe',
           dmg:    5,
@@ -228,7 +228,7 @@ export const slice = createSlice({
         },
         {
           id:     603,
-          label:   'Branch',
+          label:  'Branch',
           type:   'bow',
           symbol: 'item.weapon.bow',
           dmg:    4,
@@ -236,7 +236,7 @@ export const slice = createSlice({
         },
         {
           id:     604,
-          label:   'Stone',
+          label:  'Stone',
           type:   'dagger',
           symbol: 'item.weapon.dagger',
           dmg:    4,
@@ -246,14 +246,14 @@ export const slice = createSlice({
       armor: [
         {
           id:     701,
-          label:   'Leather',
+          label:  'Leather',
           type:   'armor',
           symbol: 'item.armor',
           qty:    1
         },
         {
           id:     703,
-          label:   'Hide',
+          label:  'Hide',
           type:   'robe',
           symbol: 'item.robe',
           qty:    1
@@ -310,11 +310,11 @@ export const selectCharacterIds = state => {
 
 export const selectGold = state => state.gold;
 
-export const selectItem = (state, action) => {
+export const selectItem = ( state, action ) => {
   console.log(action);
 }
 
-export const selectWeapon = (state, action) => {
+export const selectWeapon = ( state, action ) => {
   console.log(action);
 }
 
@@ -324,7 +324,7 @@ export const selectAllWeapons = ( state ) => {
 
 }
 
-export const selectArmor = (state, action) => {
+export const selectArmor = ( state, action ) => {
   console.log(action);
 }
 

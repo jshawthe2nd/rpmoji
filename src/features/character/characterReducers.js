@@ -18,10 +18,11 @@ export default {
         //  TODO: put current weapon into inventory
         //
 
-        state.characters[ charId ].gear.weapon = { 
-                                ...gearToEquip,
-                                dmg: ( gearToEquip.dmg + char.level ) 
-                              };
+        state.characters[ charId ]
+          .gear.weapon = { 
+                  ...gearToEquip,
+                  dmg: ( gearToEquip.dmg + char.stats.level.current ) 
+                };
 
       break;
 

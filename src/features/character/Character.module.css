@@ -104,7 +104,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  margin-top: -20px;
+  margin-top: -10px;
 
 }
 
@@ -173,19 +173,14 @@
 @keyframes flash-gear {
   0% {
     color: yellow;
-    opacity: 1;
-    font-size: 12px;
+    transform: scale(1.0);
   }
-  22% {
-    color: yellow;
-    font-size: 14px;
-  }
-  77% {
-    font-size: 15px;
+  50% {
+    transform: scale(1.01);
     color: yellow;
   }
   100% {
-    font-size: 12px;
+    transform: scale(1.0);
     color: #eee;
   }
 }
