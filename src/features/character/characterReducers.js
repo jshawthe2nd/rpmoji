@@ -2,9 +2,7 @@ export default {
   attack: (state) => {},
   defend: (state) => {},
   equip: ( state, action ) => {
-
-    console.log(action);
-
+    
     const { charId, gearToEquip } = action.payload;
 
     const char = { ...state.chars2[ charId ] };
@@ -24,8 +22,6 @@ export default {
                                 ...gearToEquip,
                                 dmg: ( gearToEquip.dmg + char.level ) 
                               };
-
-        
 
       break;
 

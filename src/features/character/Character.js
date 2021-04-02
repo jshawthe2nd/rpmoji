@@ -11,7 +11,8 @@ import {
   selectActiveItem,
   deactivateItem,
   selectGearToEquip,
-  equip
+  equip,
+  clearGearToEquip
 } from "../party/partySlice";
 
 import {
@@ -88,6 +89,8 @@ export function Character( { charId, ...props } ) {
       if( gearToEquip !== null ) {
 
         dispatch( equip( { charId, gearToEquip } ) );
+
+        dispatch( clearGearToEquip() );
 
       }
 
@@ -179,8 +182,11 @@ export function Character( { charId, ...props } ) {
                 e.stopPropagation();
                 dispatch( openMenu( { menu: "armor" } ) );
               } 
-              } >
-              <Icon symbol="item.armor" label="armor" /> Leather
+              }>
+              <Icon 
+                symbol={ char.gear.armor.symbol } 
+                label={ char.gear.armor.label } 
+              /> { char.gear.armor.name }
             </div>
           </div>
         </div>

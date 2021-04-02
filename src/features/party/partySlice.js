@@ -198,7 +198,8 @@ export const slice = createSlice({
           },
           armor: {
             name: "Leather",
-            def: 5
+            def: 5,
+            symbol: "item.armor"
           }
         },
         status: "poison"
@@ -232,7 +233,8 @@ export const slice = createSlice({
           },
           armor: {
             name: "Leather",
-            def: 5
+            def: 5,
+            symbol: "item.armor"
           }
         },
         status: "poison"
@@ -266,7 +268,8 @@ export const slice = createSlice({
           },
           armor: {
             name: "Burlap",
-            def: 2
+            def: 2,
+            symbol: "item.robe"
           },
           spells: [
             {
@@ -314,7 +317,8 @@ export const slice = createSlice({
           },
           armor: {
             name: "Burlap",
-            def: 2
+            def: 2,
+            symbol: "item.robe"
           },
           spells: [
             {
