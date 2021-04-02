@@ -59,10 +59,10 @@ Game Menu:
 
   Armor Equip:
     UI Updates:
-      ☐ Ensure functionality is same as for Weapons
+      ✔ Ensure functionality is same as for Weapons @done(21-04-02 02:05)
     State Updates:
-      ☐ Ensure state updates similarly to Weapons
-      ☐ Put previously-equipped armor into inventory
+      ✔ Ensure state updates similarly to Weapons @done(21-04-02 02:05)
+      ✔ Put previously-equipped armor into inventory @done(21-04-02 02:05)
 
   Scroll/Spell Equip:
     UI Updates:
@@ -91,7 +91,8 @@ Coding:
   ☐ Maybe PropTypes?
   ✔ Change State shape for characters to an id-based set of keys in an object @done(21-04-02 01:13)
       eg, party.chars[ $charId ].stats.hp, etc
-  ☐ Also need to adjust inventory stuffs to account for IDs, finally
+  ✔ Also need to adjust inventory stuffs to account for IDs, finally @done(21-04-02 02:05)
+  ☐ Generate IDs for items, gear
 
 Bugfixes:
   ✔ make sure onCharacterSelect only fires when applying item not when selecting for weapon or armor @done(20-09-23 22:24)

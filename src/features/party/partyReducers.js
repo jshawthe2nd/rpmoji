@@ -75,6 +75,8 @@ export default {
 
     const gearItem = { ...action.payload.gearItem };
 
+    console.log(gearItem);
+
     switch( gearItem.type ) {
 
       case `sword`:
@@ -90,16 +92,12 @@ export default {
         state.inventory.weapon.push( { ...gearItem, qty: 1 } );
 
       break;
-
-      case `armor`:
-      case `robe`:
-
-        state.inventory.armor.push( gearItem );
-      
-      break;
       
       default:
-        break;
+
+        state.inventory.armor.push( { ...gearItem, qty: 1 } );
+
+      break;
 
     }
     

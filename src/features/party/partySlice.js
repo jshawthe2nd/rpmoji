@@ -29,15 +29,18 @@ export const slice = createSlice({
         },
         gear: {
           weapon: {
-            type: "sword",
-            dmg: 10,
-            label: "Wood",
+            id:     605,
+            type:   "sword",
+            dmg:    10,
+            label:  "Wood",
             symbol: "item.weapon.sword"
           },
           armor: {
-            label: "Leather",
-            def: 5,
-            symbol: "item.armor"
+            id:     704,
+            label:  "Leather",
+            def:    5,
+            symbol: "item.armor",
+            type:   "armor"
           }
         },
         status: "poison"
@@ -64,15 +67,18 @@ export const slice = createSlice({
         },
         gear: {
           weapon: {
-            type: "sword",
-            dmg: 10,
-            label: "Wood",
+            id:     606,
+            type:   "sword",
+            dmg:    10,
+            label:  "Wood",
             symbol: "item.weapon.sword"
           },
           armor: {
-            label: "Leather",
-            def: 5,
-            symbol: "item.armor"
+            id:     705,
+            label:  "Leather",
+            def:    5,
+            symbol: "item.armor",
+            type:   "armor"
           }
         },
         status: "poison"
@@ -99,15 +105,18 @@ export const slice = createSlice({
         },
         gear: {
           weapon: {
-            type: "dagger",
-            dmg: 4,
-            label: "Wood",
+            id:     607,
+            type:   "dagger",
+            dmg:    4,
+            label:  "Wood",
             symbol: "item.weapon.dagger"
           },
           armor: {
+            id:     706,
             label: "Burlap",
             def: 2,
-            symbol: "item.robe"
+            symbol: "item.robe",
+            type:   "robe"
           },
           spells: [
             {
@@ -148,15 +157,18 @@ export const slice = createSlice({
         },
         gear: {
           weapon: {
-            type: "dagger",
-            dmg: 4,
-            label: "Wood",
+            id:     608,
+            type:   "dagger",
+            dmg:    4,
+            label:  "Wood",
             symbol: "item.weapon.dagger"
           },
           armor: {
-            label: "Burlap",
-            def: 2,
-            symbol: "item.robe"
+            id:     707,
+            label:  "Burlap",
+            def:    2,
+            symbol: "item.robe",
+            type:   "robe"
           },
           spells: [
             {
