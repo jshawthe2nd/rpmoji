@@ -93,7 +93,7 @@ Saving Game:
   ☐ DB Data 
 
 Coding:
-  ☐ Maybe PropTypes?
+  ✘ Maybe PropTypes? @cancelled(21-04-02 12:02)
   ✔ Change State shape for characters to an id-based set of keys in an object @done(21-04-02 01:13)
       eg, party.chars[ $charId ].stats.hp, etc
   ✔ Also need to adjust inventory stuffs to account for IDs, finally @done(21-04-02 02:05)

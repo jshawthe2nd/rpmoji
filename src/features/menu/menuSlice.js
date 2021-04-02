@@ -4,11 +4,18 @@ export const slice = createSlice({
   name: "menu",
   initialState: {
     menu: false,
+    ref: false
   },
   reducers: {
     openMenu: (state, action) => {
       
       state.menu = action.payload.menu;
+
+      if( action.payload.ref ) {
+
+        state.ref = action.payload.ref;
+
+      }
 
     },
     closeMenu: (state, action) => {

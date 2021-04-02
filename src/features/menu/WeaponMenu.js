@@ -16,9 +16,9 @@ import {
 
 export function WeaponMenu() {
 
-  const dispatch  = useDispatch();
+  const dispatch        = useDispatch();
 
-  const weapons   = useSelector( selectAllWeapons );
+  const weapons         = useSelector( selectAllWeapons );
 
   const weaponToEquip   = useSelector( selectGearToEquip );
 
@@ -26,7 +26,7 @@ export function WeaponMenu() {
 
     if( !weaponToEquip ) {
 
-      dispatch( setWeaponToEquip( { weapon }) );
+      dispatch( setWeaponToEquip( { weapon } ) );
 
     } else {
 

@@ -217,7 +217,7 @@ export function Character( { charId, ...props } ) {
                 e.preventDefault();
                 e.stopPropagation();
                 setOpenedWeaponMenu( true );
-                dispatch( openMenu( { menu: "weapons" } ) );
+                dispatch( openMenu( { menu: "weapons", ref: 'character' } ) );
               } }
             >
               <Icon 
@@ -237,7 +237,7 @@ export function Character( { charId, ...props } ) {
                 e.preventDefault();
                 e.stopPropagation();
                 setOpenedArmorMenu( true );
-                dispatch( openMenu( { menu: "armor" } ) );
+                dispatch( openMenu( { menu: "armor", ref: 'character' } ) );
               } 
               }>
               <Icon 
