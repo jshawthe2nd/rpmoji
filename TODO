@@ -10,60 +10,61 @@ Game Menu:
   ✔ Clicking Back in the menu should undo applying item effects @done(20-09-27 15:16)
   ✔ Clicking the active item should deactivate it @done(20-09-27 15:30)
   ✔ When applying item, deactivate states for the weapon/armor menu @done(20-09-27 15:58)
-  ☐ Post-item usage
-      ☐ UI updates
-      clearing the classes on Character components:
-        So I handled the item quantity case for the UI,
-        but now I need to figure out how to properly have
-        the Character watch itself for when its stats values
-        have been restored to max, and disable the classes
-        appropriately to return the UI to where
-        it needs to be.
-        update: pretty sure I can rely on the
-        canItemBeUsed paradigm to dispatch necessary
-        actions
-        In the end, what I ended up doing was writing an action
-        creator that returned a function that received a dispatch
-        and getState function as arguments, and used those to check
-        state of the character stat and deactivate the item to return
-        the UI to its regular state.
+  Post-item Usage:
+      clearing the classes on Character components
+      So I handled the item quantity case for the UI,
+      but now I need to figure out how to properly have
+      the Character watch itself for when its stats values
+      have been restored to max, and disable the classes
+      appropriately to return the UI to where
+      it needs to be.
+      update: pretty sure I can rely on the
+      canItemBeUsed paradigm to dispatch necessary
+      actions
+      In the end, what I ended up doing was writing an action
+      creator that returned a function that received a dispatch
+      and getState function as arguments, and used those to check
+      state of the character stat and deactivate the item to return
+      the UI to its regular state.
        
-      ☐ State updates
-        - when item qty reaches 0:
+      ✔ State updates @done(21-04-01 19:22)
         ✔ deactivate item @done(20-09-27 17:32)
         ✔ disable menu option @done(20-09-27 17:32)
-        - when char stat current value equals max value:
         ✔ dispatch deactivateItem @done(21-02-26 03:14)
 
-  ☐ Weapon Equip
-    ☐ Setup click handler for WeaponMenu
+  Weapon Equip:
+    ✔ Setup click handler for WeaponMenu @done(21-04-01 19:17)
         
-    ☐ UI Updates
-        - On weapon select, announce active item
-        - Party component sets class
-        - Character components determine if they can use the weapon, dim if not
-        - User clicks Character component, weapon swaps, Character flashes
-        - Classes are removed, UI returns to normal
-    ☐ State Updates
-        - onClick handler, setWeaponToEquip()
-        - onCharacterSelect, if weaponToEquip is truthy, and its a weapon type for the character, dispatch equip()
-        - characterReducers.equip() should
-          - Take the name & type from the setWeaponToEquip, apply damage calculation
-          Do weapons have their own innate damage, or do different types have a formula that then gets calculated when equipped to the character to know how much damage it does? If we do have a formula, what should it be? I feel like damage and armor should adjust to the level of the character equipping it. We could even have a scaling boost factor based on, maybe, item rarity? Or some kind of power level?
-          For now let's just say damage per character is level + damage.
-          Crit chance can be flat 25%. 
-          Crit damage can be flat 50%.
-          - Spread new object data into char.gear.weapon
+    UI Updates:
+        ✔ On weapon select, announce active item @done(21-04-01 19:17)
+        ✔ Party component sets class @done(21-04-01 19:19)
+        ✔ Character components determine if they can use the weapon, dim if not @done(21-04-01 19:19)
+        ✔ User clicks Character component, weapon swaps... @done(21-04-01 19:19)
+        ☐ ...Character flashes
+        ☐ Classes are removed, UI returns to normal
+
+    State Updates:
+        ✔ onClick handler, setGearToEquip() @done(21-04-01 19:19)
+        ✔ onCharacterSelect, if gearToEquip is truthy, and its a weapon type for the character, dispatch equip() @done(21-04-01 19:20)
+        ✔ Take the name & type from the setGearToEquip, apply damage calculation @done(21-04-01 19:20)
+        Do weapons have their own innate damage, or do different types have a formula that then gets calculated when equipped to the character to know how much damage it does? If we do have a formula, what should it be? I feel like damage and armor should adjust to the level of the character equipping it. We could even have a scaling boost factor based on, maybe, item rarity? Or some kind of power level?
+        For now let's just say damage per character is level + damage.
+        Crit chance can be flat 25%. 
+        Crit damage can be flat 50%.
+        ✔ Spread new object data into char.gear.weapon @done(21-04-01 19:16)
     
   ✔ Weapon menu pulling from partySlice @done(21-03-29 08:27)
   ✔ Armor menu pulling from partySlice @done(21-03-29 08:27)
-  ☐ Armor Equip
-    ☐ UI Updates
-    ☐ State Updates
-  ☐ Scroll/Spell Equip
-    ☐ UI Updates
-    ☐ State Updates
-  ☐ UI Fine-tuning
+
+  Armor Equip:
+    UI Updates:
+    State Updates:
+
+  Scroll/Spell Equip:
+    UI Updates:
+    State Updates:
+
+  UI Fine-tuning:
     ✔ Show hand on hovered Character (changed to showing color) @done(20-09-27 15:49)
     ✔ When clicking BackOption clear Character 'select' state @done(20-09-27 15:49)
     ✔ Adjusted areas of weapon/armor slots to be more mouse-friendly @done(20-09-27 16:05)
@@ -71,7 +72,6 @@ Game Menu:
 World Map: 
 
 Battle System:
-
 
 Quest:
   ☐ State Updates
@@ -87,6 +87,7 @@ Coding:
   ☐ Maybe PropTypes?
   ☐ Change State shape for characters to an id-based set of keys in an object
       eg, party.chars[ $charId ].stats.hp, etc
+
 Bugfixes:
   ✔ make sure onCharacterSelect only fires when applying item not when selecting for weapon or armor @done(20-09-23 22:24)
   ✔ Fixed a bug where I wasn't properly checking the current character's state in Redux and therefore couldn't properly react to state changes and decide if we needed to deactivate the current item because the character's current stat value had met or exceeded their max value. @done(21-02-26 03:12)

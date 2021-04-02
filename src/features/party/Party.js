@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { selectChars, selectActiveItem, selectCharacterIds } from "./partySlice";
+import { selectActiveItem, selectCharacterIds, selectGearToEquip } from "./partySlice";
 
 import { Character } from '../character/Character';
 
@@ -17,11 +17,17 @@ export function Party( { children } ) {
     
   const party = useSelector( selectCharacterIds );
 
-
   const activeItem = useSelector( selectActiveItem );  
+
+  const gearToEquip = useSelector( selectGearToEquip );
   
   return (
-    <div id="partyContainer" className={ `${styles.partyContainer} ${ activeItem ? `applyingItem` : `` } ` }>
+    <div 
+      id="partyContainer" 
+      className={ 
+        `${styles.partyContainer} ${ activeItem ? `applyingItem` : `` } 
+         ${ gearToEquip ? `applyingItem` : ``}` 
+      }>
       { party.map( ( characterId, index ) => {
         
         return (
