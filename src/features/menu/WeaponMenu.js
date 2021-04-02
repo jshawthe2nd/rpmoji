@@ -5,7 +5,12 @@ import styles from './Menu.module.css';
 
 import { Icon } from '../../icons/Icon';
 
-import { selectAllWeapons, selectWeaponToEquip } from '../party/partySlice';
+import { 
+  selectAllWeapons, 
+  selectWeaponToEquip, 
+  setWeaponToEquip, 
+  clearGearToEquip 
+} from '../party/partySlice';
 
 
 
@@ -17,17 +22,19 @@ export function WeaponMenu() {
 
   const weaponToEquip   = useSelector( selectWeaponToEquip );
 
-  const onWeaponClick   = ( ) => {
+  const onWeaponClick   = ( weapon ) => {
 
-    // if( !weaponToEquip ) {
+    console.log( weapon );
 
-    //   dispatch( setWeaponToEquip() );
+    if( !weaponToEquip ) {
 
-    // } else {
+      dispatch( setWeaponToEquip( { weapon }) );
 
-    //   dispatch( clearWeaponToEquip() );
+    } else {
 
-    // }
+      dispatch( clearGearToEquip() );
+
+    }
 
   };
 
@@ -36,7 +43,8 @@ export function WeaponMenu() {
     <div>
       { weapons.map( ( weapon, index ) => {
         return (
-          <div key={ index } className={ styles.subMenuOption }>
+          <div key={ index } className={ styles.subMenuOption } 
+          onClick={ (e) => { onWeaponClick( weapon ) } }>
             <Icon symbol={ weapon.symbol } label={ weapon.name } />
             { weapon.name } &times; { weapon.qty }
           </div>

@@ -3,52 +3,51 @@ export default {
   defend: (state) => {},
   equip: ( state, action ) => {
 
-    const { charId, gearItem } = action.payload;
+    console.log(action);
 
-    state.chars.map( ( char, index ) => {
+    const { charId, gearToEquip } = action.payload;
 
-      if( char.id === charId ) {
+    const char = { ...state.chars2[ charId ] };
+
+    switch( gearToEquip.type ) {
+
+      case `sword`:
+      case `axe`:
+      case `dagger`:
+      case `bow`:
 
         //
+        //  TODO: put current weapon into inventory
+        //
 
-        switch( gearItem.type ) {
+        state.chars2[ charId ].gear.weapon = { 
+                                ...gearToEquip,
+                                dmg: ( gearToEquip.dmg + char.level ) 
+                              };
 
-          case `sword`:
-          case `axe`:
-          case `dagger`:
-          case `bow`:
+        
 
-            state.chars[index].gear.weapon = { ...gearItem };
+      break;
 
-          break;
+      case `armor`:
+      case `robe`:
 
-          case `armor`:
-          case `robe`:
+        state.chars2[ charId ].gear.armor = { ...gearToEquip };
 
-            state.chars[index].gear.armor = { ...gearItem };
+      break;
 
-          break;
+      case `scroll`:
+        //
+        //  So maybe the scroll, as part of its data, should explain what
+        //  spell it will give to the user, 
 
-          case `scroll`:
+      break;
 
-          break;
+      default:
 
-          default:
+      break;
 
-          break;
-
-        }
-
-      }
-
-      return true;
-
-    } )
-
-  },
-  setWeaponToEquip: ( state, action ) => {
-
-    
+    }
 
   },
   levelUp: (state) => {},

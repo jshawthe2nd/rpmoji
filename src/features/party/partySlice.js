@@ -193,7 +193,8 @@ export const slice = createSlice({
           weapon: {
             type: "sword",
             dmg: 10,
-            name: "Wood"
+            name: "Wood",
+            symbol: "item.weapon.sword"
           },
           armor: {
             name: "Leather",
@@ -226,7 +227,8 @@ export const slice = createSlice({
           weapon: {
             type: "sword",
             dmg: 10,
-            name: "Wood"
+            name: "Wood",
+            symbol: "item.weapon.sword"
           },
           armor: {
             name: "Leather",
@@ -259,7 +261,8 @@ export const slice = createSlice({
           weapon: {
             type: "dagger",
             dmg: 4,
-            name: "Wood"
+            name: "Wood",
+            symbol: "item.weapon.dagger"
           },
           armor: {
             name: "Burlap",
@@ -306,7 +309,8 @@ export const slice = createSlice({
           weapon: {
             type: "dagger",
             dmg: 4,
-            name: "Wood"
+            name: "Wood",
+            symbol: "item.weapon.dagger"
           },
           armor: {
             name: "Burlap",
@@ -422,8 +426,7 @@ export const slice = createSlice({
     gold: 666,
     activeItem: null,
     applyingItem: false,
-    weaponToEquip: false,
-    armorToEquip: false
+    gearToEquip: null
   },
   reducers: {
     ...partyReducers,
@@ -441,7 +444,10 @@ export const {
   setApplyItem,
   recoverHP,
   recoverMP,
-  clearStatus
+  clearStatus,
+  setWeaponToEquip,
+  clearGearToEquip,
+  equip
 } = slice.actions;
 
 export const selectInventory = state => state.party.inventory;
@@ -485,6 +491,12 @@ export const selectArmor = (state, action) => {
 export const selectAllArmor = ( state ) => {
 
   return state.party.inventory.armor;
+
+}
+
+export const selectGearToEquip = ( state ) => {
+
+  return state.party.gearToEquip;
 
 }
 

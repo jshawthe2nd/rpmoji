@@ -4,7 +4,7 @@ export const checkItem = ( itemUsed, deactivateItem ) => {
 
     const items = getState().party.inventory.item;        
 
-    const item  = items.find( item => item.id == itemUsed.id );        
+    const item  = items.find( item => item.id === itemUsed.id );        
 
     if( item.qty < 1 ) {
 

@@ -10,12 +10,15 @@ import {
   decrementItemQty,
   selectActiveItem,
   deactivateItem,
+  selectGearToEquip,
+  equip
 } from "../party/partySlice";
 
 import {
   getCharacterSymbolPath,
   getCharacterIconLabel,
-  canItemBeUsed
+  canItemBeUsed,
+  canGearBeEquipped
 } from "./utils";
 
 import {
@@ -36,11 +39,13 @@ export function Character( { charId, ...props } ) {
 
   } ); 
 
-  const itemToUse = useSelector( selectActiveItem );
+  const itemToUse             = useSelector( selectActiveItem );
 
-  const doesItemApplyToChar = canItemBeUsed( char, itemToUse ); 
+  const doesItemApplyToChar   = canItemBeUsed( char, itemToUse ); 
 
-  //const isGearEquippable    = canGearBeEquipped( char, gearToUse );
+  const gearToEquip           = useSelector( selectGearToEquip );
+
+  const isGearEquippable      = canGearBeEquipped( char, gearToEquip );
 
   const onCharacterSelect = ( event ) => {
 
@@ -80,20 +85,39 @@ export function Character( { charId, ...props } ) {
 
       }
 
+      if( gearToEquip !== null ) {
+
+        dispatch( equip( { charId, gearToEquip } ) );
+
+      }
+
   };
  
   
   return (
     <div
-      className={ `${ styles.character } ${
+      className={ `${ styles.character } 
+      ${
         itemToUse && !doesItemApplyToChar
           ? styles.dimCharacter
           : ``
-      } ${
+      } 
+      ${
         itemToUse && doesItemApplyToChar
           ? styles.applyingToChar
           : ``
-      }`}
+      }
+      ${
+        gearToEquip && !isGearEquippable
+          ? styles.dimCharacter
+          : ``
+      }
+      ${
+        gearToEquip && isGearEquippable
+          ? styles.applyingToChar
+          : ``
+      }
+      `}
 
       onClick={ onCharacterSelect }
     >
@@ -143,7 +167,10 @@ export function Character( { charId, ...props } ) {
                 dispatch( openMenu( { menu: "weapons" } ) );
               } }
             >
-              <Icon symbol="item.weapon.sword" label="sword" /> Wood
+              <Icon 
+                symbol={ char.gear.weapon.symbol } 
+                label={ char.gear.weapon.label } 
+              /> { char.gear.weapon.name }
             </div>
             <div
               className={ styles.armor }
