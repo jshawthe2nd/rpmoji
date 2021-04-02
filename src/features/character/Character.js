@@ -54,6 +54,10 @@ export function Character( { charId, ...props } ) {
 
   const [ wasArmorEquipped, setWasArmorEquipped ] = useState( false );
 
+  const [ openedWeaponMenu, setOpenedWeaponMenu ] = useState( false );
+
+  const [ openedArmorMenu, setOpenedArmorMenu ] = useState( false );
+
   const onCharacterSelect = ( event ) => {
 
       if ( itemToUse !== null ) {
@@ -206,11 +210,13 @@ export function Character( { charId, ...props } ) {
 
                 ${ styles.weapon }
                 ${ wasWeaponEquipped ? styles.flashGear : `` }
+                ${ openedWeaponMenu ? styles.openedMenu : `` }
                 
               ` }
               onClick={ ( e ) => {
                 e.preventDefault();
                 e.stopPropagation();
+                setOpenedWeaponMenu( true );
                 dispatch( openMenu( { menu: "weapons" } ) );
               } }
             >
@@ -224,11 +230,13 @@ export function Character( { charId, ...props } ) {
 
                 ${ styles.armor }
                 ${ wasArmorEquipped ? styles.flashGear : `` }
+                ${ openedArmorMenu ? styles.openedMenu : `` }
                 
               ` }
               onClick={ ( e ) => {
                 e.preventDefault();
                 e.stopPropagation();
+                setOpenedArmorMenu( true );
                 dispatch( openMenu( { menu: "armor" } ) );
               } 
               }>

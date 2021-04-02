@@ -171,6 +171,21 @@
 
 }
 
+.openedMenu {
+
+  color: yellow;
+
+}
+
+.openedMenu::after {
+  position: absolute;
+  left: -25px;
+  top: -4px;
+  content: '👉';
+  font-size: 16px;
+  text-shadow: 1px 1px 1px #222;
+}
+
 @keyframes flash-gear {
   0% {
     color: yellow;
