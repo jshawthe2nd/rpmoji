@@ -98,12 +98,12 @@ export function Character( { charId, ...props } ) {
 
         
 
-        if( gearToEquip.symbol.indexOf( 'weapon' ) ) {
-
+        if( gearToEquip.symbol.indexOf( 'weapon' ) !== -1 ) {
+          console.log('got weapon');
           setWasWeaponEquipped( true );
 
         } else {
-
+          console.log('got armor');
           setWasArmorEquipped( true );
 
         }
