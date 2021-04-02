@@ -52,13 +52,17 @@ Game Menu:
         Crit chance can be flat 25%. 
         Crit damage can be flat 50%.
         ✔ Spread new object data into char.gear.weapon @done(21-04-01 19:16)
+        ☐ Put previously-equipped weapon into inventory
     
   ✔ Weapon menu pulling from partySlice @done(21-03-29 08:27)
   ✔ Armor menu pulling from partySlice @done(21-03-29 08:27)
 
   Armor Equip:
     UI Updates:
+      ☐ Ensure functionality is same as for Weapons
     State Updates:
+      ☐ Ensure state updates similarly to Weapons
+      ☐ Put previously-equipped armor into inventory
 
   Scroll/Spell Equip:
     UI Updates:
@@ -85,8 +89,9 @@ Saving Game:
 
 Coding:
   ☐ Maybe PropTypes?
-  ☐ Change State shape for characters to an id-based set of keys in an object
+  ✔ Change State shape for characters to an id-based set of keys in an object @done(21-04-02 01:13)
       eg, party.chars[ $charId ].stats.hp, etc
+  ☐ Also need to adjust inventory stuffs to account for IDs, finally
 
 Bugfixes:
   ✔ make sure onCharacterSelect only fires when applying item not when selecting for weapon or armor @done(20-09-23 22:24)

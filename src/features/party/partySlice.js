@@ -293,6 +293,7 @@ export const {
   setWeaponToEquip,
   setArmorToEquip,
   clearGearToEquip,
+  sendGearToInventory,
   equip
 } = slice.actions;
 

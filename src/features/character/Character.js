@@ -12,7 +12,9 @@ import {
   deactivateItem,
   selectGearToEquip,
   equip,
-  clearGearToEquip
+  clearGearToEquip,
+  addToInventory,
+  removeFromInventory
 } from "../party/partySlice";
 
 import {
@@ -92,23 +94,33 @@ export function Character( { charId, ...props } ) {
 
       if( gearToEquip !== null ) {
 
-        dispatch( equip( { charId, gearToEquip } ) );
+        dispatch( removeFromInventory( { gearItem: gearToEquip } ) );
 
-        dispatch( clearGearToEquip() );
+        dispatch( equip( { charId, gearToEquip, dispatch } ) );
 
-        
+        let sendToInventory;
 
         if( gearToEquip.symbol.indexOf( 'weapon' ) !== -1 ) {
-          console.log('got weapon');
+          
+          sendToInventory = 'weapon';
+          
           setWasWeaponEquipped( true );
 
         } else {
-          console.log('got armor');
+
+          sendToInventory = 'armor';
+          
           setWasArmorEquipped( true );
 
         }
 
-        console.log(wasArmorEquipped, wasWeaponEquipped);
+        dispatch( addToInventory( 
+          { 
+            gearItem: { ...char.gear[ sendToInventory ] } 
+          }
+        ) );
+
+        dispatch( clearGearToEquip() );
 
         //so the flashGear class is removed
         setTimeout( () => {
