@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Icon } from "../../icons/Icon";
 
@@ -48,6 +48,8 @@ export function Character( { charId, ...props } ) {
 
   const isGearEquippable      = canGearBeEquipped( char, gearToEquip );
 
+  const [ wasGearEquipped, setWasGearEquipped ] = useState( false );
+
   const onCharacterSelect = ( event ) => {
 
       if ( itemToUse !== null ) {
@@ -92,6 +94,8 @@ export function Character( { charId, ...props } ) {
 
         dispatch( clearGearToEquip() );
 
+        setWasGearEquipped( true );
+
       }
 
   };
@@ -99,28 +103,31 @@ export function Character( { charId, ...props } ) {
   
   return (
     <div
-      className={ `${ styles.character } 
-      ${
-        itemToUse && !doesItemApplyToChar
-          ? styles.dimCharacter
-          : ``
-      } 
-      ${
-        itemToUse && doesItemApplyToChar
-          ? styles.applyingToChar
-          : ``
-      }
-      ${
-        gearToEquip && !isGearEquippable
-          ? styles.dimCharacter
-          : ``
-      }
-      ${
-        gearToEquip && isGearEquippable
-          ? styles.applyingToChar
-          : ``
-      }
-      `}
+      className={ `
+
+        ${ styles.character } 
+        ${
+          itemToUse && !doesItemApplyToChar
+            ? styles.dimCharacter
+            : ``
+        } 
+        ${
+          itemToUse && doesItemApplyToChar
+            ? styles.applyingToChar
+            : ``
+        }
+        ${
+          gearToEquip && !isGearEquippable
+            ? styles.dimCharacter
+            : ``
+        }
+        ${
+          gearToEquip && isGearEquippable
+            ? styles.applyingToChar
+            : ``
+        }
+
+      ` }
 
       onClick={ onCharacterSelect }
     >
@@ -163,7 +170,11 @@ export function Character( { charId, ...props } ) {
           </div>
           <div className={ styles.gear }>
             <div
-              className={ styles.weapon }
+              className={ `
+                ${ styles.weapon }
+                ${ wasGearEquipped ? styles.flashGear : `` }
+                
+              ` }
               onClick={ ( e ) => {
                 e.preventDefault();
                 e.stopPropagation();
