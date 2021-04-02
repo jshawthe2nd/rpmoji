@@ -7,7 +7,7 @@ import { Icon } from '../../icons/Icon';
 
 import { 
   selectAllWeapons, 
-  selectWeaponToEquip, 
+  selectGearToEquip, 
   setWeaponToEquip, 
   clearGearToEquip 
 } from '../party/partySlice';
@@ -20,11 +20,9 @@ export function WeaponMenu() {
 
   const weapons   = useSelector( selectAllWeapons );
 
-  const weaponToEquip   = useSelector( selectWeaponToEquip );
+  const weaponToEquip   = useSelector( selectGearToEquip );
 
   const onWeaponClick   = ( weapon ) => {
-
-    console.log( weapon );
 
     if( !weaponToEquip ) {
 
@@ -45,8 +43,8 @@ export function WeaponMenu() {
         return (
           <div key={ index } className={ styles.subMenuOption } 
           onClick={ (e) => { onWeaponClick( weapon ) } }>
-            <Icon symbol={ weapon.symbol } label={ weapon.name } />
-            { weapon.name } &times; { weapon.qty }
+            <Icon symbol={ weapon.symbol } label={ weapon.label } />
+            { weapon.label } &times; { weapon.qty }
           </div>
         )
       } ) }

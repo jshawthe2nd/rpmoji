@@ -36,7 +36,7 @@ export function Character( { charId, ...props } ) {
 
   const char = useSelector( ( state ) => {
 
-    return state.party.chars2[ charId ];
+    return state.party.characters[ charId ];
 
   } ); 
 
@@ -48,7 +48,9 @@ export function Character( { charId, ...props } ) {
 
   const isGearEquippable      = canGearBeEquipped( char, gearToEquip );
 
-  const [ wasGearEquipped, setWasGearEquipped ] = useState( false );
+  const [ wasWeaponEquipped, setWasWeaponEquipped ] = useState( false );
+
+  const [ wasArmorEquipped, setWasArmorEquipped ] = useState( false );
 
   const onCharacterSelect = ( event ) => {
 
@@ -94,7 +96,21 @@ export function Character( { charId, ...props } ) {
 
         dispatch( clearGearToEquip() );
 
-        setWasGearEquipped( true );
+        if( gearToEquip.symbol.indexOf( 'weapon' ) ) {
+
+          setWasWeaponEquipped( true );
+
+        } else {
+
+          setWasArmorEquipped( true );
+
+        }
+
+        //so the flashGear class is removed
+        setTimeout( () => {
+          setWasWeaponEquipped( false );
+          setWasArmorEquipped( false );
+        }, 1000 );
 
       }
 
@@ -171,8 +187,9 @@ export function Character( { charId, ...props } ) {
           <div className={ styles.gear }>
             <div
               className={ `
+
                 ${ styles.weapon }
-                ${ wasGearEquipped ? styles.flashGear : `` }
+                ${ wasWeaponEquipped ? styles.flashGear : `` }
                 
               ` }
               onClick={ ( e ) => {
@@ -184,10 +201,15 @@ export function Character( { charId, ...props } ) {
               <Icon 
                 symbol={ char.gear.weapon.symbol } 
                 label={ char.gear.weapon.label } 
-              /> { char.gear.weapon.name }
+              /> { char.gear.weapon.label }
             </div>
             <div
-              className={ styles.armor }
+              className={ `
+
+                ${ styles.armor }
+                ${ wasArmorEquipped ? styles.flashGear : `` }
+                
+              ` }
               onClick={ ( e ) => {
                 e.preventDefault();
                 e.stopPropagation();
@@ -197,7 +219,7 @@ export function Character( { charId, ...props } ) {
               <Icon 
                 symbol={ char.gear.armor.symbol } 
                 label={ char.gear.armor.label } 
-              /> { char.gear.armor.name }
+              /> { char.gear.armor.label }
             </div>
           </div>
         </div>

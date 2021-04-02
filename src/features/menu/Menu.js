@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import styles from "./Menu.module.css";
 
 import { selectMenu, openMenu, closeMenu } from "./menuSlice";
-import { deactivateItem, setApplyItem } from '../party/partySlice';
+import { deactivateItem, clearGearToEquip, selectGearToEquip, selectActiveItem } from '../party/partySlice';
 
 import { WeaponMenu } from "./WeaponMenu";
 import { ArmorMenu } from "./ArmorMenu";
@@ -29,14 +29,31 @@ const menuOptions = {
 };
 
 export function Menu() {
-  const menu = useSelector(selectMenu);
-  const SubMenu = !menu ? false : menuOptions[menu].component;
-  const dispatch = useDispatch();
+
+  const menu          = useSelector(selectMenu);
+  const activeItem    = useSelector( selectActiveItem );
+  const gearToEquip   = useSelector( selectGearToEquip );
+
+  const SubMenu       = !menu ? false : menuOptions[menu].component;
+
+  const dispatch      = useDispatch();
 
   const onMenuClosed = () => {
-    dispatch(closeMenu({}));
-    dispatch(deactivateItem({}));
-    dispatch(setApplyItem({applying: false}))
+
+    dispatch( closeMenu( {} ) );
+
+    if( activeItem ) {
+
+      dispatch( deactivateItem( {} ) );
+
+    }
+    
+    if( gearToEquip ) {
+
+      dispatch( clearGearToEquip() );
+
+    }
+    
   };
 
   return (
