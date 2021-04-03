@@ -1,6 +1,6 @@
 export default {
-  attack: (state) => {},
-  defend: (state) => {},
+  attack: ( state ) => {},
+  defend: ( state ) => {},
   equip: ( state, action ) => {
 
     const { charId, gearToEquip } = action.payload;
@@ -47,9 +47,9 @@ export default {
     }
 
   },
-  levelUp: (state) => {},
-  gainExp: (state) => {},
-  afflictStatus: (state) => {},
+  levelUp: ( state ) => {},
+  gainExp: ( state ) => {},
+  afflictStatus: ( state ) => {},
   clearStatus: (state, action) => {
 
     const { charId } = action.payload;
@@ -58,9 +58,9 @@ export default {
 
   },
 
-  openSubMenu: (state) => {},
+  openSubMenu: ( state ) => {},
 
-  recoverHP: (state, action) => {
+  recoverHP: ( state, action ) => {
 
     const { charId } = action.payload;
 
@@ -72,7 +72,7 @@ export default {
 
   },
 
-  recoverMP: (state, action) => {
+  recoverMP: ( state, action ) => {
     
     const { charId } = action.payload;
 

@@ -1,22 +1,22 @@
 export default {
-  incrementItemQty: (state, action) => {
-    console.log(action);
+  incrementItemQty: ( state, action ) => {
+    
   },
-  decrementItemQty: (state, action) => {
+  decrementItemQty: ( state, action ) => {
     
     const { itemUsed } = action.payload;
     
-    state.inventory.item.map((item, index) => {
+    state.inventory.item.map( ( item, index ) => {
 
-      if(item.label === itemUsed.label) {
+      if( item.label === itemUsed.label ) {
 
-        state.inventory.item[index].qty = (state.inventory.item[index].qty - 1 < 0) ? 0 : state.inventory.item[index].qty - 1;
+        state.inventory.item[index].qty = ( state.inventory.item[ index ].qty - 1 < 0 ) ? 0 : state.inventory.item[ index ].qty - 1;
 
-        state.activeItem.qty = (state.activeItem.qty - 1 < 0) ? 0 : state.activeItem.qty - 1;
+        state.activeItem.qty = ( state.activeItem.qty - 1 < 0 ) ? 0 : state.activeItem.qty - 1;
 
-        if(state.inventory.item[index].qty < 1) {
+        if(state.inventory.item[ index ].qty < 1) {
           
-          state.inventory.item[index].using = false;
+          state.inventory.item[ index ].using = false;
           
         }
 
@@ -75,8 +75,6 @@ export default {
 
     const gearItem = { ...action.payload.gearItem };
 
-    console.log(gearItem);
-
     switch( gearItem.type ) {
 
       case `sword`:
@@ -102,42 +100,59 @@ export default {
     }
     
   },
-  activateItem: (state, action) => {
+
+  activateItem: ( state, action) => {
      
-     state.inventory.item.map((item, index) => {
-       state.inventory.item[index].using = false;
+     state.inventory.item.map( ( item, index ) => {
+
+       state.inventory.item[ index ].using = false;
        return true;
-     });
-     state.activeItem = state.inventory.item[action.payload.item];
-     state.inventory.item[action.payload.item].using = true;
+
+     } );
+
+     state.activeItem = state.inventory.item[ action.payload.item ];
+
+     state.inventory.item[ action.payload.item ].using = true;
+
   },
-  deactivateItem: (state, action) => {
-    state.inventory.item.map((item, index) => {
+
+  deactivateItem: ( state, action ) => {
+
+    state.inventory.item.map( ( item, index ) => {
       
-      state.inventory.item[index].using = false;
+      state.inventory.item[ index ].using = false;
       return true;
-    });
+
+    } );
+
     state.activeItem = null;
     
   },
-  setApplyItem: (state, action) => {
+
+  setApplyItem: ( state, action ) => {
+
     state.applyingItem = action.payload.applying;
+
   },
+
   setWeaponToEquip: ( state, action ) => {
 
     state.gearToEquip = action.payload.weapon;
 
   },
+
   clearGearToEquip: ( state, action ) => {
 
     state.gearToEquip = false;
 
   },
+
   setArmorToEquip: ( state, action ) => {
 
     state.gearToEquip = action.payload.armor;
 
   },
+
   setEquippingCharacter: ( state, action ) => {
 
     state.equippingCharacter = action.payload.charId;

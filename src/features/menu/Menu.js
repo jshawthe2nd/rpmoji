@@ -39,12 +39,12 @@ const menuOptions = {
 
 export function Menu() {
 
-  const menu          = useSelector(selectMenu);
+  const menu          = useSelector( selectMenu );
   const activeItem    = useSelector( selectActiveItem );
   const gearToEquip   = useSelector( selectGearToEquip );
   const equippingCharacter = useSelector( selectEquippingCharacter );
 
-  const SubMenu       = !menu ? false : menuOptions[menu].component;
+  const SubMenu       = !menu ? false : menuOptions[ menu ].component;
 
   const dispatch      = useDispatch();
 
@@ -64,31 +64,31 @@ export function Menu() {
 
     }
 
-    
+
 
 
     
   };
 
   return (
-    <div className={styles.menu}>
+    <div className={ styles.menu }>
       {SubMenu
         ? SubMenu
-        : menuOptions.entries.map((entry, index) => {
+        : menuOptions.entries.map( ( entry, index ) => {
             return (
               <div
-                key={index}
-                className={styles.menuOption}
-                onClick={() => {
-                  dispatch(openMenu({ menu: entry }));
-                }}
+                key={ index }
+                className={ styles.menuOption }
+                onClick={ () => {
+                  dispatch( openMenu( { menu: entry } ) );
+                } }
               >
-                {menuOptions[entry].label}
+                { menuOptions[ entry ].label }
               </div>
             );
           })}
-      {menu && <BackOption onMenuClosed={onMenuClosed} />}
-      <div className={styles.metaInfo}>
+      { menu && <BackOption onMenuClosed={ onMenuClosed } />}
+      <div className={ styles.metaInfo }>
         <p>
           <Icon symbol="menu.gold" label="gold" /> 666
         </p>

@@ -246,7 +246,7 @@ export function Character(
 
                 ${ styles.armor }
                 ${ wasArmorEquipped ? styles.flashGear : `` }
-                ${ openedArmorMenu ? styles.openedMenu : `` }
+                ${ openedArmorMenu && menuRef ? styles.openedMenu : `` }
                 
               ` }
               onClick={ ( e ) => {

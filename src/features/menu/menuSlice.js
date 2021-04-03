@@ -19,13 +19,13 @@ export const slice = createSlice({
       }
 
     },
-    closeMenu: ( state, action ) => {
+    closeMenu: ( state ) => {
 
       state.menu = slice.initialState;
       state.ref = false;
 
     },
-    
+
   },
 });
 
@@ -33,7 +33,7 @@ export const { openMenu, closeMenu } = slice.actions;
 
 export const selectMenu = ( state ) => state.menu.menu;
 
-export const selectMenuRef = state => state.menu.ref;
+export const selectMenuRef = ( state ) => state.menu.ref;
 
 export const selectItem = ( state, itemIndex ) => {
 
