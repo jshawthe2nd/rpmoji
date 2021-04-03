@@ -42,7 +42,7 @@ Game Menu:
         ✔ User clicks Character component, weapon swaps... @done(21-04-01 19:19)
         ✔ ...Character weapon flashes/pulses name @done(21-04-01 20:33)
         ✔ Classes are removed, UI returns to normal @done(21-04-01 20:08)
-        ☐ Highlight weapon name in yellow when clicking it direct to equip new weapon
+        ✔ Highlight weapon name in yellow when clicking it direct to equip new weapon @done(21-04-02 18:15)
 
     State Updates:
         ✔ onClick handler, setGearToEquip() @done(21-04-01 19:19)
@@ -77,7 +77,7 @@ Game Menu:
     ✔ Show hand on hovered Character (changed to showing color) @done(20-09-27 15:49)
     ✔ When clicking BackOption clear Character 'select' state @done(20-09-27 15:49)
     ✔ Adjusted areas of weapon/armor slots to be more mouse-friendly @done(20-09-27 16:05)
-    ☐ create CSS classes for Weapon & Armor menu items to dim themselves if they can't be equipped by the Character whose gear slot was clicked
+    ✔ create CSS classes for Weapon & Armor menu items to dim themselves if they can't be equipped by the Character whose gear slot was clicked @done(21-04-02 18:14)
     ✔ Create a selector in menuSlice to get the menu.ref in Weapon/Armor menu @done(21-04-02 17:41)
     ✔ Import canGearBeEquipped function from Character utils to determine item's equippability by selected gear slot's owning Character @done(21-04-02 17:41)
     User Story - 
@@ -86,7 +86,8 @@ Game Menu:
       selectMenuRef needs to be created so gear items know to check themselves and indicate if they can be equipped. 
     Maybe additional payload data can be passing current character type, or,
     also just dispatching something like `setCharacterForEquipping()`
-    ☐ How to handle <BackOption/> in the event equippingCharacter is truthy
+    ✔ How to handle <BackOption/> in the event equippingCharacter is truthy @done(21-04-02 18:14)
+    ☐ Figure out how to trigger gear-slot flash when the equip UserFlow is initiated via the Character component as opposed to the Menu component(s)
 
 World Map: 
 

@@ -72,6 +72,8 @@ export function WeaponMenu() {
           }
         ) );
 
+        dispatch( closeMenu() );
+
       } else {
         //
         //  Notify characters to receive weapon
@@ -93,8 +95,21 @@ export function WeaponMenu() {
   return (
     <div>
       { weapons.map( ( weapon, index ) => {
+
+        const canEquip = canGearBeEquipped( char, weapon );
+
         return (
-          <div key={ index } className={ styles.subMenuOption } 
+          <div key={ index } 
+          className={ `
+          
+            ${ styles.subMenuOption }
+            ${
+              equippingCharacter && !canEquip
+                ? styles.dimItem
+                : ``
+            }
+
+          ` } 
           onClick={ (e) => { onWeaponClick( weapon ) } }>
             <Icon symbol={ weapon.symbol } label={ weapon.label } />
             { weapon.label } &times; { weapon.qty }

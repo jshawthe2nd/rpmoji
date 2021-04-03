@@ -71,7 +71,12 @@ export function ArmorMenu() {
           }
         ) );
 
+        dispatch( closeMenu() );
+
       } else {
+        //
+        //  Notify characters to receive armor
+        //
 
         dispatch( setArmorToEquip( { armor } ) );
 
