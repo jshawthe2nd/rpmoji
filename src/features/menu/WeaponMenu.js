@@ -9,8 +9,21 @@ import {
   selectAllWeapons, 
   selectGearToEquip, 
   setWeaponToEquip, 
-  clearGearToEquip 
+  clearGearToEquip,
+  selectEquippingCharacter,
+  removeFromInventory,
+  addToInventory,
+  equip
 } from '../party/partySlice';
+
+import {
+  canGearBeEquipped
+} from '../character/utils';
+
+import {
+  selectMenuRef,
+  closeMenu
+} from '../menu/menuSlice';
 
 
 
@@ -22,11 +35,51 @@ export function WeaponMenu() {
 
   const weaponToEquip   = useSelector( selectGearToEquip );
 
+  const menuRef         = useSelector( selectMenuRef );
+
+  const equippingCharacter = useSelector( selectEquippingCharacter );
+
+  const char = useSelector( ( state ) => {
+
+    return state.party.characters[ equippingCharacter ];
+
+  } );
+
+  
+
   const onWeaponClick   = ( weapon ) => {
 
     if( !weaponToEquip ) {
 
-      dispatch( setWeaponToEquip( { weapon } ) );
+      if( menuRef === 'character' && equippingCharacter ) {
+        //
+        //  If the menu was originally opened from the 
+        //  character's weapon slot, just equip
+        //
+
+        dispatch( equip( { 
+
+          charId: equippingCharacter, 
+          gearToEquip: weapon
+
+        } ) );
+
+        dispatch( removeFromInventory( { gearItem: weapon } ) );        
+
+        dispatch( addToInventory( 
+          { 
+            gearItem: { ...char.gear[ 'weapon' ] } 
+          }
+        ) );
+
+      } else {
+        //
+        //  Notify characters to receive weapon
+        //
+
+        dispatch( setWeaponToEquip( { weapon } ) );
+
+      }  
 
     } else {
 

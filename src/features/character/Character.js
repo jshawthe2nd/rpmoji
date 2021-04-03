@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Icon } from "../../icons/Icon";
 
-import { openMenu } from "../menu/menuSlice";
+import { openMenu, selectMenu } from "../menu/menuSlice";
 import {
   recoverHP,
   recoverMP,
@@ -14,8 +14,13 @@ import {
   equip,
   clearGearToEquip,
   addToInventory,
-  removeFromInventory
+  removeFromInventory,
+  setEquippingCharacter
 } from "../party/partySlice";
+
+import {
+  selectMenuRef
+} from '../menu/menuSlice';
 
 import {
   getCharacterSymbolPath,
@@ -32,7 +37,13 @@ import {
 import styles from "./Character.module.css";
 import { checkItem } from "../party/actions";
 
-export function Character( { charId, ...props } ) {
+export function Character( 
+  { 
+    charId, 
+    ...props 
+  } 
+) 
+{
 
   const dispatch = useDispatch();
 
@@ -44,19 +55,21 @@ export function Character( { charId, ...props } ) {
 
   const itemToUse             = useSelector( selectActiveItem );
 
+  const menuRef               = useSelector( selectMenuRef );
+
   const doesItemApplyToChar   = canItemBeUsed( char, itemToUse ); 
 
   const gearToEquip           = useSelector( selectGearToEquip );
 
   const isGearEquippable      = canGearBeEquipped( char, gearToEquip );
 
-  const [ wasWeaponEquipped, setWasWeaponEquipped ] = useState( false );
+  const [ wasWeaponEquipped,  setWasWeaponEquipped ] = useState( false );
 
-  const [ wasArmorEquipped, setWasArmorEquipped ] = useState( false );
+  const [ wasArmorEquipped,   setWasArmorEquipped ]  = useState( false );
 
-  const [ openedWeaponMenu, setOpenedWeaponMenu ] = useState( false );
+  const [ openedWeaponMenu,   setOpenedWeaponMenu ]  = useState( false );
 
-  const [ openedArmorMenu, setOpenedArmorMenu ] = useState( false );
+  const [ openedArmorMenu,    setOpenedArmorMenu ]   = useState( false );
 
   const onCharacterSelect = ( event ) => {
 
@@ -98,7 +111,7 @@ export function Character( { charId, ...props } ) {
 
       if( gearToEquip !== null ) {
 
-        dispatch( equip( { charId, gearToEquip, dispatch } ) );
+        dispatch( equip( { charId, gearToEquip } ) );
 
         let sendToInventory;
 
@@ -210,14 +223,17 @@ export function Character( { charId, ...props } ) {
 
                 ${ styles.weapon }
                 ${ wasWeaponEquipped ? styles.flashGear : `` }
-                ${ openedWeaponMenu ? styles.openedMenu : `` }
+                ${ openedWeaponMenu && menuRef ? styles.openedMenu : `` }
                 
               ` }
               onClick={ ( e ) => {
                 e.preventDefault();
                 e.stopPropagation();
                 setOpenedWeaponMenu( true );
-                dispatch( openMenu( { menu: "weapons", ref: 'character' } ) );
+                dispatch( 
+                  openMenu( { menu: "weapons", ref: 'character' } ) 
+                );
+                dispatch( setEquippingCharacter( { charId } ) );
               } }
             >
               <Icon 
@@ -237,7 +253,10 @@ export function Character( { charId, ...props } ) {
                 e.preventDefault();
                 e.stopPropagation();
                 setOpenedArmorMenu( true );
-                dispatch( openMenu( { menu: "armor", ref: 'character' } ) );
+                dispatch( 
+                  openMenu( { menu: "armor", ref: 'character' } ) 
+                );
+                dispatch( setEquippingCharacter( { charId } ) );
               } 
               }>
               <Icon 

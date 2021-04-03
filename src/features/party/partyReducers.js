@@ -137,6 +137,11 @@ export default {
 
     state.gearToEquip = action.payload.armor;
 
+  },
+  setEquippingCharacter: ( state, action ) => {
+
+    state.equippingCharacter = action.payload.charId;
+
   }
   
 }

@@ -13,10 +13,7 @@ import { Icon } from "../../icons/Icon";
 import { BackOption } from "./BackOption";
 
 const menuOptions = {
-  items: {
-    label: "Items",
-    component: <ItemMenu />,
-  },
+  
   weapons: {
     label: "Weapons",
     component: <WeaponMenu />,
@@ -25,7 +22,13 @@ const menuOptions = {
     label: "Armor",
     component: <ArmorMenu />,
   },
-  entries: ["items", "weapons", "armor"],
+  items: {
+    label: "Items",
+    component: <ItemMenu />,
+  },
+
+  entries: [ "weapons", "armor", "items" ],
+
 };
 
 export function Menu() {

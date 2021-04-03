@@ -283,7 +283,8 @@ export const slice = createSlice({
     gold: 666,
     activeItem: null,
     applyingItem: false,
-    gearToEquip: null
+    gearToEquip: null,
+    equippingCharacter: null
   },
   reducers: {
     ...partyReducers,
@@ -306,22 +307,25 @@ export const {
   setArmorToEquip,
   clearGearToEquip,
   sendGearToInventory,
+  setEquippingCharacter,
+  selectCharacter,
   equip
 } = slice.actions;
 
-export const selectInventory = state => state.party.inventory;
+export const selectInventory = ( state ) => state.party.inventory;
 
-export const selectChars = state => {
+export const selectChars = ( state ) => {
   return state.party.characters;
 }
 
-export const selectCharacterIds = state => {
+export const selectCharacterIds = ( state ) => {
 
   return [ ...Object.keys( state.party.characters ) ];
 
 }
 
-export const selectGold = state => state.gold;
+
+export const selectGold = ( state ) => state.gold;
 
 export const selectItem = ( state, action ) => {
   console.log(action);
@@ -353,21 +357,25 @@ export const selectGearToEquip = ( state ) => {
 
 }
 
-export const selectItems = state => {
+export const selectItems = ( state ) => {
   return state.party.inventory.item;
 };
 
-export const selectActiveItem = state => { 
+export const selectActiveItem = ( state ) => { 
   
   return state.party.activeItem;
 }
 
-export const selectActiveItemQty = state => {
+export const selectActiveItemQty = ( state ) => {
   return (state.party.activeItem) ? state.party.activeItem.qty : null;
 }
 
-export const selectApplyingItem = state => {
+export const selectApplyingItem = ( state ) => {
   return state.party.applyingItem;
+}
+
+export const selectEquippingCharacter = ( state ) => {
+  return state.party.equippingCharacter;
 }
 
 export default slice.reducer;

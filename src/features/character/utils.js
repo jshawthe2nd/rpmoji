@@ -120,6 +120,7 @@ export const canItemBeUsed = ( char, item ) => {
 
 export const canGearBeEquipped = ( char, gear ) => {
 
+  if( !char ) return false;
   if( !gear ) return false;
 
   switch( char.charType ) {

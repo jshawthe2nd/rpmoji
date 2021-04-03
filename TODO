@@ -61,7 +61,7 @@ Game Menu:
   Armor Equip:
     UI Updates:
       ✔ Ensure functionality is same as for Weapons @done(21-04-02 02:05)
-      ☐ Highlight armor in yellow when directly clicking to equip armor
+      ✔ Highlight armor in yellow when directly clicking to equip armor @done(21-04-02 17:41)
     State Updates:
       ✔ Ensure state updates similarly to Weapons @done(21-04-02 02:05)
       ✔ Put previously-equipped armor into inventory @done(21-04-02 02:05)
@@ -78,14 +78,15 @@ Game Menu:
     ✔ When clicking BackOption clear Character 'select' state @done(20-09-27 15:49)
     ✔ Adjusted areas of weapon/armor slots to be more mouse-friendly @done(20-09-27 16:05)
     ☐ create CSS classes for Weapon & Armor menu items to dim themselves if they can't be equipped by the Character whose gear slot was clicked
-    ☐ Create a selector in menuSlice to get the menu.ref in Weapon/Armor menu
-    ☐ Import canGearBeEquipped function from Character utils to determine item's equippability by selected gear slot's owning Character
+    ✔ Create a selector in menuSlice to get the menu.ref in Weapon/Armor menu @done(21-04-02 17:41)
+    ✔ Import canGearBeEquipped function from Character utils to determine item's equippability by selected gear slot's owning Character @done(21-04-02 17:41)
     User Story - 
     User clicks gear slot in particular Character
     Dispatch openMenu() with `character` menu ref
-    selectMenuRef needs to be created so gear items know to check themselves and indicate if they can be equipped. 
+      selectMenuRef needs to be created so gear items know to check themselves and indicate if they can be equipped. 
     Maybe additional payload data can be passing current character type, or,
     also just dispatching something like `setCharacterForEquipping()`
+    ☐ How to handle <BackOption/> in the event equippingCharacter is truthy
 
 World Map: 
 
@@ -107,12 +108,14 @@ Coding:
       eg, party.chars[ $charId ].stats.hp, etc
   ✔ Also need to adjust inventory stuffs to account for IDs, finally @done(21-04-02 02:05)
   ☐ Generate IDs for items, gear
-  ☐ Reduce clicks needed to equip when clicking a gear slot directly on a character
+  ✔ Reduce clicks needed to equip when clicking a gear slot directly on a character @done(21-04-02 17:41)
       User clicks weapon or armor slot
       <WeaponMenu/> or <ArmorMenu/> opens
       User clicks desired weapon or armor to equip
       dispatch equip action for the given gearItem
       dispatch methods for resetting UI
+  ☐ Hopefully eventually incorporate keyboard control
+  ☐ Put handlers in separate file to keep components clean
 
 Bugfixes:
   ✔ make sure onCharacterSelect only fires when applying item not when selecting for weapon or armor @done(20-09-23 22:24)
