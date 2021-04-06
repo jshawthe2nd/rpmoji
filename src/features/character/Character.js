@@ -35,7 +35,12 @@ import {
 } from "./characterUtils";
 
 import {
-  checkCharacter
+  getTypeOfItem
+} from '../party/partyUtils';
+
+import {
+  checkCharacter,
+  characterSelected
 } from './characterActions';
 
 

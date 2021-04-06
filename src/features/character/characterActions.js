@@ -70,11 +70,13 @@ export const characterSelected = ( characterId, actions, utils ) => {
 
             case `gear`:
 
+                dispatch( actions.equip() );
 
             break;
 
             case `scroll`:
 
+                dispatch( actions.learn() );
 
             break;
 
@@ -82,6 +84,8 @@ export const characterSelected = ( characterId, actions, utils ) => {
                 return;
 
         }
+
+        dispatch( actions.resetUI() );
 
     }
 

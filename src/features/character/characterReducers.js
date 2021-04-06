@@ -83,4 +83,9 @@ export default {
     state.characters[ charId ].stats.mp.current = ( healing > char.stats.mp.max ) ? char.stats.mp.max : healing;
 
   },
+  recover: ( state, action ) => {
+
+    
+
+  }
 };
