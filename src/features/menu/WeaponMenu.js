@@ -18,7 +18,7 @@ import {
 
 import {
   canGearBeEquipped
-} from '../character/utils';
+} from '../character/characterUtils';
 
 import {
   selectMenuRef,

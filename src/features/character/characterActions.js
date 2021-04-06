@@ -47,3 +47,42 @@ export const checkCharacter = ( charId, itemUsed, deactivateItem ) => {
 
     };
 }
+
+export const characterSelected = ( characterId, actions, utils ) => {
+
+    return ( dispatch, getState ) => {
+
+        const state = getState().party;
+
+        const character = state.characters[ characterId ];
+
+        const selectedItem = state.selectedItem;
+
+        const selectedType = utils.getTypeOfItem = ( selectedItem );
+
+        switch( selectedType ) {
+
+            case `item`:
+
+                dispatch( actions.useItem() );
+            
+            break;
+
+            case `gear`:
+
+
+            break;
+
+            case `scroll`:
+
+
+            break;
+
+            default:
+                return;
+
+        }
+
+    }
+
+}

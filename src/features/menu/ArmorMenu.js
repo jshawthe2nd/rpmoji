@@ -18,7 +18,7 @@ import {
 
 import {
   canGearBeEquipped
-} from '../character/utils';
+} from '../character/characterUtils';
 
 import {
   selectMenuRef,
@@ -114,7 +114,7 @@ export function ArmorMenu() {
             ` }
             onClick={ (e) => { onArmorClick( armor ) } }
           >
-              <Icon symbol={ `item.${ armor.type }` } label={ armor.label } />
+              <Icon symbol={ `gear.${ armor.type }` } label={ armor.label } />
               { armor.label } &times; { armor.qty }
           </div>
         )

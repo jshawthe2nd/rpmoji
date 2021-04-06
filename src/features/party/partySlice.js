@@ -33,13 +33,13 @@ export const slice = createSlice({
             type:   "sword",
             dmg:    10,
             label:  "Wood",
-            symbol: "item.weapon.sword"
+            symbol: "gear.weapon.sword"
           },
           armor: {
             id:     704,
             label:  "Leather",
             def:    5,
-            symbol: "item.armor",
+            symbol: "gear.armor",
             type:   "armor"
           }
         },
@@ -71,13 +71,13 @@ export const slice = createSlice({
             type:   "sword",
             dmg:    10,
             label:  "Wood",
-            symbol: "item.weapon.sword"
+            symbol: "gear.weapon.sword"
           },
           armor: {
             id:     705,
             label:  "Leather",
             def:    5,
-            symbol: "item.armor",
+            symbol: "gear.armor",
             type:   "armor"
           }
         },
@@ -109,13 +109,13 @@ export const slice = createSlice({
             type:   "dagger",
             dmg:    4,
             label:  "Wood",
-            symbol: "item.weapon.dagger"
+            symbol: "gear.weapon.dagger"
           },
           armor: {
             id:     706,
             label: "Burlap",
             def: 2,
-            symbol: "item.robe",
+            symbol: "gear.robe",
             type:   "robe"
           },
           spells: [
@@ -161,13 +161,13 @@ export const slice = createSlice({
             type:   "dagger",
             dmg:    4,
             label:  "Wood",
-            symbol: "item.weapon.dagger"
+            symbol: "gear.weapon.dagger"
           },
           armor: {
             id:     707,
             label:  "Burlap",
             def:    2,
-            symbol: "item.robe",
+            symbol: "gear.robe",
             type:   "robe"
           },
           spells: [
@@ -224,7 +224,7 @@ export const slice = createSlice({
           id:     601,
           label:  'Stone',
           type:   'sword',
-          symbol: 'item.weapon.sword',
+          symbol: 'gear.weapon.sword',
           dmg:    5,
           crit:   0.25,
           cdmg:   0.5,
@@ -234,7 +234,7 @@ export const slice = createSlice({
           id:     602,
           label:  'Stone',
           type:   'axe',
-          symbol: 'item.weapon.axe',
+          symbol: 'gear.weapon.axe',
           dmg:    5,
           qty:    1
         },
@@ -242,7 +242,7 @@ export const slice = createSlice({
           id:     603,
           label:  'Branch',
           type:   'bow',
-          symbol: 'item.weapon.bow',
+          symbol: 'gear.weapon.bow',
           dmg:    4,
           qty:    1
         },
@@ -250,7 +250,7 @@ export const slice = createSlice({
           id:     604,
           label:  'Stone',
           type:   'dagger',
-          symbol: 'item.weapon.dagger',
+          symbol: 'gear.weapon.dagger',
           dmg:    4,
           qty:    1
         }
@@ -260,14 +260,14 @@ export const slice = createSlice({
           id:     701,
           label:  'Leather',
           type:   'armor',
-          symbol: 'item.armor',
+          symbol: 'gear.armor',
           qty:    1
         },
         {
           id:     703,
           label:  'Hide',
           type:   'robe',
-          symbol: 'item.robe',
+          symbol: 'gear.robe',
           qty:    1
         },
       ],
@@ -275,7 +275,7 @@ export const slice = createSlice({
         {
           id:     801,
           name:   'Cure',
-          symbol: 'item.scroll',
+          symbol: 'magic.scroll',
           qty:    1
         }
       ]
@@ -284,7 +284,8 @@ export const slice = createSlice({
     activeItem: null,
     applyingItem: false,
     gearToEquip: null,
-    equippingCharacter: null
+    equippingCharacter: null,
+    selectedItem: null
   },
   reducers: {
     ...partyReducers,

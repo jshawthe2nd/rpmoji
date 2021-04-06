@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Icon } from "../../icons/Icon";
 
-import { openMenu, selectMenu } from "../menu/menuSlice";
+import { openMenu } from "../menu/menuSlice";
+
+//TODO: - Combine recover methods
+//      - combine add/remove inventory to swapInventory
+//      
+
 import {
   recoverHP,
   recoverMP,
@@ -27,15 +32,15 @@ import {
   getCharacterIconLabel,
   canItemBeUsed,
   canGearBeEquipped
-} from "./utils";
+} from "./characterUtils";
 
 import {
   checkCharacter
-} from './actions';
+} from './characterActions';
 
 
 import styles from "./Character.module.css";
-import { checkItem } from "../party/actions";
+import { checkItem } from "../party/partyActions";
 
 export function Character( 
   { 
@@ -108,6 +113,11 @@ export function Character(
         dispatch( checkCharacter( charId, itemToUse, deactivateItem ) );
 
       }
+
+      //TODO: We can clean up these big if-blocks by moving them to
+      //      actions.js as we'll be able to check state directly
+      //      there and dispatch as needed.
+      //
 
       if( gearToEquip !== null ) {
 
