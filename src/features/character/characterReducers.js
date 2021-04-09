@@ -3,11 +3,11 @@ export default {
   defend: ( state ) => {},
   equip: ( state, action ) => {
 
-    const { charId, gearToEquip } = action.payload;
+    const { id, gear } = action.payload;
 
-    const char = { ...state.characters[ charId ] };
+    const char = { ...state.characters[ id ] };
 
-    switch( gearToEquip.type ) {
+    switch( gear.type ) {
 
       case `sword`:
       case `axe`:
@@ -18,10 +18,10 @@ export default {
         //  TODO: put current weapon into inventory
         //
 
-        state.characters[ charId ]
+        state.characters[ id ]
           .gear.weapon = { 
-                  ...gearToEquip,
-                  dmg: ( gearToEquip.dmg + char.stats.level.current ) 
+                  ...gear,
+                  dmg: ( gear.dmg + char.stats.level.current ) 
                 };
 
       break;
@@ -29,7 +29,8 @@ export default {
       case `armor`:
       case `robe`:
 
-        state.characters[ charId ].gear.armor = { ...gearToEquip };
+        state.characters[ id ]
+          .gear.armor = { ...gear };
 
       break;
 

@@ -31,12 +31,11 @@ import {
   getCharacterSymbolPath,
   getCharacterIconLabel,
   canItemBeUsed,
-  canGearBeEquipped
+  canGearBeEquipped,
+  canTheyUseIt
 } from "./characterUtils";
 
-import {
-  getTypeOfItem
-} from '../party/partyUtils';
+
 
 import {
   checkCharacter,

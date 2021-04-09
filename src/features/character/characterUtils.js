@@ -90,6 +90,31 @@ export const getCharacterIconLabel = ( char ) => {
 
 }
 
+export const canTheyUseIt = ( char, item, getTypeOfItem ) => {
+
+  if( !char || !item ) return false;  
+
+  switch( getTypeOfItem( item ) ) {
+
+    case `item`:
+
+      return canItemBeUsed( char, item );
+
+    case `gear`:
+
+      return canGearBeEquipped( char, item );
+
+    case `magic`:
+
+      return canSpellBeLearned( char, item );
+
+    default:
+      return false;
+
+  }
+
+}
+
 export const canItemBeUsed = ( char, item ) => {  
   
   if( !item ) return false;
@@ -162,7 +187,7 @@ export const canGearBeEquipped = ( char, gear ) => {
 
 }
 
-export const canScrollBeLearned = ( char, scroll ) => {
+export const canSpellBeLearned = ( char, scroll ) => {
 
   if( char.charType !== 2 ) return false;
 

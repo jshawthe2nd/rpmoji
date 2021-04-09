@@ -1,3 +1,7 @@
+import {
+    getTypeOfItem
+  } from '../party/partyUtils';
+
 export const checkCharacter = ( charId, itemUsed, deactivateItem ) => {
     
     return( dispatch, getState ) => {
@@ -48,35 +52,55 @@ export const checkCharacter = ( charId, itemUsed, deactivateItem ) => {
     };
 }
 
-export const characterSelected = ( characterId, actions, utils ) => {
+export const characterSelected = ( characterId, actions ) => {
 
     return ( dispatch, getState ) => {
 
         const state = getState().party;
 
-        const character = state.characters[ characterId ];
-
         const selectedItem = state.selectedItem;
 
-        const selectedType = utils.getTypeOfItem = ( selectedItem );
+        const character = state.characters[ characterId ];
 
-        switch( selectedType ) {
+        switch( getTypeOfItem( selectedItem ) ) {
 
             case `item`:
 
-                dispatch( actions.useItem() );
+                dispatch( actions.useItem( {
+
+                    char: character,
+                    item: selectedItem
+
+                } ) );
+
+                dispatch( checkCharacter( 
+
+                    characterId, 
+                    selectedItem, 
+                    actions.deactivateItem 
+
+                ) );
             
             break;
 
             case `gear`:
 
-                dispatch( actions.equip() );
+                dispatch( actions.equip( {
+
+                    char: character,
+                    gear: selectedItem
+
+                } ) );
 
             break;
 
-            case `scroll`:
+            case `magic`:
 
-                dispatch( actions.learn() );
+                dispatch( actions.learnSpell( {
+
+                    scroll: selectedItem
+
+                } ) );
 
             break;
 
