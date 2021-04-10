@@ -4,11 +4,11 @@ export default {
   },
   decrementItemQty: ( state, action ) => {
     
-    const { itemUsed } = action.payload;
+    const activeItem = state.activeItem;
     
     state.inventory.item.map( ( item, index ) => {
 
-      if( item.label === itemUsed.label ) {
+      if( item.id === activeItem.id ) {
 
         state.inventory.item[index].qty = ( state.inventory.item[ index ].qty - 1 < 0 ) ? 0 : state.inventory.item[ index ].qty - 1;
 

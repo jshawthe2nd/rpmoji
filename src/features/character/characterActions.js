@@ -1,8 +1,17 @@
 import {
+    decrementItemQty,
+    deactivateItem,
+    equip,
+    recoverHP,
+    recoverMP,
+    clearStatus
+} from '../party/partySlice';
+
+import {
     getTypeOfItem
   } from '../party/partyUtils';
 
-export const checkCharacter = ( charId, itemUsed, deactivateItem ) => {
+export const checkCharacter = ( charId, itemUsed ) => {
     
     return( dispatch, getState ) => {
 
@@ -58,7 +67,7 @@ export const characterSelected = ( characterId, actions ) => {
 
         const state = getState().party;
 
-        const selectedItem = state.selectedItem;
+        const selectedItem = state.activeItem;
 
         const character = state.characters[ characterId ];
 
@@ -66,18 +75,13 @@ export const characterSelected = ( characterId, actions ) => {
 
             case `item`:
 
-                dispatch( actions.useItem( {
-
-                    char: character,
-                    item: selectedItem
-
-                } ) );
+                dispatch( useItem( character ) );
 
                 dispatch( checkCharacter( 
 
                     characterId, 
                     selectedItem, 
-                    actions.deactivateItem 
+                    deactivateItem 
 
                 ) );
             
@@ -85,7 +89,7 @@ export const characterSelected = ( characterId, actions ) => {
 
             case `gear`:
 
-                dispatch( actions.equip( {
+                dispatch( equip( {
 
                     char: character,
                     gear: selectedItem
@@ -98,6 +102,7 @@ export const characterSelected = ( characterId, actions ) => {
 
                 dispatch( actions.learnSpell( {
 
+                    char: character,
                     scroll: selectedItem
 
                 } ) );
@@ -109,8 +114,47 @@ export const characterSelected = ( characterId, actions ) => {
 
         }
 
-        dispatch( actions.resetUI() );
+        dispatch( checkCharacter( characterId, selectedItem ) );
+
+        //dispatch( deactivateItem( {} ) );
 
     }
+
+}
+
+const useItem = ( character ) => {
+
+    return ( dispatch, getState ) => {
+
+        const state = getState().party;
+
+        const item = state.activeItem;
+
+        console.log(character);
+
+        switch( item.label ) {
+
+            case `Potion`:
+
+                dispatch( recoverHP( { charId: character.id } ) );
+
+            break;
+
+            case `Ether`:
+
+                dispatch( recoverMP( { charId: character.id } ) );
+
+            break;
+
+            case `Antidote`:
+            case `Elixir`:
+
+                dispatch( clearStatus( { charId: character.id } ) );
+
+            break;
+
+        }
+
+    };
 
 }

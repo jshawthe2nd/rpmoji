@@ -9,17 +9,8 @@ import { openMenu } from "../menu/menuSlice";
 //      
 
 import {
-  recoverHP,
-  recoverMP,
-  clearStatus,
-  decrementItemQty,
   selectActiveItem,
-  deactivateItem,
   selectGearToEquip,
-  equip,
-  clearGearToEquip,
-  addToInventory,
-  removeFromInventory,
   setEquippingCharacter
 } from "../party/partySlice";
 
@@ -38,7 +29,6 @@ import {
 
 
 import {
-  checkCharacter,
   characterSelected
 } from './characterActions';
 
@@ -82,84 +72,86 @@ export function Character(
 
   const onCharacterSelect = ( event ) => {
 
-      if ( itemToUse !== null ) {
+    dispatch( characterSelected( charId, {} ) );
 
-        switch ( itemToUse.label ) {
+      // if ( itemToUse !== null ) {
 
-          case `Potion`:
+      //   switch ( itemToUse.label ) {
 
-            dispatch( recoverHP( { charId } ) );
+      //     case `Potion`:
+
+      //       dispatch( recoverHP( { charId } ) );
                         
-            break;
+      //       break;
 
-          case `Ether`:
+      //     case `Ether`:
 
-            dispatch( recoverMP( { charId } ) );                
+      //       dispatch( recoverMP( { charId } ) );                
 
-            break;
+      //       break;
 
-          case `Antidote`:
-          case `Elixir`:
+      //     case `Antidote`:
+      //     case `Elixir`:
 
-            dispatch( clearStatus( { charId } ) );    
+      //       dispatch( clearStatus( { charId } ) );    
 
-            break;
+      //       break;
 
-          default:
-            return;
+      //     default:
+      //       return;
 
-        }
+      //   }
         
-        dispatch( decrementItemQty( { itemUsed: itemToUse } ) );
+      //   dispatch( decrementItemQty( { itemUsed: itemToUse } ) );
 
-        dispatch( checkItem( itemToUse, deactivateItem ) );
+      //   dispatch( checkItem( itemToUse, deactivateItem ) );
 
-        dispatch( checkCharacter( charId, itemToUse, deactivateItem ) );
+      //   dispatch( checkCharacter( charId, itemToUse, deactivateItem ) );
 
-      }
+      // }
 
-      //TODO: We can clean up these big if-blocks by moving them to
-      //      actions.js as we'll be able to check state directly
-      //      there and dispatch as needed.
-      //
+      // //TODO: We can clean up these big if-blocks by moving them to
+      // //      actions.js as we'll be able to check state directly
+      // //      there and dispatch as needed.
+      // //
 
-      if( gearToEquip !== null ) {
+      // if( gearToEquip !== null ) {
 
-        dispatch( equip( { charId, gearToEquip } ) );
+      //   dispatch( equip( { charId, gearToEquip } ) );
 
-        let sendToInventory;
+      //   let sendToInventory;
 
-        if( gearToEquip.symbol.indexOf( 'weapon' ) !== -1 ) {
+      //   if( gearToEquip.symbol.indexOf( 'weapon' ) !== -1 ) {
           
-          sendToInventory = 'weapon';
+      //     sendToInventory = 'weapon';
           
-          setWasWeaponEquipped( true );
+      //     setWasWeaponEquipped( true );
 
-        } else {
+      //   } else {
 
-          sendToInventory = 'armor';
+      //     sendToInventory = 'armor';
           
-          setWasArmorEquipped( true );
+      //     setWasArmorEquipped( true );
 
-        }
+      //   }
 
-        dispatch( removeFromInventory( { gearItem: gearToEquip } ) );
+      //   dispatch( removeFromInventory( { gearItem: gearToEquip } ) );
 
-        dispatch( addToInventory( 
-          { 
-            gearItem: { ...char.gear[ sendToInventory ] } 
-          }
-        ) );
+      //   dispatch( addToInventory( 
+      //     { 
+      //       gearItem: { ...char.gear[ sendToInventory ] } 
+      //     }
+      //   ) );
 
-        dispatch( clearGearToEquip() );
+      //   dispatch( clearGearToEquip() );
 
-        //so the flashGear class is removed
-        setTimeout( () => {
-          setWasWeaponEquipped( false );
-          setWasArmorEquipped( false );
-        }, 1000 );
+      //   //so the flashGear class is removed
+      //   setTimeout( () => {
+      //     setWasWeaponEquipped( false );
+      //     setWasArmorEquipped( false );
+      //   }, 1000 );
 
-      }
+      // }
 
   };
  
