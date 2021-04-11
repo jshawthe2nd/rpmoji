@@ -1,3 +1,5 @@
+import { getTypeOfItem } from '../party/partyUtils';
+
 export const getCharacterSymbolPath = ( char ) => {
 
   let symbolPath = ``;
@@ -90,7 +92,7 @@ export const getCharacterIconLabel = ( char ) => {
 
 }
 
-export const canTheyUseIt = ( char, item, getTypeOfItem ) => {
+export const canTheyUseIt = ( char, item ) => {
 
   if( !char || !item ) return false;  
 

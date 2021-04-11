@@ -137,19 +137,19 @@ export default {
 
   setWeaponToEquip: ( state, action ) => {
 
-    state.gearToEquip = action.payload.weapon;
+    state.activeItem = action.payload.weapon;
 
   },
 
   clearGearToEquip: ( state, action ) => {
 
-    state.gearToEquip = false;
+    state.activeItem = false;
 
   },
 
   setArmorToEquip: ( state, action ) => {
 
-    state.gearToEquip = action.payload.armor;
+    state.activeItem = action.payload.armor;
 
   },
 

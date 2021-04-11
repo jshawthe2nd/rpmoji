@@ -56,11 +56,11 @@ export function Character(
 
   const menuRef               = useSelector( selectMenuRef );
 
-  const doesItemApplyToChar   = canItemBeUsed( char, itemToUse ); 
+  const doesItemApplyToChar   = canTheyUseIt( char, itemToUse ); 
 
-  const gearToEquip           = useSelector( selectGearToEquip );
+  //const gearToEquip           = useSelector( selectGearToEquip );
 
-  const isGearEquippable      = canGearBeEquipped( char, gearToEquip );
+  //const isGearEquippable      = canGearBeEquipped( char, gearToEquip );
 
   const [ wasWeaponEquipped,  setWasWeaponEquipped ] = useState( false );
 
@@ -73,6 +73,11 @@ export function Character(
   const onCharacterSelect = ( event ) => {
 
     dispatch( characterSelected( charId, {} ) );
+
+    /**
+     * To handle the flags for the CSS classes to activate,
+     * I dont know what to do. 
+     */
 
       // if ( itemToUse !== null ) {
 
@@ -168,16 +173,6 @@ export function Character(
         } 
         ${
           itemToUse && doesItemApplyToChar
-            ? styles.applyingToChar
-            : ``
-        }
-        ${
-          gearToEquip && !isGearEquippable
-            ? styles.dimCharacter
-            : ``
-        }
-        ${
-          gearToEquip && isGearEquippable
             ? styles.applyingToChar
             : ``
         }

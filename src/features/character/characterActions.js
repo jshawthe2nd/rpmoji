@@ -80,18 +80,17 @@ export const characterSelected = ( characterId, actions ) => {
                 dispatch( checkCharacter( 
 
                     characterId, 
-                    selectedItem, 
-                    deactivateItem 
+                    selectedItem
 
                 ) );
             
             break;
 
-            case `gear`:
+            case `gear`:        
 
                 dispatch( equip( {
 
-                    char: character,
+                    id: characterId,
                     gear: selectedItem
 
                 } ) );
@@ -114,9 +113,9 @@ export const characterSelected = ( characterId, actions ) => {
 
         }
 
-        dispatch( checkCharacter( characterId, selectedItem ) );
-
         //dispatch( deactivateItem( {} ) );
+
+        dispatch( decrementItemQty( {} ) );
 
     }
 
