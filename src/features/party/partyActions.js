@@ -1,4 +1,6 @@
-export const checkItem = ( itemUsed, deactivateItem ) => {
+import { deactivateItem } from './partySlice';
+
+export const checkItem = ( itemUsed ) => {
     
   return( dispatch, getState ) => {        
 

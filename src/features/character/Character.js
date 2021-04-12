@@ -58,6 +58,8 @@ export function Character(
 
   const doesItemApplyToChar   = canTheyUseIt( char, itemToUse ); 
 
+  console.log(doesItemApplyToChar);
+
   //const gearToEquip           = useSelector( selectGearToEquip );
 
   //const isGearEquippable      = canGearBeEquipped( char, gearToEquip );
@@ -72,93 +74,38 @@ export function Character(
 
   const onCharacterSelect = ( event ) => {
 
-    dispatch( characterSelected( charId, {} ) );
-
-    /**
-     * To handle the flags for the CSS classes to activate,
-     * I dont know what to do. 
-     */
-
-      // if ( itemToUse !== null ) {
-
-      //   switch ( itemToUse.label ) {
-
-      //     case `Potion`:
-
-      //       dispatch( recoverHP( { charId } ) );
-                        
-      //       break;
-
-      //     case `Ether`:
-
-      //       dispatch( recoverMP( { charId } ) );                
-
-      //       break;
-
-      //     case `Antidote`:
-      //     case `Elixir`:
-
-      //       dispatch( clearStatus( { charId } ) );    
-
-      //       break;
-
-      //     default:
-      //       return;
-
-      //   }
-        
-      //   dispatch( decrementItemQty( { itemUsed: itemToUse } ) );
-
-      //   dispatch( checkItem( itemToUse, deactivateItem ) );
-
-      //   dispatch( checkCharacter( charId, itemToUse, deactivateItem ) );
-
-      // }
-
-      // //TODO: We can clean up these big if-blocks by moving them to
-      // //      actions.js as we'll be able to check state directly
-      // //      there and dispatch as needed.
-      // //
-
-      // if( gearToEquip !== null ) {
-
-      //   dispatch( equip( { charId, gearToEquip } ) );
-
-      //   let sendToInventory;
-
-      //   if( gearToEquip.symbol.indexOf( 'weapon' ) !== -1 ) {
-          
-      //     sendToInventory = 'weapon';
-          
-      //     setWasWeaponEquipped( true );
-
-      //   } else {
-
-      //     sendToInventory = 'armor';
-          
-      //     setWasArmorEquipped( true );
-
-      //   }
-
-      //   dispatch( removeFromInventory( { gearItem: gearToEquip } ) );
-
-      //   dispatch( addToInventory( 
-      //     { 
-      //       gearItem: { ...char.gear[ sendToInventory ] } 
-      //     }
-      //   ) );
-
-      //   dispatch( clearGearToEquip() );
-
-      //   //so the flashGear class is removed
-      //   setTimeout( () => {
-      //     setWasWeaponEquipped( false );
-      //     setWasArmorEquipped( false );
-      //   }, 1000 );
-
-      // }
+    dispatch( characterSelected( charId, {} ) );  
 
   };
+
+  const onGearSlotSelect = ( event, slot ) => {
+
+    switch( slot ) {
+
+      case `weapons`:
+
+        setOpenedWeaponMenu( true );
+
+      break;
+
+      case `armor`:
+
+        setOpenedArmorMenu( true );
+
+      break;
+
+      default:
+        return;
+
+    }
+
+    dispatch( 
+      openMenu( { menu: slot, ref: 'character' } ) 
+    );
+
+    dispatch( setEquippingCharacter( { charId } ) );
+
+  }
  
   
   return (
@@ -227,15 +174,7 @@ export function Character(
                 ${ openedWeaponMenu && menuRef ? styles.openedMenu : `` }
                 
               ` }
-              onClick={ ( e ) => {
-                e.preventDefault();
-                e.stopPropagation();
-                setOpenedWeaponMenu( true );
-                dispatch( 
-                  openMenu( { menu: "weapons", ref: 'character' } ) 
-                );
-                dispatch( setEquippingCharacter( { charId } ) );
-              } }
+              onClick={ ( e ) => onGearSlotSelect( `weapons` ) }
             >
               <Icon 
                 symbol={ char.gear.weapon.symbol } 
@@ -250,16 +189,7 @@ export function Character(
                 ${ openedArmorMenu && menuRef ? styles.openedMenu : `` }
                 
               ` }
-              onClick={ ( e ) => {
-                e.preventDefault();
-                e.stopPropagation();
-                setOpenedArmorMenu( true );
-                dispatch( 
-                  openMenu( { menu: "armor", ref: 'character' } ) 
-                );
-                dispatch( setEquippingCharacter( { charId } ) );
-              } 
-              }>
+              onClick={ ( e ) => onGearSlotSelect( `armor` ) }>
               <Icon 
                 symbol={ char.gear.armor.symbol } 
                 label={ char.gear.armor.label } 

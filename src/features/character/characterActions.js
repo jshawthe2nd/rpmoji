@@ -4,12 +4,19 @@ import {
     equip,
     recoverHP,
     recoverMP,
-    clearStatus
+    clearStatus,
+    addToInventory,
+    removeFromInventory,
+    learnSpell
 } from '../party/partySlice';
 
 import {
     getTypeOfItem
   } from '../party/partyUtils';
+
+import {
+    checkItem
+} from '../party/partyActions';
 
 export const checkCharacter = ( charId, itemUsed ) => {
     
@@ -61,7 +68,7 @@ export const checkCharacter = ( charId, itemUsed ) => {
     };
 }
 
-export const characterSelected = ( characterId, actions ) => {
+export const characterSelected = ( characterId ) => {
 
     return ( dispatch, getState ) => {
 
@@ -86,25 +93,22 @@ export const characterSelected = ( characterId, actions ) => {
             
             break;
 
-            case `gear`:        
+            case `gear`:
 
-                dispatch( equip( {
-
-                    id: characterId,
-                    gear: selectedItem
-
-                } ) );
+                dispatch( equipGear( characterId, selectedItem ) );
 
             break;
 
             case `magic`:
 
-                dispatch( actions.learnSpell( {
+                dispatch( learnSpell( {
 
                     char: character,
                     scroll: selectedItem
 
                 } ) );
+
+                dispatch( removeFromInventory( { gearItem: selectedItem } ) );
 
             break;
 
@@ -113,9 +117,7 @@ export const characterSelected = ( characterId, actions ) => {
 
         }
 
-        //dispatch( deactivateItem( {} ) );
-
-        dispatch( decrementItemQty( {} ) );
+        dispatch( deactivateItem() );
 
     }
 
@@ -128,8 +130,6 @@ const useItem = ( character ) => {
         const state = getState().party;
 
         const item = state.activeItem;
-
-        console.log(character);
 
         switch( item.label ) {
 
@@ -152,8 +152,49 @@ const useItem = ( character ) => {
 
             break;
 
+            default:
+                return;
+
         }
 
+        dispatch( decrementItemQty( {} ) );
+
+        dispatch( checkItem( item ) );
+
     };
+
+}
+
+const equipGear = ( id, gear ) => {
+
+    return ( dispatch, getState ) => {
+
+        
+
+        const state = getState().party;
+
+        const character = { ...state.characters[ id ] };
+
+        dispatch( equip( {
+
+            id,
+            gear
+
+        } ) );
+
+        dispatch( removeFromInventory( { gearItem: gear } ) );
+
+        dispatch( addToInventory( 
+
+            { 
+            gearItem: { ...character.gear[ 
+                gear.symbol.indexOf( 'weapon' ) !== -1 ? `weapon` : `armor`
+             ] } 
+
+            }
+
+        ) );
+
+    }
 
 }

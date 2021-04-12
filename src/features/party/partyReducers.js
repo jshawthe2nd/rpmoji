@@ -1,3 +1,7 @@
+import {
+  getTypeOfItem
+} from '../party/partyUtils';
+
 export default {
   incrementItemQty: ( state, action ) => {
     

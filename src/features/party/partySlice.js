@@ -310,7 +310,8 @@ export const {
   sendGearToInventory,
   setEquippingCharacter,
   selectCharacter,
-  equip
+  equip,
+  learnSpell
 } = slice.actions;
 
 export const selectInventory = ( state ) => state.party.inventory;
