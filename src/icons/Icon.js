@@ -85,6 +85,12 @@ export const symbols = {
     ko: `💀`
   },
   item: {
+    potion: `🧃`,
+    ether: `🧴`,
+    elixir: `🧪`,
+    antidote: `💊`
+  },
+  gear: {
     weapon: {
       sword: `🗡️`,
       axe: `🪓`,
@@ -94,19 +100,17 @@ export const symbols = {
     armor: `🧥`,
     shield: `🛡️`,
     robe: `👘`,
+  },
+  magic: {
     scroll: `📜`,
-    spell: {
-      cure: `🩹`,
-      ice: `🧊`,
-      dispel: `🔮`,
-      fire: `🔥`,
-      elec: `⚡`,
-      poison: `⚗️`
-    },
-    potion: `🧃`,
-    ether: `🧴`,
-    elixir: `🧪`,
-    antidote: `💊`
+  },
+  spell: {
+    cure: `🩹`,
+    ice: `🧊`,
+    dispel: `🔮`,
+    fire: `🔥`,
+    elec: `⚡`,
+    poison: `⚗️`
   },
   dialog: `💬`
 };

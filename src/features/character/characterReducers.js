@@ -1,13 +1,13 @@
 export default {
-  attack: (state) => {},
-  defend: (state) => {},
+  attack: ( state ) => {},
+  defend: ( state ) => {},
   equip: ( state, action ) => {
 
-    const { charId, gearToEquip } = action.payload;
+    const { id, gear } = action.payload;
 
-    const char = { ...state.characters[ charId ] };
+    const char = { ...state.characters[ id ] };
 
-    switch( gearToEquip.type ) {
+    switch( gear.type ) {
 
       case `sword`:
       case `axe`:
@@ -18,10 +18,10 @@ export default {
         //  TODO: put current weapon into inventory
         //
 
-        state.characters[ charId ]
+        state.characters[ id ]
           .gear.weapon = { 
-                  ...gearToEquip,
-                  dmg: ( gearToEquip.dmg + char.stats.level.current ) 
+                  ...gear,
+                  dmg: ( gear.dmg + char.stats.level.current ) 
                 };
 
       break;
@@ -29,7 +29,8 @@ export default {
       case `armor`:
       case `robe`:
 
-        state.characters[ charId ].gear.armor = { ...gearToEquip };
+        state.characters[ id ]
+          .gear.armor = { ...gear };
 
       break;
 
@@ -47,9 +48,9 @@ export default {
     }
 
   },
-  levelUp: (state) => {},
-  gainExp: (state) => {},
-  afflictStatus: (state) => {},
+  levelUp: ( state ) => {},
+  gainExp: ( state ) => {},
+  afflictStatus: ( state ) => {},
   clearStatus: (state, action) => {
 
     const { charId } = action.payload;
@@ -58,9 +59,9 @@ export default {
 
   },
 
-  openSubMenu: (state) => {},
+  openSubMenu: ( state ) => {},
 
-  recoverHP: (state, action) => {
+  recoverHP: ( state, action ) => {
 
     const { charId } = action.payload;
 
@@ -72,7 +73,7 @@ export default {
 
   },
 
-  recoverMP: (state, action) => {
+  recoverMP: ( state, action ) => {
     
     const { charId } = action.payload;
 
@@ -83,4 +84,9 @@ export default {
     state.characters[ charId ].stats.mp.current = ( healing > char.stats.mp.max ) ? char.stats.mp.max : healing;
 
   },
+
+  learnSpell: ( state, action ) => {
+    
+  }
+  
 };

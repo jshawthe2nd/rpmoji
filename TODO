@@ -2,6 +2,14 @@
   ☐ <Pause/> component, for bootstrapping/setting up <Party/>, <Character/>s and <Menu/>
   ☐ Update /store/Store.js with initStore() method for help in bootstrapping
       https://stackoverflow.com/questions/60999058/load-initialstate-dynamically-with-createslice-in-redux-toolkit
+      I'd like to eventually store game state when players Save to IndexedDb.
+      I think localStorage could hold state, at 4kb? Unless I fully flesh out
+      everything in this to make it, like, an actual game, as it is now, this
+      piece is definitely smaller. 
+      I'm interested in this topic because I don't know how involved I want
+      to get with refactoring the state shape. Normalizing is an option (see below) and I'm curious if Party even needs to be that aware of the Characters. I tend to think too much in terms of a user and not a developer, and that's kind of how I built this - but it definitely can be cleaner. So knowing how to bootstrap the store from IndexedDB I think will
+      help in better understanding the problem, at least, to give better
+      guidance on a solution.
   ☐ 
 
 
@@ -42,7 +50,7 @@ Game Menu:
         ✔ User clicks Character component, weapon swaps... @done(21-04-01 19:19)
         ✔ ...Character weapon flashes/pulses name @done(21-04-01 20:33)
         ✔ Classes are removed, UI returns to normal @done(21-04-01 20:08)
-        ☐ Highlight weapon name in yellow when clicking it direct to equip new weapon
+        ✔ Highlight weapon name in yellow when clicking it direct to equip new weapon @done(21-04-02 18:15)
 
     State Updates:
         ✔ onClick handler, setGearToEquip() @done(21-04-01 19:19)
@@ -50,7 +58,7 @@ Game Menu:
         ✔ Take the name & type from the setGearToEquip, apply damage calculation @done(21-04-01 19:20)
         Do weapons have their own innate damage, or do different types have a formula that then gets calculated when equipped to the character to know how much damage it does? If we do have a formula, what should it be? I feel like damage and armor should adjust to the level of the character equipping it. We could even have a scaling boost factor based on, maybe, item rarity? Or some kind of power level?
         For now let's just say damage per character is level + damage.
-        Crit chance can be flat 25%. 
+        Crit chance can be flat 25% (or maybe 15 or 10). 
         Crit damage can be flat 50%.
         ✔ Spread new object data into char.gear.weapon @done(21-04-01 19:16)
         ✔ Put previously-equipped weapon into inventory @done(21-04-02 08:31)
@@ -61,7 +69,7 @@ Game Menu:
   Armor Equip:
     UI Updates:
       ✔ Ensure functionality is same as for Weapons @done(21-04-02 02:05)
-      ☐ Highlight armor in yellow when directly clicking to equip armor
+      ✔ Highlight armor in yellow when directly clicking to equip armor @done(21-04-02 17:41)
     State Updates:
       ✔ Ensure state updates similarly to Weapons @done(21-04-02 02:05)
       ✔ Put previously-equipped armor into inventory @done(21-04-02 02:05)
@@ -72,11 +80,26 @@ Game Menu:
       ☐ Scroll disappears from inventory
       ☐ Show pop up like, "${char.name} learned 'Cure'!"
     State Updates:
+      ☐ dispatch `learnSpell()`
+      ☐ 
+
 
   UI Fine-tuning:
     ✔ Show hand on hovered Character (changed to showing color) @done(20-09-27 15:49)
     ✔ When clicking BackOption clear Character 'select' state @done(20-09-27 15:49)
     ✔ Adjusted areas of weapon/armor slots to be more mouse-friendly @done(20-09-27 16:05)
+    ✔ create CSS classes for Weapon & Armor menu items to dim themselves if they can't be equipped by the Character whose gear slot was clicked @done(21-04-02 18:14)
+    ✔ Create a selector in menuSlice to get the menu.ref in Weapon/Armor menu @done(21-04-02 17:41)
+    ✔ Import canGearBeEquipped function from Character utils to determine item's equippability by selected gear slot's owning Character @done(21-04-02 17:41)
+    User Story - 
+    User clicks gear slot in particular Character
+    Dispatch openMenu() with `character` menu ref
+      selectMenuRef needs to be created so gear items know to check themselves and indicate if they can be equipped. 
+    Maybe additional payload data can be passing current character type, or,
+    also just dispatching something like `setCharacterForEquipping()`
+    ✔ How to handle <BackOption/> in the event equippingCharacter is truthy @done(21-04-02 18:14)
+    ☐ Figure out how to trigger gear-slot flash when the equip UserFlow is initiated via the Character component as opposed to the Menu component(s)
+      Figure out how to do this with the new actions flow
 
 World Map: 
 
@@ -98,12 +121,16 @@ Coding:
       eg, party.chars[ $charId ].stats.hp, etc
   ✔ Also need to adjust inventory stuffs to account for IDs, finally @done(21-04-02 02:05)
   ☐ Generate IDs for items, gear
-  ☐ Reduce clicks needed to equip when clicking a gear slot directly on a character
+  ✔ Reduce clicks needed to equip when clicking a gear slot directly on a character @done(21-04-02 17:41)
       User clicks weapon or armor slot
       <WeaponMenu/> or <ArmorMenu/> opens
       User clicks desired weapon or armor to equip
       dispatch equip action for the given gearItem
       dispatch methods for resetting UI
+  ☐ Hopefully eventually incorporate keyboard control
+  ✔ Make a `characterSelected` action in `characterActions.js` that handles all cases where the user clicks the Character after selecting an item or gear @done(21-04-13 00:42)
+  ✔ Make a `gearSlotSelected` action in `menuActions.js` that moves the component handler to dispatches this logic @done(21-04-13 00:43)
+  ☐ Need a learnSpell action 
 
 Bugfixes:
   ✔ make sure onCharacterSelect only fires when applying item not when selecting for weapon or armor @done(20-09-23 22:24)

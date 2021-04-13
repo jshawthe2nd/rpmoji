@@ -7,7 +7,8 @@ export const slice = createSlice({
     ref: false
   },
   reducers: {
-    openMenu: (state, action) => {
+
+    openMenu: ( state, action ) => {
       
       state.menu = action.payload.menu;
 
@@ -18,21 +19,25 @@ export const slice = createSlice({
       }
 
     },
-    closeMenu: (state, action) => {
+    closeMenu: ( state ) => {
 
       state.menu = slice.initialState;
+      state.ref = false;
 
     },
+
   },
 });
 
 export const { openMenu, closeMenu } = slice.actions;
 
-export const selectMenu = (state) => state.menu.menu;
+export const selectMenu = ( state ) => state.menu.menu;
 
-export const selectItem = (state, itemIndex) => {
+export const selectMenuRef = ( state ) => state.menu.ref;
 
-  return state.party.item[itemIndex];
+export const selectItem = ( state, itemIndex ) => {
+
+  return state.party.item[ itemIndex ];
   
 }
 

@@ -33,13 +33,13 @@ export const slice = createSlice({
             type:   "sword",
             dmg:    10,
             label:  "Wood",
-            symbol: "item.weapon.sword"
+            symbol: "gear.weapon.sword"
           },
           armor: {
             id:     704,
             label:  "Leather",
             def:    5,
-            symbol: "item.armor",
+            symbol: "gear.armor",
             type:   "armor"
           }
         },
@@ -71,13 +71,13 @@ export const slice = createSlice({
             type:   "sword",
             dmg:    10,
             label:  "Wood",
-            symbol: "item.weapon.sword"
+            symbol: "gear.weapon.sword"
           },
           armor: {
             id:     705,
             label:  "Leather",
             def:    5,
-            symbol: "item.armor",
+            symbol: "gear.armor",
             type:   "armor"
           }
         },
@@ -109,13 +109,13 @@ export const slice = createSlice({
             type:   "dagger",
             dmg:    4,
             label:  "Wood",
-            symbol: "item.weapon.dagger"
+            symbol: "gear.weapon.dagger"
           },
           armor: {
             id:     706,
             label: "Burlap",
             def: 2,
-            symbol: "item.robe",
+            symbol: "gear.robe",
             type:   "robe"
           },
           spells: [
@@ -161,13 +161,13 @@ export const slice = createSlice({
             type:   "dagger",
             dmg:    4,
             label:  "Wood",
-            symbol: "item.weapon.dagger"
+            symbol: "gear.weapon.dagger"
           },
           armor: {
             id:     707,
             label:  "Burlap",
             def:    2,
-            symbol: "item.robe",
+            symbol: "gear.robe",
             type:   "robe"
           },
           spells: [
@@ -224,7 +224,7 @@ export const slice = createSlice({
           id:     601,
           label:  'Stone',
           type:   'sword',
-          symbol: 'item.weapon.sword',
+          symbol: 'gear.weapon.sword',
           dmg:    5,
           crit:   0.25,
           cdmg:   0.5,
@@ -234,7 +234,7 @@ export const slice = createSlice({
           id:     602,
           label:  'Stone',
           type:   'axe',
-          symbol: 'item.weapon.axe',
+          symbol: 'gear.weapon.axe',
           dmg:    5,
           qty:    1
         },
@@ -242,7 +242,7 @@ export const slice = createSlice({
           id:     603,
           label:  'Branch',
           type:   'bow',
-          symbol: 'item.weapon.bow',
+          symbol: 'gear.weapon.bow',
           dmg:    4,
           qty:    1
         },
@@ -250,7 +250,7 @@ export const slice = createSlice({
           id:     604,
           label:  'Stone',
           type:   'dagger',
-          symbol: 'item.weapon.dagger',
+          symbol: 'gear.weapon.dagger',
           dmg:    4,
           qty:    1
         }
@@ -260,14 +260,14 @@ export const slice = createSlice({
           id:     701,
           label:  'Leather',
           type:   'armor',
-          symbol: 'item.armor',
+          symbol: 'gear.armor',
           qty:    1
         },
         {
           id:     703,
           label:  'Hide',
           type:   'robe',
-          symbol: 'item.robe',
+          symbol: 'gear.robe',
           qty:    1
         },
       ],
@@ -275,7 +275,7 @@ export const slice = createSlice({
         {
           id:     801,
           name:   'Cure',
-          symbol: 'item.scroll',
+          symbol: 'magic.scroll',
           qty:    1
         }
       ]
@@ -283,7 +283,9 @@ export const slice = createSlice({
     gold: 666,
     activeItem: null,
     applyingItem: false,
-    gearToEquip: null
+    gearToEquip: null,
+    equippingCharacter: null,
+    selectedItem: null
   },
   reducers: {
     ...partyReducers,
@@ -306,22 +308,26 @@ export const {
   setArmorToEquip,
   clearGearToEquip,
   sendGearToInventory,
-  equip
+  setEquippingCharacter,
+  selectCharacter,
+  equip,
+  learnSpell
 } = slice.actions;
 
-export const selectInventory = state => state.party.inventory;
+export const selectInventory = ( state ) => state.party.inventory;
 
-export const selectChars = state => {
+export const selectChars = ( state ) => {
   return state.party.characters;
 }
 
-export const selectCharacterIds = state => {
+export const selectCharacterIds = ( state ) => {
 
   return [ ...Object.keys( state.party.characters ) ];
 
 }
 
-export const selectGold = state => state.gold;
+
+export const selectGold = ( state ) => state.gold;
 
 export const selectItem = ( state, action ) => {
   console.log(action);
@@ -353,21 +359,25 @@ export const selectGearToEquip = ( state ) => {
 
 }
 
-export const selectItems = state => {
+export const selectItems = ( state ) => {
   return state.party.inventory.item;
 };
 
-export const selectActiveItem = state => { 
+export const selectActiveItem = ( state ) => { 
   
   return state.party.activeItem;
 }
 
-export const selectActiveItemQty = state => {
+export const selectActiveItemQty = ( state ) => {
   return (state.party.activeItem) ? state.party.activeItem.qty : null;
 }
 
-export const selectApplyingItem = state => {
+export const selectApplyingItem = ( state ) => {
   return state.party.applyingItem;
+}
+
+export const selectEquippingCharacter = ( state ) => {
+  return state.party.equippingCharacter;
 }
 
 export default slice.reducer;

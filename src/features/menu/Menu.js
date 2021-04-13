@@ -4,7 +4,13 @@ import { useSelector, useDispatch } from "react-redux";
 import styles from "./Menu.module.css";
 
 import { selectMenu, openMenu, closeMenu } from "./menuSlice";
-import { deactivateItem, clearGearToEquip, selectGearToEquip, selectActiveItem } from '../party/partySlice';
+import { 
+  deactivateItem, 
+  clearGearToEquip, 
+  selectGearToEquip, 
+  selectActiveItem, 
+  selectEquippingCharacter 
+} from '../party/partySlice';
 
 import { WeaponMenu } from "./WeaponMenu";
 import { ArmorMenu } from "./ArmorMenu";
@@ -13,10 +19,7 @@ import { Icon } from "../../icons/Icon";
 import { BackOption } from "./BackOption";
 
 const menuOptions = {
-  items: {
-    label: "Items",
-    component: <ItemMenu />,
-  },
+  
   weapons: {
     label: "Weapons",
     component: <WeaponMenu />,
@@ -25,16 +28,23 @@ const menuOptions = {
     label: "Armor",
     component: <ArmorMenu />,
   },
-  entries: ["items", "weapons", "armor"],
+  items: {
+    label: "Items",
+    component: <ItemMenu />,
+  },
+
+  entries: [ "weapons", "armor", "items" ],
+
 };
 
 export function Menu() {
 
-  const menu          = useSelector(selectMenu);
+  const menu          = useSelector( selectMenu );
   const activeItem    = useSelector( selectActiveItem );
   const gearToEquip   = useSelector( selectGearToEquip );
+  const equippingCharacter = useSelector( selectEquippingCharacter );
 
-  const SubMenu       = !menu ? false : menuOptions[menu].component;
+  const SubMenu       = !menu ? false : menuOptions[ menu ].component;
 
   const dispatch      = useDispatch();
 
@@ -53,28 +63,32 @@ export function Menu() {
       dispatch( clearGearToEquip() );
 
     }
+
+
+
+
     
   };
 
   return (
-    <div className={styles.menu}>
+    <div className={ styles.menu }>
       {SubMenu
         ? SubMenu
-        : menuOptions.entries.map((entry, index) => {
+        : menuOptions.entries.map( ( entry, index ) => {
             return (
               <div
-                key={index}
-                className={styles.menuOption}
-                onClick={() => {
-                  dispatch(openMenu({ menu: entry }));
-                }}
+                key={ index }
+                className={ styles.menuOption }
+                onClick={ () => {
+                  dispatch( openMenu( { menu: entry } ) );
+                } }
               >
-                {menuOptions[entry].label}
+                { menuOptions[ entry ].label }
               </div>
             );
           })}
-      {menu && <BackOption onMenuClosed={onMenuClosed} />}
-      <div className={styles.metaInfo}>
+      { menu && <BackOption onMenuClosed={ onMenuClosed } />}
+      <div className={ styles.metaInfo }>
         <p>
           <Icon symbol="menu.gold" label="gold" /> 666
         </p>

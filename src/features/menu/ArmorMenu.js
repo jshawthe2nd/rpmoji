@@ -7,50 +7,73 @@ import { Icon } from '../../icons/Icon';
 
 import { 
   selectAllArmor, 
-  selectGearToEquip, 
-  setArmorToEquip, 
-  clearGearToEquip 
+  selectEquippingCharacter
 } from '../party/partySlice';
+
+import {
+  canGearBeEquipped
+} from '../character/characterUtils';
+
+import {
+  gearSelected
+} from '../menu/menuActions';
 
 
 
 export function ArmorMenu() {
 
-  const dispatch  = useDispatch();
+  const dispatch            = useDispatch();
 
-  const armors    = useSelector( selectAllArmor );
+  const armors              = useSelector( selectAllArmor );
 
-  const armorToEquip  = useSelector( selectGearToEquip );
+  const equippingCharacter  = useSelector( selectEquippingCharacter );
 
-  const onArmorClick  = ( armor ) => {
+  const char = useSelector( ( state ) => {
 
-    if( !armorToEquip ) {
+    return state.party.characters[ equippingCharacter ];
 
-      dispatch( setArmorToEquip( { armor } ) );
+  } );
 
-    } else {
 
-      dispatch( clearGearToEquip() );
+  const onGearSlotClick   = ( armor ) => {
 
-    }
+    dispatch( gearSelected( armor ) );
 
   };
 
 
   return (
+
     <div>
+
       { armors.map( ( armor, index ) => {
+
+        const canEquip = canGearBeEquipped( char, armor );
+
         return (
           <div 
             key={ index } 
-            className={ styles.subMenuOption }
-            onClick={ (e) => { onArmorClick( armor ) } }
+            className={ `
+
+              ${ styles.subMenuOption }
+              ${
+                equippingCharacter && !canEquip
+                  ? styles.dimItem
+                  : ``
+              }
+              
+            ` }
+            onClick={ (e) => { onGearSlotClick( armor ) } }
           >
-              <Icon symbol={ `item.${ armor.type }` } label={ armor.label } />
-              { armor.label } &times; {armor.qty}
+              <Icon symbol={ `gear.${ armor.type }` } label={ armor.label } />
+              { armor.label } &times; { armor.qty }
           </div>
-        )        
+        )
+
       } ) }
+
     </div>
+
   );
+
 }

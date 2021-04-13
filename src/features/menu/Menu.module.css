@@ -26,7 +26,6 @@
   font-size: 14px;
   letter-spacing: -3px;
   padding-left: 11px;
-  cursor: pointer;
   position: relative;
 }
 
@@ -38,8 +37,12 @@
   height: 28px;
 }
 
-.menuOption:hover::before,
-.subMenuOption:hover::before {
+.subMenuOption:not(.dimItem):hover {
+  cursor: pointer;
+}
+
+.menuOption:not(.dimItem):hover::before,
+.subMenuOption:not(.dimItem):hover::before {
   position: absolute;
   left: -8px;
   top: -4px;
@@ -91,4 +94,8 @@
 
 .metaInfo p:last-child {
   font-size: 12px;
+}
+
+.dimItem {
+  opacity: 0.6;
 }

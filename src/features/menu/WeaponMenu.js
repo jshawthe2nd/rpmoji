@@ -9,8 +9,26 @@ import {
   selectAllWeapons, 
   selectGearToEquip, 
   setWeaponToEquip, 
-  clearGearToEquip 
+  clearGearToEquip,
+  selectEquippingCharacter,
+  removeFromInventory,
+  addToInventory,
+  equip,
+  setEquippingCharacter
 } from '../party/partySlice';
+
+import {
+  canGearBeEquipped
+} from '../character/characterUtils';
+
+import {
+  selectMenuRef,
+  closeMenu
+} from '../menu/menuSlice';
+
+import {
+  gearSelected
+} from '../menu/menuActions';
 
 
 
@@ -20,19 +38,19 @@ export function WeaponMenu() {
 
   const weapons         = useSelector( selectAllWeapons );
 
-  const weaponToEquip   = useSelector( selectGearToEquip );
+  const equippingCharacter = useSelector( selectEquippingCharacter );
 
-  const onWeaponClick   = ( weapon ) => {
+  const char = useSelector( ( state ) => {
 
-    if( !weaponToEquip ) {
+    return state.party.characters[ equippingCharacter ];
 
-      dispatch( setWeaponToEquip( { weapon } ) );
+  } );
 
-    } else {
+  
 
-      dispatch( clearGearToEquip() );
+  const onGearSlotClick   = ( weapon ) => {
 
-    }
+    dispatch( gearSelected( weapon ) );
 
   };
 
@@ -40,9 +58,22 @@ export function WeaponMenu() {
   return (
     <div>
       { weapons.map( ( weapon, index ) => {
+
+        const canEquip = canGearBeEquipped( char, weapon );
+
         return (
-          <div key={ index } className={ styles.subMenuOption } 
-          onClick={ (e) => { onWeaponClick( weapon ) } }>
+          <div key={ index } 
+          className={ `
+          
+            ${ styles.subMenuOption }
+            ${
+              equippingCharacter && !canEquip
+                ? styles.dimItem
+                : ``
+            }
+
+          ` } 
+          onClick={ (e) => { onGearSlotClick( weapon ) } }>
             <Icon symbol={ weapon.symbol } label={ weapon.label } />
             { weapon.label } &times; { weapon.qty }
           </div>

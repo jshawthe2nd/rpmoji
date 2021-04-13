@@ -3,36 +3,36 @@ import { useSelector, useDispatch } from "react-redux";
 import { Icon } from "../../icons/Icon";
 
 import { openMenu } from "../menu/menuSlice";
+
 import {
-  recoverHP,
-  recoverMP,
-  clearStatus,
-  decrementItemQty,
   selectActiveItem,
-  deactivateItem,
-  selectGearToEquip,
-  equip,
-  clearGearToEquip,
-  addToInventory,
-  removeFromInventory
+  setEquippingCharacter
 } from "../party/partySlice";
+
+import {
+  selectMenuRef
+} from '../menu/menuSlice';
 
 import {
   getCharacterSymbolPath,
   getCharacterIconLabel,
-  canItemBeUsed,
-  canGearBeEquipped
-} from "./utils";
+  canTheyUseIt
+} from "./characterUtils";
 
 import {
-  checkCharacter
-} from './actions';
+  characterSelected
+} from './characterActions';
 
 
 import styles from "./Character.module.css";
-import { checkItem } from "../party/actions";
 
-export function Character( { charId, ...props } ) {
+export function Character( 
+  { 
+    charId, 
+    ...props 
+  } 
+) 
+{
 
   const dispatch = useDispatch();
 
@@ -44,97 +44,52 @@ export function Character( { charId, ...props } ) {
 
   const itemToUse             = useSelector( selectActiveItem );
 
-  const doesItemApplyToChar   = canItemBeUsed( char, itemToUse ); 
+  const menuRef               = useSelector( selectMenuRef );
 
-  const gearToEquip           = useSelector( selectGearToEquip );
+  const doesItemApplyToChar   = canTheyUseIt( char, itemToUse ); 
 
-  const isGearEquippable      = canGearBeEquipped( char, gearToEquip );
+  const [ wasWeaponEquipped,  setWasWeaponEquipped ] = useState( false );
 
-  const [ wasWeaponEquipped, setWasWeaponEquipped ] = useState( false );
+  const [ wasArmorEquipped,   setWasArmorEquipped ]  = useState( false );
 
-  const [ wasArmorEquipped, setWasArmorEquipped ] = useState( false );
+  const [ openedWeaponMenu,   setOpenedWeaponMenu ]  = useState( false );
 
-  const [ openedWeaponMenu, setOpenedWeaponMenu ] = useState( false );
-
-  const [ openedArmorMenu, setOpenedArmorMenu ] = useState( false );
+  const [ openedArmorMenu,    setOpenedArmorMenu ]   = useState( false );
 
   const onCharacterSelect = ( event ) => {
 
-      if ( itemToUse !== null ) {
-
-        switch ( itemToUse.label ) {
-
-          case `Potion`:
-
-            dispatch( recoverHP( { charId } ) );
-                        
-            break;
-
-          case `Ether`:
-
-            dispatch( recoverMP( { charId } ) );                
-
-            break;
-
-          case `Antidote`:
-          case `Elixir`:
-
-            dispatch( clearStatus( { charId } ) );    
-
-            break;
-
-          default:
-            return;
-
-        }
-        
-        dispatch( decrementItemQty( { itemUsed: itemToUse } ) );
-
-        dispatch( checkItem( itemToUse, deactivateItem ) );
-
-        dispatch( checkCharacter( charId, itemToUse, deactivateItem ) );
-
-      }
-
-      if( gearToEquip !== null ) {
-
-        dispatch( equip( { charId, gearToEquip, dispatch } ) );
-
-        let sendToInventory;
-
-        if( gearToEquip.symbol.indexOf( 'weapon' ) !== -1 ) {
-          
-          sendToInventory = 'weapon';
-          
-          setWasWeaponEquipped( true );
-
-        } else {
-
-          sendToInventory = 'armor';
-          
-          setWasArmorEquipped( true );
-
-        }
-
-        dispatch( removeFromInventory( { gearItem: gearToEquip } ) );
-
-        dispatch( addToInventory( 
-          { 
-            gearItem: { ...char.gear[ sendToInventory ] } 
-          }
-        ) );
-
-        dispatch( clearGearToEquip() );
-
-        //so the flashGear class is removed
-        setTimeout( () => {
-          setWasWeaponEquipped( false );
-          setWasArmorEquipped( false );
-        }, 1000 );
-
-      }
+    dispatch( characterSelected( charId, {} ) );  
 
   };
+
+  const onGearSlotSelect = ( slot ) => {  
+
+    switch( slot ) {
+
+      case `weapons`:
+
+        setOpenedWeaponMenu( true );
+
+      break;
+
+      case `armor`:
+
+        setOpenedArmorMenu( true );
+
+      break;
+
+      default:
+        return;
+
+    }
+
+    dispatch( 
+      openMenu( { menu: slot, ref: 'character' } ) 
+    );
+
+    dispatch( setEquippingCharacter( { charId } ) );
+
+  }
  
   
   return (
@@ -149,16 +104,6 @@ export function Character( { charId, ...props } ) {
         } 
         ${
           itemToUse && doesItemApplyToChar
-            ? styles.applyingToChar
-            : ``
-        }
-        ${
-          gearToEquip && !isGearEquippable
-            ? styles.dimCharacter
-            : ``
-        }
-        ${
-          gearToEquip && isGearEquippable
             ? styles.applyingToChar
             : ``
         }
@@ -210,14 +155,13 @@ export function Character( { charId, ...props } ) {
 
                 ${ styles.weapon }
                 ${ wasWeaponEquipped ? styles.flashGear : `` }
-                ${ openedWeaponMenu ? styles.openedMenu : `` }
+                ${ openedWeaponMenu && menuRef ? styles.openedMenu : `` }
                 
               ` }
               onClick={ ( e ) => {
                 e.preventDefault();
                 e.stopPropagation();
-                setOpenedWeaponMenu( true );
-                dispatch( openMenu( { menu: "weapons", ref: 'character' } ) );
+                onGearSlotSelect( `weapons` ) 
               } }
             >
               <Icon 
@@ -230,16 +174,14 @@ export function Character( { charId, ...props } ) {
 
                 ${ styles.armor }
                 ${ wasArmorEquipped ? styles.flashGear : `` }
-                ${ openedArmorMenu ? styles.openedMenu : `` }
+                ${ openedArmorMenu && menuRef ? styles.openedMenu : `` }
                 
               ` }
               onClick={ ( e ) => {
                 e.preventDefault();
                 e.stopPropagation();
-                setOpenedArmorMenu( true );
-                dispatch( openMenu( { menu: "armor", ref: 'character' } ) );
-              } 
-              }>
+                onGearSlotSelect( `armor` ) 
+              } }>
               <Icon 
                 symbol={ char.gear.armor.symbol } 
                 label={ char.gear.armor.label } 
