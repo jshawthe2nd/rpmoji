@@ -48,7 +48,7 @@ export function ArmorMenu() {
 
       { armors.map( ( armor, index ) => {
 
-        const canEquip = canGearBeEquipped( char, armor );
+        const canEquip = canTheyUseIt( char, armor );
 
         return (
           <div 
