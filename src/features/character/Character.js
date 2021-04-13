@@ -4,13 +4,8 @@ import { Icon } from "../../icons/Icon";
 
 import { openMenu } from "../menu/menuSlice";
 
-//TODO: - Combine recover methods
-//      - combine add/remove inventory to swapInventory
-//      
-
 import {
   selectActiveItem,
-  selectGearToEquip,
   setEquippingCharacter
 } from "../party/partySlice";
 
@@ -21,12 +16,8 @@ import {
 import {
   getCharacterSymbolPath,
   getCharacterIconLabel,
-  canItemBeUsed,
-  canGearBeEquipped,
   canTheyUseIt
 } from "./characterUtils";
-
-
 
 import {
   characterSelected
@@ -34,7 +25,6 @@ import {
 
 
 import styles from "./Character.module.css";
-import { checkItem } from "../party/partyActions";
 
 export function Character( 
   { 
@@ -58,12 +48,6 @@ export function Character(
 
   const doesItemApplyToChar   = canTheyUseIt( char, itemToUse ); 
 
-  console.log(doesItemApplyToChar);
-
-  //const gearToEquip           = useSelector( selectGearToEquip );
-
-  //const isGearEquippable      = canGearBeEquipped( char, gearToEquip );
-
   const [ wasWeaponEquipped,  setWasWeaponEquipped ] = useState( false );
 
   const [ wasArmorEquipped,   setWasArmorEquipped ]  = useState( false );
@@ -78,7 +62,7 @@ export function Character(
 
   };
 
-  const onGearSlotSelect = ( event, slot ) => {
+  const onGearSlotSelect = ( slot ) => {  
 
     switch( slot ) {
 
@@ -174,7 +158,11 @@ export function Character(
                 ${ openedWeaponMenu && menuRef ? styles.openedMenu : `` }
                 
               ` }
-              onClick={ ( e ) => onGearSlotSelect( `weapons` ) }
+              onClick={ ( e ) => {
+                e.preventDefault();
+                e.stopPropagation();
+                onGearSlotSelect( `weapons` ) 
+              } }
             >
               <Icon 
                 symbol={ char.gear.weapon.symbol } 
@@ -189,7 +177,11 @@ export function Character(
                 ${ openedArmorMenu && menuRef ? styles.openedMenu : `` }
                 
               ` }
-              onClick={ ( e ) => onGearSlotSelect( `armor` ) }>
+              onClick={ ( e ) => {
+                e.preventDefault();
+                e.stopPropagation();
+                onGearSlotSelect( `armor` ) 
+              } }>
               <Icon 
                 symbol={ char.gear.armor.symbol } 
                 label={ char.gear.armor.label } 

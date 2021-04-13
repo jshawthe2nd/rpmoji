@@ -99,6 +99,7 @@ Game Menu:
     also just dispatching something like `setCharacterForEquipping()`
     ✔ How to handle <BackOption/> in the event equippingCharacter is truthy @done(21-04-02 18:14)
     ☐ Figure out how to trigger gear-slot flash when the equip UserFlow is initiated via the Character component as opposed to the Menu component(s)
+      Figure out how to do this with the new actions flow
 
 World Map: 
 
@@ -127,8 +128,9 @@ Coding:
       dispatch equip action for the given gearItem
       dispatch methods for resetting UI
   ☐ Hopefully eventually incorporate keyboard control
-  ☐ Make a `characterSelected` action in `characterActions.js` that handles all cases where the user clicks the Character after selecting an item, gear, or scroll
-  ☐ 
+  ✔ Make a `characterSelected` action in `characterActions.js` that handles all cases where the user clicks the Character after selecting an item or gear @done(21-04-13 00:42)
+  ✔ Make a `gearSlotSelected` action in `menuActions.js` that moves the component handler to dispatches this logic @done(21-04-13 00:43)
+  ☐ Need a learnSpell action 
 
 Bugfixes:
   ✔ make sure onCharacterSelect only fires when applying item not when selecting for weapon or armor @done(20-09-23 22:24)

@@ -7,13 +7,7 @@ import { Icon } from '../../icons/Icon';
 
 import { 
   selectAllArmor, 
-  selectGearToEquip, 
-  setArmorToEquip, 
-  clearGearToEquip,
-  selectEquippingCharacter,
-  removeFromInventory,
-  addToInventory,
-  equip
+  selectEquippingCharacter
 } from '../party/partySlice';
 
 import {
@@ -21,9 +15,8 @@ import {
 } from '../character/characterUtils';
 
 import {
-  selectMenuRef,
-  closeMenu
-} from '../menu/menuSlice';
+  gearSelected
+} from '../menu/menuActions';
 
 
 
@@ -32,10 +25,6 @@ export function ArmorMenu() {
   const dispatch            = useDispatch();
 
   const armors              = useSelector( selectAllArmor );
-
-  const armorToEquip        = useSelector( selectGearToEquip );
-
-  const menuRef             = useSelector( selectMenuRef );
 
   const equippingCharacter  = useSelector( selectEquippingCharacter );
 
@@ -46,47 +35,9 @@ export function ArmorMenu() {
   } );
 
 
-  const onArmorClick = ( armor ) => {
+  const onGearSlotClick   = ( armor ) => {
 
-    if( !armorToEquip ) {
-
-      if( menuRef === 'character' && equippingCharacter ) {
-        //
-        //  If the menu was originally opened from the 
-        //  character's armor slot, just equip
-        //
-
-        dispatch( equip( { 
-
-          charId: equippingCharacter, 
-          gearToEquip: armor
-
-        } ) );
-
-        dispatch( removeFromInventory( { gearItem: armor } ) );        
-
-        dispatch( addToInventory( 
-          { 
-            gearItem: { ...char.gear[ 'armor' ] } 
-          }
-        ) );
-
-        dispatch( closeMenu() );
-
-      } else {
-        //
-        //  Notify characters to receive armor
-        //
-
-        dispatch( setArmorToEquip( { armor } ) );
-
-      }  
-
-    } else {
-
-      dispatch( clearGearToEquip() );
-
-    }
+    dispatch( gearSelected( armor ) );
 
   };
 
@@ -112,7 +63,7 @@ export function ArmorMenu() {
               }
               
             ` }
-            onClick={ (e) => { onArmorClick( armor ) } }
+            onClick={ (e) => { onGearSlotClick( armor ) } }
           >
               <Icon symbol={ `gear.${ armor.type }` } label={ armor.label } />
               { armor.label } &times; { armor.qty }

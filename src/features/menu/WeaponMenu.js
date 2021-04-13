@@ -13,7 +13,8 @@ import {
   selectEquippingCharacter,
   removeFromInventory,
   addToInventory,
-  equip
+  equip,
+  setEquippingCharacter
 } from '../party/partySlice';
 
 import {
@@ -25,6 +26,10 @@ import {
   closeMenu
 } from '../menu/menuSlice';
 
+import {
+  gearSelected
+} from '../menu/menuActions';
+
 
 
 export function WeaponMenu() {
@@ -32,10 +37,6 @@ export function WeaponMenu() {
   const dispatch        = useDispatch();
 
   const weapons         = useSelector( selectAllWeapons );
-
-  const weaponToEquip   = useSelector( selectGearToEquip );
-
-  const menuRef         = useSelector( selectMenuRef );
 
   const equippingCharacter = useSelector( selectEquippingCharacter );
 
@@ -47,47 +48,9 @@ export function WeaponMenu() {
 
   
 
-  const onWeaponClick   = ( weapon ) => {
+  const onGearSlotClick   = ( weapon ) => {
 
-    if( !weaponToEquip ) {
-
-      if( menuRef === 'character' && equippingCharacter ) {
-        //
-        //  If the menu was originally opened from the 
-        //  character's weapon slot, just equip
-        //
-
-        dispatch( equip( { 
-
-          charId: equippingCharacter, 
-          gearToEquip: weapon
-
-        } ) );
-
-        dispatch( removeFromInventory( { gearItem: weapon } ) );        
-
-        dispatch( addToInventory( 
-          { 
-            gearItem: { ...char.gear[ 'weapon' ] } 
-          }
-        ) );
-
-        dispatch( closeMenu() );
-
-      } else {
-        //
-        //  Notify characters to receive weapon
-        //
-
-        dispatch( setWeaponToEquip( { weapon } ) );
-
-      }  
-
-    } else {
-
-      dispatch( clearGearToEquip() );
-
-    }
+    dispatch( gearSelected( weapon ) );
 
   };
 
@@ -110,7 +73,7 @@ export function WeaponMenu() {
             }
 
           ` } 
-          onClick={ (e) => { onWeaponClick( weapon ) } }>
+          onClick={ (e) => { onGearSlotClick( weapon ) } }>
             <Icon symbol={ weapon.symbol } label={ weapon.label } />
             { weapon.label } &times; { weapon.qty }
           </div>
