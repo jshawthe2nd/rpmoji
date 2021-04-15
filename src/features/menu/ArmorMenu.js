@@ -11,7 +11,7 @@ import {
 } from '../party/partySlice';
 
 import {
-  canGearBeEquipped
+  canTheyUseIt
 } from '../character/characterUtils';
 
 import {

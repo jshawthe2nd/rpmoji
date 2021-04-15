@@ -17,6 +17,7 @@ import { ArmorMenu } from "./ArmorMenu";
 import { ItemMenu } from "./ItemMenu";
 import { Icon } from "../../icons/Icon";
 import { BackOption } from "./BackOption";
+import { ScrollMenu } from "./ScrollMenu";
 
 const menuOptions = {
   
@@ -32,8 +33,12 @@ const menuOptions = {
     label: "Items",
     component: <ItemMenu />,
   },
+  scrolls: {
+    label: "Scrolls",
+    component: <ScrollMenu />,
+  },
 
-  entries: [ "weapons", "armor", "items" ],
+  entries: [ "weapons", "armor", "items", "scrolls" ],
 
 };
 
@@ -63,10 +68,6 @@ export function Menu() {
       dispatch( clearGearToEquip() );
 
     }
-
-
-
-
     
   };
 

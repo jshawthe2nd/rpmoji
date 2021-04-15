@@ -80,8 +80,10 @@ Game Menu:
       ☐ Scroll disappears from inventory
       ☐ Show pop up like, "${char.name} learned 'Cure'!"
     State Updates:
-      ☐ dispatch `learnSpell()`
-      ☐ 
+      ☐ dispatch `learnSpell()` action
+      ☐ if character type is Mage, proceed
+      ☐ spell information is contained in scroll
+      ☐ put spell data into `characters[ characterId ].spells[ spellId ]`
 
 
   UI Fine-tuning:

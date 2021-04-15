@@ -172,7 +172,7 @@ export const slice = createSlice({
           },
           spells: [
             {
-              type: 'ice',
+              type: 'atk',
               cost: 4,
               dmg: 8              
             },
@@ -275,8 +275,20 @@ export const slice = createSlice({
         {
           id:     801,
           name:   'Cure',
+          label:  'Cure',
           symbol: 'magic.scroll',
-          qty:    1
+          qty:    1,
+          type:   'heal',
+          power:  1
+        },
+        {
+          id:     801,
+          name:   'Fire',
+          label:  'Fire',
+          symbol: 'magic.scroll',
+          qty:    1,
+          type:   'atk',
+          power:  1
         }
       ]
     },
@@ -340,6 +352,12 @@ export const selectWeapon = ( state, action ) => {
 export const selectAllWeapons = ( state ) => {
 
   return state.party.inventory.weapon;
+
+}
+
+export const selectAllScrolls = ( state ) => {
+
+  return state.party.inventory.scroll;
 
 }
 

@@ -6,15 +6,8 @@ import styles from './Menu.module.css';
 import { Icon } from '../../icons/Icon';
 
 import { 
-  selectAllWeapons, 
-  selectGearToEquip, 
-  setWeaponToEquip, 
-  clearGearToEquip,
-  selectEquippingCharacter,
-  removeFromInventory,
-  addToInventory,
-  equip,
-  setEquippingCharacter
+  selectAllWeapons,
+  selectEquippingCharacter
 } from '../party/partySlice';
 
 import {

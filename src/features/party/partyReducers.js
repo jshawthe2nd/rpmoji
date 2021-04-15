@@ -58,6 +58,9 @@ export default {
       break;
 
       default:
+        
+        gearType = 'scroll';
+
         break;
 
     }
