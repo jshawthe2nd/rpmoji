@@ -279,7 +279,8 @@ export const slice = createSlice({
           symbol: 'magic.scroll',
           qty:    1,
           type:   'heal',
-          power:  1
+          power:  1,
+          spellSymbol: 'spell.cure'
         },
         {
           id:     801,
@@ -288,7 +289,8 @@ export const slice = createSlice({
           symbol: 'magic.scroll',
           qty:    1,
           type:   'atk',
-          power:  1
+          power:  1,
+          spellSymbol: 'spell.fire'
         }
       ]
     },

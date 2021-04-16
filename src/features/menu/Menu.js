@@ -29,16 +29,16 @@ const menuOptions = {
     label: "Armor",
     component: <ArmorMenu />,
   },
-  items: {
-    label: "Items",
-    component: <ItemMenu />,
-  },
   scrolls: {
     label: "Scrolls",
     component: <ScrollMenu />,
   },
+  items: {
+    label: "Items",
+    component: <ItemMenu />,
+  },
 
-  entries: [ "weapons", "armor", "items", "scrolls" ],
+  entries: [ "weapons", "armor", "scrolls", "items" ],
 
 };
 

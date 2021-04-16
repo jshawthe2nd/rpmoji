@@ -1,12 +1,11 @@
 .character {
   border-radius: 10px;
-  display: flex;
-  margin: 0 auto;
-  padding: 10px 0;
+  margin: 5px;
+  padding: 10px;
   background: linear-gradient(to bottom, #999 0%, #666 64%, #333 100%);
   border: 2px solid #ccc;
-  width: 95%;
-  min-height: 90px;
+  width: 94%;
+  min-height: 82px;
 }
 
 .character:not(.dimCharacter):hover {
@@ -24,12 +23,9 @@
 
 
 .charIcon {
-  display: flex;
-  width: 25%;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  width: 15%;
   position: relative;
+  float: left;
 }
 
 .charIcon span:nth-child(1) {
@@ -42,17 +38,17 @@
 
 .charIcon span:nth-child(2) {
   position: absolute;
-  top: 0px;
-  left: 2px;
+  top: -3px;
+  left: -4px;
   font-size: 16px;
 }
 
 .charDetails {
-  width: 100%;
-  margin-right: 20px;
+  width: 75%;
+  display: flex;
 }
 
-.charDetails h2 {
+.character h2 {
   font-size: 16px;
   font-weight: normal;
   margin: 0 0 5px 0;
@@ -61,7 +57,6 @@
   font-family: "Minitel";
   color: #eee;
   text-shadow: 1px 1px 1px #111;
-  flex: 1;
   letter-spacing: -2px;
 }
 
@@ -86,13 +81,13 @@
   text-align: left;
   color: #eee;
 
-  width: 80%;
+  width: 90%;
 }
 
 .mainCharStats div span {
   padding: 3px 0;
   display: inline-block;
-  font-size: 12px;
+  font-size: 10px;
   text-shadow: 1px 1px 1px #111;
 }
 
@@ -101,12 +96,7 @@
 }
 
 .gear {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  margin-top: -10px;
-  width: 50%;
-
+  margin-top: -15px;
 }
 
 .gear div {
@@ -117,6 +107,7 @@
   cursor: pointer;
   text-align: left;
   position: relative;
+  color: #eee;
 }
 
 .gear div:hover::after {
@@ -125,28 +116,31 @@
   top: -4px;
   content: '👉';
   font-size: 16px;
-  text-shadow: 1px 1px 1px #222;
+  text-shadow: 1px 1px 1px #111;
 }
 
 
 .gear div:first-child {
-  margin-bottom: 10px;
-  height: 24px;
+  margin-bottom: 5px;
   line-height: 24px;
   margin-top: -4px;
 }
 
-.gear div:last-child {
+.gear div:nth-child(2):not(:last-child) {
   margin-top: 10px;
-  height: 24px;
+  margin-bottom: 10px;
+}
+
+.gear div:last-child {
+  margin-top: 5px;
   line-height: 24px;
 }
 
 .gear div span {
   margin-right: 10px;
   margin-top: -3px;
-  font-size: 20px;
-  text-shadow: 1px 1px 1px #333;
+  font-size: 16px;
+  text-shadow: 1px 1px 1px #111;
 }
 
 .applyingToChar .gear div:hover::after {
@@ -155,7 +149,8 @@
 }
 
 .weapon,
-.armor {
+.armor,
+.spells {
 
   color: #eee;  
   text-shadow: 1px 1px 1px #111;

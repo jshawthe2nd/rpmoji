@@ -211,7 +211,8 @@ export const learnSpell = ( characterId, scroll ) => {
         const character = state.characters[ characterId ];
 
         const spell = {
-            ...scroll
+            ...scroll,
+            symbol: spell.spellSymbol
         };
 
         switch( scroll.type ) {
@@ -228,9 +229,7 @@ export const learnSpell = ( characterId, scroll ) => {
 
             break;
 
-        }
-
-        
+        }    
 
         character.spells.push( spell );
 

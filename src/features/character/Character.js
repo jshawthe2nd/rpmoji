@@ -112,6 +112,9 @@ export function Character(
 
       onClick={ onCharacterSelect }
     >
+      <h2>
+          {char.name} L.<span>{ char.stats.level.current }</span>
+        </h2>
       <div className={ styles.charIcon }>
         <Icon
           symbol={ getCharacterSymbolPath( char ) }
@@ -126,9 +129,7 @@ export function Character(
         ) }
       </div>
       <div className={ styles.charDetails }>
-        <h2>
-          {char.name} L.<span>{ char.stats.level.current }</span>
-        </h2>
+        
 
         <div className={ styles.charStats }>
           <div className={ styles.mainCharStats }>
@@ -187,6 +188,22 @@ export function Character(
                 label={ char.gear.armor.label } 
               /> { char.gear.armor.label }
             </div>
+            { char.charType === 2 && ( <div
+              className={ `
+
+                ${ styles.spells }
+                
+              ` }
+              onClick={ ( e ) => {
+                e.preventDefault();
+                e.stopPropagation();
+                onGearSlotSelect( `spells` ) 
+              } }>
+              <Icon 
+                symbol={ `magic.scroll` } 
+                label={ `Spells` } 
+              /> Spells
+            </div> ) }
           </div>
         </div>
       </div>
