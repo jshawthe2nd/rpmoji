@@ -102,6 +102,13 @@ Game Menu:
     ✔ How to handle <BackOption/> in the event equippingCharacter is truthy @done(21-04-02 18:14)
     ☐ Figure out how to trigger gear-slot flash when the equip UserFlow is initiated via the Character component as opposed to the Menu component(s)
       Figure out how to do this with the new actions flow
+    Setup interaction with `Spells` menu to open that character's list of learned spells into the `<Menu/>` component:
+      ☐ wire up `onGearSlotSelect()` for spells
+        - create `<SpellMenu/>` component
+        - Gets a character reference (equippingCharacter?)
+        - `<SpellMenu/>` renders list of spells in char
+        - Spell items have click handler
+          Maybe need a new party state - `party.castingSpell`
 
 World Map: 
 
