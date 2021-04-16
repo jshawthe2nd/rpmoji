@@ -76,14 +76,14 @@ Game Menu:
 
   Scroll/Spell Equip:
     UI Updates:
-      ☐ Mostly same as weapons & armor but probably need something a lil different
-      ☐ Scroll disappears from inventory
+      ✔ Mostly same as weapons & armor but probably need something a lil different @done(21-04-16 09:29)
+      ✔ Scroll disappears from inventory @done(21-04-16 09:29)
       ☐ Show pop up like, "${char.name} learned 'Cure'!"
     State Updates:
-      ☐ dispatch `learnSpell()` action
-      ☐ if character type is Mage, proceed
-      ☐ spell information is contained in scroll
-      ☐ put spell data into `characters[ characterId ].spells[ spellId ]`
+      ✔ dispatch `learnSpell()` action @done(21-04-16 09:29)
+      ✔ if character type is Mage, proceed @done(21-04-16 09:29)
+      ✔ spell information is contained in scroll @done(21-04-16 09:29)
+      ✔ put spell data into `characters[ characterId ].spells[ spellId ]` @done(21-04-16 09:29)
 
 
   UI Fine-tuning:
@@ -132,7 +132,7 @@ Coding:
   ☐ Hopefully eventually incorporate keyboard control
   ✔ Make a `characterSelected` action in `characterActions.js` that handles all cases where the user clicks the Character after selecting an item or gear @done(21-04-13 00:42)
   ✔ Make a `gearSlotSelected` action in `menuActions.js` that moves the component handler to dispatches this logic @done(21-04-13 00:43)
-  ☐ Need a learnSpell action 
+  ✔ Need a learnSpell action @done(21-04-16 09:30)
 
 Bugfixes:
   ✔ make sure onCharacterSelect only fires when applying item not when selecting for weapon or armor @done(20-09-23 22:24)
