@@ -212,7 +212,7 @@ export const learnSpell = ( characterId, scroll ) => {
 
         const spell = {
             ...scroll,
-            symbol: spell.spellSymbol
+            symbol: scroll.spellSymbol
         };
 
         switch( scroll.type ) {
@@ -228,6 +228,8 @@ export const learnSpell = ( characterId, scroll ) => {
                 spell.atk = Math.floor( character.stats.level.current * 10 + ( character.stats.level.current + scroll.power ) );
 
             break;
+            default:
+                return;
 
         }    
 

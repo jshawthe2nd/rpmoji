@@ -14,10 +14,6 @@ import {
   canTheyUseIt
 } from '../character/characterUtils';
 
-import {
-  selectMenuRef,
-  closeMenu
-} from '../menu/menuSlice';
 
 import {
   gearSelected

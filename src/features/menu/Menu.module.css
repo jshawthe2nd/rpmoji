@@ -99,3 +99,26 @@
 .dimItem {
   opacity: 0.6;
 }
+
+.spellMenu {
+  text-align: left;
+  padding: 10px;
+  min-width: 25%;
+  border-radius: 10px;
+  background: linear-gradient(to bottom, #999 0%, #666 64%, #333 100%);
+  border: 2px solid #ccc;
+  font-family: "Minitel";
+  color: #eee;
+  text-shadow: 1px 1px 1px #111;
+  letter-spacing: -4px;
+  margin: 3px 5px 3px 0;
+  position: absolute;
+  bottom: 30px;
+  right: 10px;
+}
+
+.spellMenu .subMenuOption {
+
+  margin: 0;
+
+}

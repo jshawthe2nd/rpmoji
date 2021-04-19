@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Icon } from "../../icons/Icon";
 
+import { SpellMenu } from '../menu/SpellMenu';
+
 import { openMenu } from "../menu/menuSlice";
 
 import {
@@ -55,6 +57,10 @@ export function Character(
   const [ openedWeaponMenu,   setOpenedWeaponMenu ]  = useState( false );
 
   const [ openedArmorMenu,    setOpenedArmorMenu ]   = useState( false );
+
+  const [ openedSpellsMenu,   setOpenedSpellsMenu ]  = useState( false );
+
+  const [ castingCharacter,   setCastingCharacter ]  = useState( { } );
 
   const onCharacterSelect = ( event ) => {
 
@@ -197,16 +203,20 @@ export function Character(
               onClick={ ( e ) => {
                 e.preventDefault();
                 e.stopPropagation();
-                onGearSlotSelect( `spells` ) 
+                setOpenedSpellsMenu( true );
+                setCastingCharacter( char );
               } }>
               <Icon 
                 symbol={ `magic.scroll` } 
                 label={ `Spells` } 
               /> Spells
             </div> ) }
+            
           </div>
         </div>
       </div>
+      <SpellMenu spells={ [] } />
     </div>
+    
   );
 }

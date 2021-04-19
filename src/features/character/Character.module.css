@@ -6,6 +6,7 @@
   border: 2px solid #ccc;
   width: 94%;
   min-height: 82px;
+  position: relative;
 }
 
 .character:not(.dimCharacter):hover {
