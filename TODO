@@ -110,6 +110,11 @@ Game Menu:
         - `<SpellMenu/>` renders list of spells in char (in progress)
         - Spell items have click handler
           Maybe need a new party state - `party.castingSpell`
+          STATE - 
+          Only showing cure type spells, can open menu per Mage, can click the Spell in the SpellMenu, and change state. Next is to have Characters
+          indicate if they can accept the spell and dim accordingly.
+          Then do the actual heal and reset the state. 
+          Also need to check the castingCharacter's MP to see if they have the MP to cast the spell
         
           
 

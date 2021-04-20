@@ -60,9 +60,11 @@ export function Character(
 
   const [ openedSpellsMenu,   setOpenedSpellsMenu ]  = useState( false );
 
-  const [ castingCharacter,   setCastingCharacter ]  = useState( { } );
+  const [ castingCharacter,   setCastingCharacter ]  = useState( 0 );
 
   const onCharacterSelect = ( event ) => {
+
+    if( castingCharacter ) return;
 
     dispatch( characterSelected( charId, {} ) );  
 
@@ -111,6 +113,11 @@ export function Character(
         ${
           itemToUse && doesItemApplyToChar
             ? styles.applyingToChar
+            : ``
+        }
+        ${
+          castingCharacter === char.id 
+            ? styles.characterIsCasting 
             : ``
         }
 
@@ -203,8 +210,8 @@ export function Character(
               onClick={ ( e ) => {
                 e.preventDefault();
                 e.stopPropagation();
-                setOpenedSpellsMenu( true );
-                setCastingCharacter( char );
+                setOpenedSpellsMenu( !openedSpellsMenu );
+                setCastingCharacter( char.id );
               } }>
               <Icon 
                 symbol={ `magic.scroll` } 
@@ -215,7 +222,7 @@ export function Character(
           </div>
         </div>
       </div>
-      <SpellMenu spells={ [] } />
+      { char.id === castingCharacter && openedSpellsMenu && <SpellMenu spells={ char.gear.spells } /> }
     </div>
     
   );

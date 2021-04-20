@@ -164,6 +164,12 @@ export default {
 
     state.equippingCharacter = action.payload.charId;
 
+  },
+
+  setCastingSpell: ( state, action ) => {
+
+    state.castingSpell = action.payload.spell;
+
   }
   
 }

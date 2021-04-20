@@ -21,7 +21,9 @@
 }
 
 
-
+.character.characterIsCasting {
+  background: linear-gradient(to bottom, #999 0%, #666 64%, rgb(28, 18, 37) 100%);
+}
 
 .charIcon {
   width: 15%;

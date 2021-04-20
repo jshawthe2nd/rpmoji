@@ -113,7 +113,7 @@
   letter-spacing: -4px;
   margin: 3px 5px 3px 0;
   position: absolute;
-  bottom: 30px;
+  bottom: 35px;
   right: 10px;
 }
 
@@ -121,4 +121,12 @@
 
   margin: 0;
 
+}
+
+.spellMenu .castThisSpell::before {
+  position: absolute;
+  left: -8px;
+  top: -4px;
+  content: '👉';
+  text-shadow: 1px 1px 1px #222;
 }

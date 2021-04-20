@@ -120,16 +120,20 @@ export const slice = createSlice({
           },
           spells: [
             {
-              type: 'ice',
+              type: 'atk',
               cost: 4,
-              dmg: 8              
+              dmg: 8,
+              label: 'Ice',
+              symbol: 'spell.ice'         
             },
             {
               type: 'cure',
               cost: 6,
               // possible formula for calculating heal:
               // (level * 10 / 2) + (cost / 2) 
-              heal: ((1 * 10 /2 ) + (6 / 2)) + (Math.floor(Math.random() * Math.floor((1 * 10 / 2))))
+              heal: ((1 * 10 /2 ) + (6 / 2)) + (Math.floor(Math.random() * Math.floor((1 * 10 / 2)))),
+              label: 'Cure',
+              symbol: 'spell.cure'
             }
           ]
         },
@@ -174,14 +178,18 @@ export const slice = createSlice({
             {
               type: 'atk',
               cost: 4,
-              dmg: 8              
+              dmg: 8,
+              label: 'Fire',
+              symbol: 'spell.fire'         
             },
             {
               type: 'cure',
               cost: 6,
               // possible formula for calculating heal:
               // (level * 10 / 2) + (cost / 2) 
-              heal: ((1 * 10 /2 ) + (6 / 2)) + (Math.floor(Math.random() * Math.floor((1 * 10 / 2))))
+              heal: ((1 * 10 /2 ) + (6 / 2)) + (Math.floor(Math.random() * Math.floor((1 * 10 / 2)))),
+              label: 'Cure',
+              symbol: 'spell.cure'
             }
           ]
         },
@@ -299,7 +307,8 @@ export const slice = createSlice({
     applyingItem: false,
     gearToEquip: null,
     equippingCharacter: null,
-    selectedItem: null
+    selectedItem: null,
+    castingSpell: null
   },
   reducers: {
     ...partyReducers,
@@ -325,7 +334,8 @@ export const {
   setEquippingCharacter,
   selectCharacter,
   equip,
-  learnSpell
+  learnSpell,
+  setCastingSpell
 } = slice.actions;
 
 export const selectInventory = ( state ) => state.party.inventory;
