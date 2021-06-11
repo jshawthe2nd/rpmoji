@@ -6,8 +6,7 @@ import {
     recoverMP,
     clearStatus,
     addToInventory,
-    removeFromInventory,
-    learnSpell
+    removeFromInventory
 } from '../party/partySlice';
 
 import {
@@ -169,8 +168,6 @@ const equipGear = ( id, gear ) => {
 
     return ( dispatch, getState ) => {
 
-        
-
         const state = getState().party;
 
         const character = { ...state.characters[ id ] };
@@ -194,6 +191,51 @@ const equipGear = ( id, gear ) => {
             }
 
         ) );
+
+    }
+
+}
+
+
+/**
+ * 
+ * 
+ */
+
+export const learnSpell = ( characterId, scroll ) => {
+
+    return( dispatch, getState ) => {
+
+        const state = getState().party;
+
+        const character = state.characters[ characterId ];
+
+        const spell = {
+            ...scroll,
+            symbol: scroll.spellSymbol
+        };
+
+        switch( scroll.type ) {
+
+            case 'heal':
+
+                spell.heal = Math.floor( ( character.stats.level.current * 10 ) / 2 ) + ( character.stats.level.current + scroll.power );
+
+            break;
+
+            case 'atk':
+
+                spell.atk = Math.floor( character.stats.level.current * 10 + ( character.stats.level.current + scroll.power ) );
+
+            break;
+            default:
+                return;
+
+        }    
+
+        character.spells.push( spell );
+
+        dispatch( removeFromInventory( scroll ) );
 
     }
 

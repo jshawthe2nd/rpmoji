@@ -11,7 +11,7 @@ import {
 } from '../party/partySlice';
 
 import {
-  canGearBeEquipped
+  canTheyUseIt
 } from '../character/characterUtils';
 
 import {
@@ -48,7 +48,7 @@ export function ArmorMenu() {
 
       { armors.map( ( armor, index ) => {
 
-        const canEquip = canGearBeEquipped( char, armor );
+        const canEquip = canTheyUseIt( char, armor );
 
         return (
           <div 

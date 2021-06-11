@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Icon } from "../../icons/Icon";
 
+import { SpellMenu } from '../menu/SpellMenu';
+
 import { openMenu } from "../menu/menuSlice";
 
 import {
@@ -56,7 +58,13 @@ export function Character(
 
   const [ openedArmorMenu,    setOpenedArmorMenu ]   = useState( false );
 
+  const [ openedSpellsMenu,   setOpenedSpellsMenu ]  = useState( false );
+
+  const [ castingCharacter,   setCastingCharacter ]  = useState( 0 );
+
   const onCharacterSelect = ( event ) => {
+
+    if( castingCharacter ) return;
 
     dispatch( characterSelected( charId, {} ) );  
 
@@ -107,11 +115,19 @@ export function Character(
             ? styles.applyingToChar
             : ``
         }
+        ${
+          castingCharacter === char.id 
+            ? styles.characterIsCasting 
+            : ``
+        }
 
       ` }
 
       onClick={ onCharacterSelect }
     >
+      <h2>
+          {char.name} L.<span>{ char.stats.level.current }</span>
+        </h2>
       <div className={ styles.charIcon }>
         <Icon
           symbol={ getCharacterSymbolPath( char ) }
@@ -126,9 +142,7 @@ export function Character(
         ) }
       </div>
       <div className={ styles.charDetails }>
-        <h2>
-          {char.name} L.<span>{ char.stats.level.current }</span>
-        </h2>
+        
 
         <div className={ styles.charStats }>
           <div className={ styles.mainCharStats }>
@@ -187,9 +201,29 @@ export function Character(
                 label={ char.gear.armor.label } 
               /> { char.gear.armor.label }
             </div>
+            { char.charType === 2 && ( <div
+              className={ `
+
+                ${ styles.spells }
+                
+              ` }
+              onClick={ ( e ) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setOpenedSpellsMenu( !openedSpellsMenu );
+                setCastingCharacter( char.id );
+              } }>
+              <Icon 
+                symbol={ `magic.scroll` } 
+                label={ `Spells` } 
+              /> Spells
+            </div> ) }
+            
           </div>
         </div>
       </div>
+      { char.id === castingCharacter && openedSpellsMenu && <SpellMenu spells={ char.gear.spells } /> }
     </div>
+    
   );
 }

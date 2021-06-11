@@ -6,7 +6,7 @@ import styles from './Menu.module.css';
 import { Icon } from '../../icons/Icon';
 
 import { 
-  selectAllWeapons,
+  selectAllScrolls,
   selectEquippingCharacter
 } from '../party/partySlice';
 
@@ -14,18 +14,17 @@ import {
   canTheyUseIt
 } from '../character/characterUtils';
 
-
 import {
   gearSelected
 } from '../menu/menuActions';
 
 
 
-export function WeaponMenu() {
+export function ScrollMenu() {
 
   const dispatch        = useDispatch();
 
-  const weapons         = useSelector( selectAllWeapons );
+  const scrolls         = useSelector( selectAllScrolls );
 
   const equippingCharacter = useSelector( selectEquippingCharacter );
 
@@ -35,20 +34,18 @@ export function WeaponMenu() {
 
   } );
 
-  
+  const onGearSlotClick   = ( scroll ) => {
 
-  const onGearSlotClick   = ( weapon ) => {
-
-    dispatch( gearSelected( weapon ) );
+    dispatch( gearSelected( scroll ) );
 
   };
 
 
   return (
     <div>
-      { weapons.map( ( weapon, index ) => {
+      { scrolls.map( ( scroll, index ) => {
 
-        const canEquip = canTheyUseIt( char, weapon );
+        const canLearn = canTheyUseIt( char, scroll );
 
         return (
           <div key={ index } 
@@ -56,15 +53,15 @@ export function WeaponMenu() {
           
             ${ styles.subMenuOption }
             ${
-              equippingCharacter && !canEquip
+              equippingCharacter && !canLearn
                 ? styles.dimItem
                 : ``
             }
 
           ` } 
-          onClick={ (e) => { onGearSlotClick( weapon ) } }>
-            <Icon symbol={ weapon.symbol } label={ weapon.label } />
-            { weapon.label } &times; { weapon.qty }
+          onClick={ (e) => { onGearSlotClick( scroll ) } }>
+            <Icon symbol={ scroll.symbol } label={ scroll.label } />
+            { scroll.label } &times; { scroll.qty }
           </div>
         )
       } ) }

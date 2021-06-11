@@ -121,12 +121,12 @@ function getSymbol( symbolPath ) {
     .reduce( ( o, i ) => o[ i ], symbols ) : ``;
 }
 
-export function Icon( { symbol, label, cssClass, status = false } ) {
+export function Icon( { symbol, label, cssClass = ``, status = false } ) {
   return (
     <span
       className={ `icon 
         ${ getSymbol( symbol ) } 
-        ${ ( status ) ? `status` : `` } 
+        ${ ( status ) ? status : `` } 
         ${ cssClass }`
       }
       role="img"

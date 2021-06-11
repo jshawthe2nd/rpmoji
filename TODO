@@ -76,12 +76,14 @@ Game Menu:
 
   Scroll/Spell Equip:
     UI Updates:
-      ☐ Mostly same as weapons & armor but probably need something a lil different
-      ☐ Scroll disappears from inventory
+      ✔ Mostly same as weapons & armor but probably need something a lil different @done(21-04-16 09:29)
+      ✔ Scroll disappears from inventory @done(21-04-16 09:29)
       ☐ Show pop up like, "${char.name} learned 'Cure'!"
     State Updates:
-      ☐ dispatch `learnSpell()`
-      ☐ 
+      ✔ dispatch `learnSpell()` action @done(21-04-16 09:29)
+      ✔ if character type is Mage, proceed @done(21-04-16 09:29)
+      ✔ spell information is contained in scroll @done(21-04-16 09:29)
+      ✔ put spell data into `characters[ characterId ].spells[ spellId ]` @done(21-04-16 09:29)
 
 
   UI Fine-tuning:
@@ -100,6 +102,21 @@ Game Menu:
     ✔ How to handle <BackOption/> in the event equippingCharacter is truthy @done(21-04-02 18:14)
     ☐ Figure out how to trigger gear-slot flash when the equip UserFlow is initiated via the Character component as opposed to the Menu component(s)
       Figure out how to do this with the new actions flow
+    Setup interaction with `Spells` menu to open that character's list of learned spells into the `<Menu/>` component:
+      Should we use main Menu component? Or make a new special one that opens above the slot? Should we do the same for all 3? Probably.
+      ☐ wire up `onSpellClick()` for spells
+        - create `<SpellMenu/>` component (in progress)
+        - Gets a character reference (equippingCharacter?)
+        - `<SpellMenu/>` renders list of spells in char (in progress)
+        - Spell items have click handler
+          Maybe need a new party state - `party.castingSpell`
+          STATE - 
+          Only showing cure type spells, can open menu per Mage, can click the Spell in the SpellMenu, and change state. Next is to have Characters
+          indicate if they can accept the spell and dim accordingly.
+          Then do the actual heal and reset the state. 
+          Also need to check the castingCharacter's MP to see if they have the MP to cast the spell
+        
+          
 
 World Map: 
 
@@ -130,7 +147,7 @@ Coding:
   ☐ Hopefully eventually incorporate keyboard control
   ✔ Make a `characterSelected` action in `characterActions.js` that handles all cases where the user clicks the Character after selecting an item or gear @done(21-04-13 00:42)
   ✔ Make a `gearSlotSelected` action in `menuActions.js` that moves the component handler to dispatches this logic @done(21-04-13 00:43)
-  ☐ Need a learnSpell action 
+  ✔ Need a learnSpell action @done(21-04-16 09:30)
 
 Bugfixes:
   ✔ make sure onCharacterSelect only fires when applying item not when selecting for weapon or armor @done(20-09-23 22:24)

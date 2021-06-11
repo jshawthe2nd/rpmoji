@@ -58,6 +58,9 @@ export default {
       break;
 
       default:
+        
+        gearType = 'scroll';
+
         break;
 
     }
@@ -160,6 +163,12 @@ export default {
   setEquippingCharacter: ( state, action ) => {
 
     state.equippingCharacter = action.payload.charId;
+
+  },
+
+  setCastingSpell: ( state, action ) => {
+
+    state.castingSpell = action.payload.spell;
 
   }
   
