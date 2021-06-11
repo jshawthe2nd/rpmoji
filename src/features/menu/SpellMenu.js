@@ -14,9 +14,7 @@ export function SpellMenu( { spells } ) {
 
   const [ spellToCast, setSpellToCast ] = useState( { } );
 
-  const onSpellClick   = ( spell ) => {
-
-    
+  const onSpellClick   = ( spell ) => {  
 
     dispatch( setCastingSpell( { spell } ) );
 
