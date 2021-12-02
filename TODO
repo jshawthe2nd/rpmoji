@@ -105,16 +105,18 @@ Game Menu:
     Setup interaction with `Spells` menu to open that character's list of learned spells into the `<Menu/>` component:
       Should we use main Menu component? Or make a new special one that opens above the slot? Should we do the same for all 3? Probably.
       ☐ wire up `onSpellClick()` for spells
-        - create `<SpellMenu/>` component (in progress)
-        - Gets a character reference (equippingCharacter?)
-        - `<SpellMenu/>` renders list of spells in char (in progress)
-        - Spell items have click handler
+        ✔ create `<SpellMenu/>` component (in progress) @done(21-12-02 11:06)
+        ✔ Gets a character reference (equippingCharacter?) @done(21-12-02 11:06)
+        ✔ `<SpellMenu/>` renders list of spells in char (in progress) @done(21-12-02 11:06)
+        ✔ Spell items have click handler @done(21-12-02 11:06)
           Maybe need a new party state - `party.castingSpell`
           STATE - 
           Only showing cure type spells, can open menu per Mage, can click the Spell in the SpellMenu, and change state. Next is to have Characters
           indicate if they can accept the spell and dim accordingly.
           Then do the actual heal and reset the state. 
-          Also need to check the castingCharacter's MP to see if they have the MP to cast the spell
+          Also need to check the castingCharacter's MP to see if they have the MP to cast the spells
+        - dispatch appropriate action(s)
+        - update characterActions::checkCharacter to handle spellcasting
         
           
 

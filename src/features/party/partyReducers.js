@@ -168,7 +168,9 @@ export default {
 
   setCastingSpell: ( state, action ) => {
 
-    state.castingSpell = action.payload.spell;
+    state.activeSpell = action.payload.spell;
+
+    state.castingSpell = true;
 
   }
   

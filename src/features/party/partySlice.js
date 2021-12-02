@@ -124,7 +124,8 @@ export const slice = createSlice({
               cost: 4,
               dmg: 8,
               label: 'Ice',
-              symbol: 'spell.ice'         
+              symbol: 'spell.ice',
+              all: false         
             },
             {
               type: 'cure',
@@ -133,7 +134,8 @@ export const slice = createSlice({
               // (level * 10 / 2) + (cost / 2) 
               heal: ((1 * 10 /2 ) + (6 / 2)) + (Math.floor(Math.random() * Math.floor((1 * 10 / 2)))),
               label: 'Cure',
-              symbol: 'spell.cure'
+              symbol: 'spell.cure',
+              all: false
             }
           ]
         },
@@ -180,7 +182,8 @@ export const slice = createSlice({
               cost: 4,
               dmg: 8,
               label: 'Fire',
-              symbol: 'spell.fire'         
+              symbol: 'spell.fire',
+              all: false         
             },
             {
               type: 'cure',
@@ -189,7 +192,8 @@ export const slice = createSlice({
               // (level * 10 / 2) + (cost / 2) 
               heal: ((1 * 10 /2 ) + (6 / 2)) + (Math.floor(Math.random() * Math.floor((1 * 10 / 2)))),
               label: 'Cure',
-              symbol: 'spell.cure'
+              symbol: 'spell.cure',
+              all: false
             }
           ]
         },
@@ -288,7 +292,8 @@ export const slice = createSlice({
           qty:    1,
           type:   'heal',
           power:  1,
-          spellSymbol: 'spell.cure'
+          spellSymbol: 'spell.cure',
+          all:    false
         },
         {
           id:     801,
@@ -298,7 +303,8 @@ export const slice = createSlice({
           qty:    1,
           type:   'atk',
           power:  1,
-          spellSymbol: 'spell.fire'
+          spellSymbol: 'spell.fire',
+          all:    false
         }
       ]
     },

@@ -73,41 +73,64 @@ export const characterSelected = ( characterId ) => {
 
         const state = getState().party;
 
-        const selectedItem = state.activeItem;
-
         const character = state.characters[ characterId ];
 
-        switch( getTypeOfItem( selectedItem ) ) {
+        console.log(state);
 
-            case `item`:
+        switch( determinePartyAction( state ) ) {
 
-                dispatch( useItem( character ) );
+            // using item
+            case 1:
 
-                dispatch( checkCharacter( 
+                const selectedItem = state.activeItem;
 
-                    characterId, 
-                    selectedItem
+                switch( getTypeOfItem( selectedItem ) ) {
 
-                ) );
-            
+                    case `item`:
+        
+                        dispatch( useItem( character ) );
+        
+                        dispatch( checkCharacter( 
+        
+                            characterId, 
+                            selectedItem
+        
+                        ) );
+                    
+                    break;
+        
+                    case `gear`:
+        
+                        dispatch( equipGear( characterId, selectedItem ) );
+        
+                    break;
+        
+                    case `magic`:
+        
+                        dispatch( learnSpell( {
+        
+                            char: character,
+                            scroll: selectedItem
+        
+                        } ) );
+        
+                        dispatch( removeFromInventory( { gearItem: selectedItem } ) );
+        
+                    break;
+        
+                    default:
+                        return;
+        
+                }
+        
+                dispatch( deactivateItem() );
+
             break;
 
-            case `gear`:
+            //casting spell
+            case 2:
 
-                dispatch( equipGear( characterId, selectedItem ) );
-
-            break;
-
-            case `magic`:
-
-                dispatch( learnSpell( {
-
-                    char: character,
-                    scroll: selectedItem
-
-                } ) );
-
-                dispatch( removeFromInventory( { gearItem: selectedItem } ) );
+                
 
             break;
 
@@ -115,8 +138,6 @@ export const characterSelected = ( characterId ) => {
                 return;
 
         }
-
-        dispatch( deactivateItem() );
 
     }
 
@@ -236,6 +257,22 @@ export const learnSpell = ( characterId, scroll ) => {
         character.spells.push( spell );
 
         dispatch( removeFromInventory( scroll ) );
+
+    }
+
+}
+
+const determinePartyAction = ( state ) => {
+
+    if( state.applyingItem || state.gearToEquip !== null ) {
+
+        return 1;
+
+    }
+    
+    if( state.castingSpell ) {
+
+        return 2;
 
     }
 
