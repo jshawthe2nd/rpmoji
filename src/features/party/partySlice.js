@@ -129,6 +129,7 @@ export const slice = createSlice({
             },
             {
               type: 'cure',
+              stat: 'hp',
               cost: 6,
               // possible formula for calculating heal:
               // (level * 10 / 2) + (cost / 2) 
@@ -187,6 +188,7 @@ export const slice = createSlice({
             },
             {
               type: 'cure',
+              stat: 'hp',
               cost: 6,
               // possible formula for calculating heal:
               // (level * 10 / 2) + (cost / 2) 
@@ -314,7 +316,9 @@ export const slice = createSlice({
     gearToEquip: null,
     equippingCharacter: null,
     selectedItem: null,
-    castingSpell: null
+    castingSpell: false,
+    activeSpell: null,
+    castingCharacter: null
   },
   reducers: {
     ...partyReducers,
@@ -332,6 +336,8 @@ export const {
   setApplyItem,
   recoverHP,
   recoverMP,
+  reduceHP,
+  reduceMP,
   clearStatus,
   setWeaponToEquip,
   setArmorToEquip,
@@ -341,7 +347,8 @@ export const {
   selectCharacter,
   equip,
   learnSpell,
-  setCastingSpell
+  setCastingSpell,
+  deactivateSpell
 } = slice.actions;
 
 export const selectInventory = ( state ) => state.party.inventory;

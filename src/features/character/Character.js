@@ -222,7 +222,7 @@ export function Character(
           </div>
         </div>
       </div>
-      { char.id === castingCharacter && openedSpellsMenu && <SpellMenu spells={ char.gear.spells } /> }
+      { char.id === castingCharacter && openedSpellsMenu && <SpellMenu spells={ char.gear.spells } character={ char.id } /> }
     </div>
     
   );

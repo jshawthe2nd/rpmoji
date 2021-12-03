@@ -116,7 +116,7 @@ Game Menu:
           Then do the actual heal and reset the state. 
           Also need to check the castingCharacter's MP to see if they have the MP to cast the spells
         - dispatch appropriate action(s)
-        - update characterActions::checkCharacter to handle spellcasting
+        - update characterActions::checkCharacter to handle spellcasting by using determineCharacterAction
         
           
 

@@ -136,6 +136,14 @@ export default {
     
   },
 
+  deactivateSpell: ( state, action ) => {
+
+    state.activeSpell = null;
+    state.castingSpell = false;
+
+
+  },
+
   setApplyItem: ( state, action ) => {
 
     state.applyingItem = action.payload.applying;
@@ -171,6 +179,8 @@ export default {
     state.activeSpell = action.payload.spell;
 
     state.castingSpell = true;
+
+    state.castingCharacter = action.payload.spellCasterId;
 
   }
   

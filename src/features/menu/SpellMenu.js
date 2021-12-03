@@ -8,7 +8,7 @@ import { setCastingSpell } from '../party/partySlice';
 
 
 
-export function SpellMenu( { spells } ) {
+export function SpellMenu( { spells, spellCasterId } ) {
 
   const dispatch        = useDispatch();
 
@@ -16,7 +16,7 @@ export function SpellMenu( { spells } ) {
 
   const onSpellClick   = ( spell ) => {  
 
-    dispatch( setCastingSpell( { spell } ) );
+    dispatch( setCastingSpell( { spell, spellCasterId } ) );
 
     setSpellToCast( spell );
 

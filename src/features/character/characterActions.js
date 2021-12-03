@@ -1,9 +1,12 @@
 import {
     decrementItemQty,
     deactivateItem,
+    deactivateSpell,
     equip,
     recoverHP,
     recoverMP,
+    reduceHP,
+    reduceMP,
     clearStatus,
     addToInventory,
     removeFromInventory
@@ -17,7 +20,7 @@ import {
     checkItem
 } from '../party/partyActions';
 
-export const checkCharacter = ( charId, itemUsed ) => {
+export const checkCharacter = ( charId, healer ) => {
     
     return( dispatch, getState ) => {
 
@@ -25,44 +28,80 @@ export const checkCharacter = ( charId, itemUsed ) => {
 
         const char = state.characters[ charId ];
 
-        switch( itemUsed.label ) {
+        switch( determineCharacterAction( state ) ) {
 
-            case `Potion`:
+            case 1:
 
-                if( char.stats.hp.current === char.stats.hp.max ) {
+                switch( healer.label ) {
 
-                    dispatch( deactivateItem() );
-
+                    case `Potion`:
+        
+                        if( char.stats.hp.current === char.stats.hp.max ) {
+        
+                            dispatch( deactivateItem() );
+        
+                        }
+        
+                    break;
+        
+                    case `Ether`:
+        
+                        if( char.stats.mp.current === char.stats.mp.max ) {
+        
+                            dispatch( deactivateItem() );
+        
+                        }
+        
+                    break;
+        
+                    case `Antidote`:
+                    case `Elixir`:
+        
+                        if( !char.status ) {
+        
+                            dispatch( deactivateItem() );
+        
+                        }
+        
+                    break;
+        
+                    default:
+        
+                    return;
+        
                 }
 
             break;
 
-            case `Ether`:
+            case 2:
 
-                if( char.stats.mp.current === char.stats.mp.max ) {
+                switch( healer.type ) {
 
-                    dispatch( deactivateItem() );
+                    case 'cure':
 
-                }
+                        const stat = healer.stat;
 
-            break;
+                        if( char.stats[stat].current === char.stats[stat].max ) {
+        
+                            dispatch( deactivateSpell() );
+        
+                        }
 
-            case `Antidote`:
-            case `Elixir`:
+                    break;
 
-                if( !char.status ) {
-
-                    dispatch( deactivateItem() );
+                    default:
+                        return;
 
                 }
 
             break;
 
             default:
-
-            return;
+                return;
 
         }
+
+        
 
     };
 }
@@ -77,7 +116,7 @@ export const characterSelected = ( characterId ) => {
 
         console.log(state);
 
-        switch( determinePartyAction( state ) ) {
+        switch( determineCharacterAction( state ) ) {
 
             // using item
             case 1:
@@ -130,7 +169,9 @@ export const characterSelected = ( characterId ) => {
             //casting spell
             case 2:
 
-                
+                dispatch( castSpell( character.id, null ) );
+
+                dispatch( deactivateSpell() );
 
             break;
 
@@ -262,7 +303,36 @@ export const learnSpell = ( characterId, scroll ) => {
 
 }
 
-const determinePartyAction = ( state ) => {
+export const castSpell = ( target, caster ) => {
+
+    return( dispatch, getState ) => {
+
+        const state = getState().party;
+
+        const character = state.characters[ target ];
+
+        const stat = state.activeSpell.stat;
+
+        const recoverySpell = 'recover' + stat.toUpperCase();
+
+        switch( stat ) {
+
+            case 'hp':
+
+                dispatch( recoverHP( { charId: character.id } ) );
+
+            break;
+
+        }
+
+        dispatch( reduceMP( { charId: caster.id } ) );
+        
+
+    }
+
+}
+
+const determineCharacterAction = ( state ) => {
 
     if( state.applyingItem || state.gearToEquip !== null ) {
 
