@@ -103,13 +103,19 @@ export default {
 
     const { charId } = action.payload;
 
-    const char = { ...state.characters[ charId ] };
+    //const char = { ...state.characters[ charId ] };
+
+    const stats = { ...state.characters[ charId ].stats };
+
+    const mp = stats.mp.current;
+
+    console.log(stats);
 
     const spell = { ...state.activeSpell };
 
-    console.log( char, spell );
+    console.log( ( ( mp.current - spell.cost ) < 0 ) ? 0 : mp.current - spell.cost );
 
-    state.characters[ charId ].stats.mp.current = ( ( char.stats.mp.current - spell.cost ) < 0 ) ? 0 : char.stats.mp.current - spell.cost;
+    state.characters[ charId ].stats.mp.current = ( ( state.characters[ charId ].stats.mp.current - spell.cost ) < 0 ) ? 0 : state.characters[ charId ].stats.mp.current - spell.cost;
 
   }
   
