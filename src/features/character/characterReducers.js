@@ -99,11 +99,15 @@ export default {
 
   reduceMP: ( state, action ) => {
 
+    
+
     const { charId } = action.payload;
 
     const char = { ...state.characters[ charId ] };
 
-    const spell = state.activeSpell;
+    const spell = { ...state.activeSpell };
+
+    console.log( char, spell );
 
     state.characters[ charId ].stats.mp.current = ( ( char.stats.mp.current - spell.cost ) < 0 ) ? 0 : char.stats.mp.current - spell.cost;
 

@@ -176,6 +176,8 @@ export default {
 
   setCastingSpell: ( state, action ) => {
 
+    console.log( action );
+
     state.activeSpell = action.payload.spell;
 
     state.castingSpell = true;

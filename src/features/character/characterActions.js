@@ -169,7 +169,7 @@ export const characterSelected = ( characterId ) => {
             //casting spell
             case 2:
 
-                dispatch( castSpell( character.id, null ) );
+                dispatch( castSpell( character.id, state.castingCharacter ) );
 
                 dispatch( deactivateSpell() );
 
@@ -325,7 +325,7 @@ export const castSpell = ( target, caster ) => {
 
         }
 
-        dispatch( reduceMP( { charId: caster.id } ) );
+        dispatch( reduceMP( { charId: caster } ) );
         
 
     }

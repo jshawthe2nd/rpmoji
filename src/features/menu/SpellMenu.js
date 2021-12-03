@@ -10,6 +10,8 @@ import { setCastingSpell } from '../party/partySlice';
 
 export function SpellMenu( { spells, spellCasterId } ) {
 
+  console.log(spellCasterId);
+
   const dispatch        = useDispatch();
 
   const [ spellToCast, setSpellToCast ] = useState( { } );
