@@ -10,7 +10,8 @@ import {
   selectActiveItem,
   setEquippingCharacter,
   selectActiveSpell,
-  selectCastingSpell
+  selectCastingSpell,
+  selectCloseMenu
 } from "../party/partySlice";
 
 import {
@@ -68,7 +69,11 @@ export function Character(
 
   const [ openedSpellsMenu,   setOpenedSpellsMenu ]  = useState( false );
 
-  const [ castingCharacter,   setCastingCharacter ]  = useState( 0 );
+  const [ castingCharacter,   setCastingCharacter ]  = useState( 0 );  
+
+  const shouldCloseSpellMenu  = useSelector( selectCloseMenu );
+
+  console.log( shouldCloseSpellMenu );
 
   const onCharacterSelect = ( event ) => {
 
@@ -246,7 +251,7 @@ export function Character(
           </div>
         </div>
       </div>
-      { char.id === castingCharacter && openedSpellsMenu && <SpellMenu spells={ char.gear.spells } spellCasterId={ char.id } /> }
+      { char.id === castingCharacter && openedSpellsMenu && !shouldCloseSpellMenu && <SpellMenu spells={ char.gear.spells } spellCasterId={ char.id } /> }
     </div>
     
   );

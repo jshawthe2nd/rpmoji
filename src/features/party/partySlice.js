@@ -435,4 +435,10 @@ export const selectCastingSpell = ( state ) => {
 
 }
 
+export const selectCloseMenu = ( state ) => {
+
+  return state.party.closeMenu;
+
+}
+
 export default slice.reducer;
