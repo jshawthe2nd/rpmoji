@@ -79,11 +79,19 @@ export const checkCharacter = ( charId, healer ) => {
 
                     case 'cure':
 
-                        console.log(healer, char);
+                        let charactersAtMaxHP = 0;
 
-                        const stat = healer.stat;
+                        Object.entries( state.characters ).map( ( [ characterId, character ] ) => {
 
-                        if( char.stats[stat].current === char.stats[stat].max ) {
+                            if( character.stats.hp.current === character.stats.hp.max ) {
+
+                                charactersAtMaxHP++;
+
+                            }
+
+                        } );
+
+                        if( charactersAtMaxHP === Object.keys( state.characters ).length ) {
         
                             dispatch( deactivateSpell() );
         

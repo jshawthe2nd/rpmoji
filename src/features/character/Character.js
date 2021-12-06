@@ -220,8 +220,8 @@ export function Character(
               onClick={ ( e ) => {
                 e.preventDefault();
                 e.stopPropagation();
-                onGearSlotSelect( `spells` );
                 setCastingCharacter( char.id );
+                setOpenedSpellsMenu( true );
               } }>
               <Icon 
                 symbol={ `magic.scroll` } 
