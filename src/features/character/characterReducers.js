@@ -87,35 +87,25 @@ export default {
 
   reduceHP: ( state, action ) => {
 
-    const { charId } = action.payload;
+    const { charId, dmg } = action.payload;
 
     const char = { ...state.characters[ charId ] };
 
-    const spell = state.activeSpell;
+    const hp = ( ( char.stats.hp.current - dmg ) < 0 ) ? 0 : char.stats.hp.current - dmg;
 
-    state.characters[ charId ].stats.hp.current = ( ( char.stats.hp.current - spell.cost ) < 0 ) ? 0 : char.stats.hp.current - spell.cost;
+    state.characters[ charId ].stats.hp.current = hp;
 
   },
 
-  reduceMP: ( state, action ) => {
+  reduceMP: ( state, action ) => {    
 
-    
+    const { charId, cost } = action.payload;
 
-    const { charId } = action.payload;
+    const char = { ...state.characters[ charId ] };
 
-    //const char = { ...state.characters[ charId ] };
+    const mp = ( ( char.stats.mp.current - cost ) < 0 ) ? 0 : char.stats.mp.current - cost;
 
-    const stats = { ...state.characters[ charId ].stats };
-
-    const mp = stats.mp.current;
-
-    console.log(stats);
-
-    const spell = { ...state.activeSpell };
-
-    console.log( ( ( mp.current - spell.cost ) < 0 ) ? 0 : mp.current - spell.cost );
-
-    state.characters[ charId ].stats.mp.current = ( ( state.characters[ charId ].stats.mp.current - spell.cost ) < 0 ) ? 0 : state.characters[ charId ].stats.mp.current - spell.cost;
+    state.characters[ charId ].stats.mp.current = mp;
 
   }
   
