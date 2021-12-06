@@ -115,10 +115,11 @@ Game Menu:
           indicate if they can accept the spell and dim accordingly.
           Then do the actual heal and reset the state. 
           Also need to check the castingCharacter's MP to see if they have the MP to cast the spells
-        - dispatch appropriate action(s)
-        - update characterActions::checkCharacter to handle spellcasting by using determineCharacterAction
-        - Adjust recover/reduce stat functions to account for more than just specific things. Should just take an adjustment number and know how to adjust which stat accordingly
+        ✔ dispatch appropriate action(s) @done(21-12-03 10:13)
+        ✔ update characterActions::checkCharacter to handle spellcasting by using determineCharacterAction @done(21-12-03 10:13)
+        ✔ Adjust recover/reduce stat functions to account for more than just specific things. Should just take an adjustment number and know how to adjust which stat accordingly @done(21-12-03 10:13)
         - Adjust logic so a mage cannot cast a spell for which they do not have MP
+        - Handle different UI scenarios
         
           
 
