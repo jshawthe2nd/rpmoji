@@ -79,6 +79,8 @@ export const checkCharacter = ( charId, healer ) => {
 
                     case 'cure':
 
+                        console.log(healer, char);
+
                         const stat = healer.stat;
 
                         if( char.stats[stat].current === char.stats[stat].max ) {
@@ -171,7 +173,7 @@ export const characterSelected = ( characterId ) => {
 
                 dispatch( castSpell( character.id, state.castingCharacter ) );
 
-                dispatch( deactivateSpell() );
+                //dispatch( deactivateSpell() );
 
             break;
 

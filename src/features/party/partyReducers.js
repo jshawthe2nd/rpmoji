@@ -140,7 +140,7 @@ export default {
 
     state.activeSpell = null;
     state.castingSpell = false;
-
+    state.castingCharacter = null;
 
   },
 

@@ -8,7 +8,9 @@ import { openMenu } from "../menu/menuSlice";
 
 import {
   selectActiveItem,
-  setEquippingCharacter
+  setEquippingCharacter,
+  selectActiveSpell,
+  selectCastingSpell
 } from "../party/partySlice";
 
 import {
@@ -48,6 +50,8 @@ export function Character(
 
   const menuRef               = useSelector( selectMenuRef );
 
+  const castingSpell          = useSelector( selectCastingSpell );
+
   const doesItemApplyToChar   = canTheyUseIt( char, itemToUse ); 
 
   const [ wasWeaponEquipped,  setWasWeaponEquipped ] = useState( false );
@@ -83,6 +87,12 @@ export function Character(
       case `armor`:
 
         setOpenedArmorMenu( true );
+
+      break;
+
+      case `spells`:
+
+        setOpenedSpellsMenu( true );
 
       break;
 
@@ -210,7 +220,7 @@ export function Character(
               onClick={ ( e ) => {
                 e.preventDefault();
                 e.stopPropagation();
-                setOpenedSpellsMenu( !openedSpellsMenu );
+                onGearSlotSelect( `spells` );
                 setCastingCharacter( char.id );
               } }>
               <Icon 

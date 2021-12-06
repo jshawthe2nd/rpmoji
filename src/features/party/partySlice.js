@@ -14,7 +14,7 @@ export const slice = createSlice({
         gender: 1,
         stats: {
           hp: {
-            current: 50,
+            current: 20,
             max: 50
           },
           mp: {
@@ -421,6 +421,18 @@ export const selectApplyingItem = ( state ) => {
 
 export const selectEquippingCharacter = ( state ) => {
   return state.party.equippingCharacter;
+}
+
+export const selectActiveSpell = ( state ) => {
+
+  return state.party.activeSpell;
+
+}
+
+export const selectCastingSpell = ( state ) => {
+
+  return state.party.castingSpell;
+
 }
 
 export default slice.reducer;
