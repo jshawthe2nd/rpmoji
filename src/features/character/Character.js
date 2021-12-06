@@ -52,7 +52,11 @@ export function Character(
 
   const castingSpell          = useSelector( selectCastingSpell );
 
-  const doesItemApplyToChar   = canTheyUseIt( char, itemToUse ); 
+  const activeSpell           = useSelector( selectActiveSpell );
+
+  const doesItemApplyToChar   = canTheyUseIt( char, itemToUse );
+
+  const canReceiveSpell       = canTheyUseIt( char, activeSpell );
 
   const [ wasWeaponEquipped,  setWasWeaponEquipped ] = useState( false );
 
@@ -128,6 +132,16 @@ export function Character(
         ${
           castingCharacter === char.id 
             ? styles.characterIsCasting 
+            : ``
+        }
+        ${
+          castingSpell && canReceiveSpell
+            ? styles.applyingToChar
+            : ``
+        }
+        ${
+          castingSpell && !canReceiveSpell
+            ? styles.dimCharacter
             : ``
         }
 

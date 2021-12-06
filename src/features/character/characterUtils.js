@@ -110,6 +110,10 @@ export const canTheyUseIt = ( char, item ) => {
 
       return canSpellBeLearned( char, item );
 
+    case `spell`:
+
+      return canSpellBeCast( char, item );
+
     default:
       return false;
 
@@ -205,6 +209,18 @@ export const canSpellBeLearned = ( char, scroll ) => {
   //
 
   return true;
+
+}
+
+export const canSpellBeCast = ( char, spell ) => {
+
+  switch( spell.type ) {
+
+    case `cure`:
+
+      return char.stats.hp.current < char.stats.hp.max;
+
+  }
 
 }
 
