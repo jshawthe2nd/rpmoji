@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import styles from './Menu.module.css';
 
 import { Icon } from '../../icons/Icon';
-import { setCastingSpell } from '../party/partySlice';
+import { setCastingSpell, selectCastingCharacter, deactivateSpell } from '../party/partySlice';
 
 
 
@@ -12,9 +12,23 @@ export function SpellMenu( { spells, spellCasterId } ) {
 
   const dispatch        = useDispatch();
 
+  const char = useSelector( ( state ) => {
+
+    return state.party.characters[ spellCasterId ];
+
+  } ); 
+
+  console.log(char);
+
   const [ spellToCast, setSpellToCast ] = useState( { } );
 
   const onSpellClick   = ( spell ) => {  
+
+    // if( spell.cost > char.stats.mp.current ) {
+
+    //   return false;
+
+    // }
 
     dispatch( setCastingSpell( { spell, spellCasterId } ) );
 
@@ -37,6 +51,11 @@ export function SpellMenu( { spells, spellCasterId } ) {
               ${ 
                 spellToCast.label === spell.label 
                   ? styles.castThisSpell 
+                  : ``
+              }
+              ${
+                spell.cost > char.stats.mp.current
+                  ? styles.disableSpell
                   : ``
               }
   

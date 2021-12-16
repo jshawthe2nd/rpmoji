@@ -323,6 +323,8 @@ export const castSpell = ( target, caster ) => {
 
         const stat = state.activeSpell.stat;
 
+        console.log(caster);
+
         switch( stat ) {
 
             case 'hp':
@@ -336,7 +338,19 @@ export const castSpell = ( target, caster ) => {
         dispatch( reduceMP( { charId: caster, cost: state.activeSpell.cost } ) );
 
         dispatch( checkCharacter( target, state.activeSpell ) );
+
+        dispatch( checkCaster( caster ) );
         
+
+    }
+
+}
+
+export const checkCaster = ( caster ) => {
+
+    return ( dispatch, getState ) => {
+
+        const state = getState().party;
 
     }
 
