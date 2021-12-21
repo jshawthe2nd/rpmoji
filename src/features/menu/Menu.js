@@ -18,7 +18,6 @@ import { ItemMenu } from "./ItemMenu";
 import { Icon } from "../../icons/Icon";
 import { BackOption } from "./BackOption";
 import { ScrollMenu } from "./ScrollMenu";
-import { SpellMenu } from "./SpellMenu";
 
 const menuOptions = {
   
@@ -38,12 +37,8 @@ const menuOptions = {
     label: "Items",
     component: <ItemMenu />,
   },
-  spells: {
-    label: "Spells",
-    component: <SpellMenu />
-  },
 
-  entries: [ "weapons", "armor", "scrolls", "items", "spells" ],
+  entries: [ "weapons", "armor", "scrolls", "items" ],
 
 };
 

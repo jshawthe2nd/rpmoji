@@ -94,7 +94,7 @@ export const slice = createSlice({
             max: 50
           },
           mp: {
-            current: 30,
+            current: 4,
             max: 35
           },
           level: {
@@ -432,6 +432,20 @@ export const selectActiveSpell = ( state ) => {
 export const selectCastingSpell = ( state ) => {
 
   return state.party.castingSpell;
+
+}
+
+export const selectCloseMenu = ( state ) => {
+
+  return state.party.closeMenu;
+
+}
+
+export const selectCastingCharacter = ( state ) => {
+
+  console.log(state.party.characters[ state.party.castingCharacter ]);
+
+  return state.party.characters[ state.party.castingCharacter ];
 
 }
 

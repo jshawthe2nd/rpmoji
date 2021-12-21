@@ -79,11 +79,19 @@ export const checkCharacter = ( charId, healer ) => {
 
                     case 'cure':
 
-                        console.log(healer, char);
+                        let charactersAtMaxHP = 0;
 
-                        const stat = healer.stat;
+                        Object.entries( state.characters ).map( ( [ characterId, character ] ) => {
 
-                        if( char.stats[stat].current === char.stats[stat].max ) {
+                            if( character.stats.hp.current === character.stats.hp.max ) {
+
+                                charactersAtMaxHP++;
+
+                            }
+
+                        } );
+
+                        if( charactersAtMaxHP === Object.keys( state.characters ).length ) {
         
                             dispatch( deactivateSpell() );
         
@@ -315,6 +323,8 @@ export const castSpell = ( target, caster ) => {
 
         const stat = state.activeSpell.stat;
 
+        console.log(caster);
+
         switch( stat ) {
 
             case 'hp':
@@ -328,7 +338,19 @@ export const castSpell = ( target, caster ) => {
         dispatch( reduceMP( { charId: caster, cost: state.activeSpell.cost } ) );
 
         dispatch( checkCharacter( target, state.activeSpell ) );
+
+        dispatch( checkCaster( caster ) );
         
+
+    }
+
+}
+
+export const checkCaster = ( caster ) => {
+
+    return ( dispatch, getState ) => {
+
+        const state = getState().party;
 
     }
 
