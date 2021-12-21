@@ -77,8 +77,6 @@ export function Character(
 
   const onCharacterSelect = ( event ) => {
 
-    if( castingCharacter ) return;
-
     dispatch( characterSelected( charId, {} ) );  
 
   };
@@ -101,7 +99,11 @@ export function Character(
 
       case `spells`:
 
-        setOpenedSpellsMenu( true );
+        console.log(openedSpellsMenu);
+
+        setOpenedSpellsMenu( ( openedSpellsMenu ) ? false : true );
+
+        console.log(openedSpellsMenu);
 
       break;
 
@@ -117,6 +119,16 @@ export function Character(
     dispatch( setEquippingCharacter( { charId } ) );
 
   }
+
+  const onRightClick = ( e ) => {
+
+    e.preventDefault();
+    
+    setOpenedSpellsMenu( false );
+
+    setCastingCharacter( 0 );
+
+  };
  
   
   return (
@@ -153,6 +165,7 @@ export function Character(
       ` }
 
       onClick={ onCharacterSelect }
+      onContextMenu={ onRightClick }
     >
       <h2>
           {char.name} L.<span>{ char.stats.level.current }</span>
@@ -251,7 +264,7 @@ export function Character(
           </div>
         </div>
       </div>
-      { char.id === castingCharacter && openedSpellsMenu && !shouldCloseSpellMenu && <SpellMenu spells={ char.gear.spells } spellCasterId={ char.id } /> }
+      { char.id === castingCharacter && openedSpellsMenu  && <SpellMenu spells={ char.gear.spells } spellCasterId={ char.id } /> }
     </div>
     
   );
