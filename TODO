@@ -10,7 +10,33 @@
       to get with refactoring the state shape. Normalizing is an option (see below) and I'm curious if Party even needs to be that aware of the Characters. I tend to think too much in terms of a user and not a developer, and that's kind of how I built this - but it definitely can be cleaner. So knowing how to bootstrap the store from IndexedDB I think will
       help in better understanding the problem, at least, to give better
       guidance on a solution.
-  ☐ 
+Game World:
+  Reference; top-down game camera and movement- https://www.youtube.com/watch?v=H3Fn33lYuE0&ab_channel=DrewConley
+  ☐ Create CSS rules for the camera and map components
+  ☐ Create requisite components in /features for World, Camera
+  ☐ Create requisite Redux files for new components & state
+    Possible new state shape-
+    {
+      game: {
+        mode: explore | battle | menu
+        dungeon: <Dungeon> | false
+        region: [need to find a way to programmatically declare regions]
+        world: {
+          regions: [
+            {
+              name: 'Hero Plains',
+              coords: [ [ 0, 0 ], [ 800, 0 ], [ 800, 600 ], [ 0, 600 ] ]
+              tiles: [
+                {
+                  coords: [ [ 0, 0 ], [ 400, 0 ], [ 400, 300 ], [ 0, 300 ]],
+                  dungeons: [ [ 150, 450 ], [ 700, 100 ] ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
 
 
 Game Menu: 
@@ -100,12 +126,12 @@ Game Menu:
     Maybe additional payload data can be passing current character type, or,
     also just dispatching something like `setCharacterForEquipping()`
     ✔ How to handle <BackOption/> in the event equippingCharacter is truthy @done(21-04-02 18:14)
-    ☐ Figure out how to trigger gear-slot flash when the equip UserFlow is initiated via the Character component as opposed to the Menu component(s)
+    ✘ Figure out how to trigger gear-slot flash when the equip UserFlow is initiated via the Character component as opposed to the Menu component(s) @cancelled(21-12-20 18:22)
       Figure out how to do this with the new actions flow
     Setup interaction with `Spells` menu to open that character's list of learned spells into the `<Menu/>` component:
       Should we use main Menu component? Or make a new special one that opens above the slot? Should we do the same for all 3? Probably.
-      ☐ wire up `onSpellClick()` for spells
-        ✔ create `<SpellMenu/>` component (in progress) @done(21-12-02 11:06)
+      ✔ wire up `onSpellClick()` for spells @done(21-12-20 18:23)
+        ✔ create `<SpellMenu/>` component (in progress) @done(21-12-20 18:23)
         ✔ Gets a character reference (equippingCharacter?) @done(21-12-02 11:06)
         ✔ `<SpellMenu/>` renders list of spells in char (in progress) @done(21-12-02 11:06)
         ✔ Spell items have click handler @done(21-12-02 11:06)
@@ -118,9 +144,9 @@ Game Menu:
         ✔ dispatch appropriate action(s) @done(21-12-03 10:13)
         ✔ update characterActions::checkCharacter to handle spellcasting by using determineCharacterAction @done(21-12-03 10:13)
         ✔ Adjust recover/reduce stat functions to account for more than just specific things. Should just take an adjustment number and know how to adjust which stat accordingly @done(21-12-03 10:13)
-        - Adjust logic so a mage cannot cast a spell for which they do not have MP
-        - Handle different UI scenarios
-        - Use the same menu ref system as weapons/armor for spells
+        ✔ Adjust logic so a mage cannot cast a spell for which they do not have MP @done(21-12-20 18:22)
+        ✔ Handle different UI scenarios @done(21-12-20 18:22)
+        ✘ Use the same menu ref system as weapons/armor for spells @cancelled(21-12-20 18:22)
         
           
 
