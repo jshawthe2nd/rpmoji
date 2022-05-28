@@ -73,7 +73,6 @@ export function Character(
 
   const shouldCloseSpellMenu  = useSelector( selectCloseMenu );
 
-  console.log( shouldCloseSpellMenu );
 
   const onCharacterSelect = ( event ) => {
 

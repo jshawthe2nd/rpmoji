@@ -325,8 +325,6 @@ export const castSpell = ( target, caster ) => {
 
         const stat = state.activeSpell.stat;
 
-        console.log(caster);
-
         switch( stat ) {
 
             case 'hp':
@@ -334,6 +332,8 @@ export const castSpell = ( target, caster ) => {
                 dispatch( recoverHP( { charId: character.id } ) );
 
             break;
+            default:
+                break;
 
         }
 
@@ -352,7 +352,7 @@ export const checkCaster = ( caster ) => {
 
     return ( dispatch, getState ) => {
 
-        const state = getState().party;
+        //const state = getState().party;
 
     }
 

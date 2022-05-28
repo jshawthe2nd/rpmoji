@@ -4,6 +4,8 @@ export default {
 
         state.paused = !state.paused;
 
+        console.log(state.paused);
+
     }
 
 }

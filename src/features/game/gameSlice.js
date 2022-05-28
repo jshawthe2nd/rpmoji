@@ -47,6 +47,6 @@ export const {
     pauseGame
 } = slice.actions;
 
-export const isGamePaused = state => state.paused;
+export const isGamePaused = state => state.game.paused;
 
 export default slice.reducer;

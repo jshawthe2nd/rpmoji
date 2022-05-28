@@ -19,9 +19,6 @@ export function Hero( props ) {
 
     const { x, y } = props;
 
-    console.log(x,y);
-
-
     const partyHero = useSelector( selectPartyHero );
 
     return (

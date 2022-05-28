@@ -37,9 +37,7 @@ export function Game({ children }) {
 
   const speed = 1;
 
-  console.log(gamePaused);
-
-  useKeyPress(['w','a','s','d','Enter'], (e) => {
+  useKeyPress(['w','a','s','d','Enter','q'], (e) => {
 
     let dir;
 
@@ -47,11 +45,7 @@ export function Game({ children }) {
 
       case 'keydown':
 
-        if( e.key == 'Enter' ) {
-
-          dispatch( pauseGame() );
-
-        } else {
+        
 
           dir = keys[ e.key ];
           if( dir && heldDirections.indexOf(dir) === -1 ) {
@@ -62,27 +56,37 @@ export function Game({ children }) {
 
           }
 
-          placeHero();
-
-        }        
+          placeHero();   
 
       break;
 
       case 'keyup':
 
-        dir = keys[ e.key ];
+        if( e.key == 'Enter' ) {
 
-        const index = heldDirections.indexOf(dir);
+          dispatch( pauseGame() );
+          
+          console.log(gamePaused);
 
-        if( index > -1 ) {
+        } else if( e.key == 'q' ) {
+          
+          if( gamePaused ) dispatch( pauseGame() );
 
-          heldDirections.splice(index, 1);
+        } else {
 
-          setHeldDirections(heldDirections);
+          dir = keys[ e.key ];
 
-        }        
+          const index = heldDirections.indexOf(dir);
 
-        console.log(heldDirections);
+          if( index > -1 ) {
+
+            heldDirections.splice(index, 1);
+
+            setHeldDirections(heldDirections);
+
+          }
+
+        }
 
       break;
 
@@ -95,8 +99,6 @@ export function Game({ children }) {
     const heldDirection = heldDirections[0];
 
     if( heldDirection ) {
-
-        let heroX, heroY;
 
         if( heldDirection === directions.right ) heroCoords.x += speed;
         if( heldDirection === directions.left ) heroCoords.x -= speed;

@@ -11,10 +11,7 @@ function App() {
     <div className="App">
       <h1>RPmoJi</h1>
       
-      <Game>
-          <Party/>
-          <Menu />
-        </Game>
+      <Game/>
     </div>
   );
 }
