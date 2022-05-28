@@ -318,7 +318,8 @@ export const slice = createSlice({
     selectedItem: null,
     castingSpell: false,
     activeSpell: null,
-    castingCharacter: null
+    castingCharacter: null,
+    partyHero: 123
   },
   reducers: {
     ...partyReducers,
@@ -446,6 +447,12 @@ export const selectCastingCharacter = ( state ) => {
   console.log(state.party.characters[ state.party.castingCharacter ]);
 
   return state.party.characters[ state.party.castingCharacter ];
+
+}
+
+export const selectPartyHero = ( state ) => {
+
+  return state.party.characters[ state.party.partyHero ];
 
 }
 

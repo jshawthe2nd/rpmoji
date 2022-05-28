@@ -89,6 +89,8 @@ export const checkCharacter = ( charId, healer ) => {
 
                             }
 
+                            return true;
+
                         } );
 
                         if( charactersAtMaxHP === Object.keys( state.characters ).length ) {

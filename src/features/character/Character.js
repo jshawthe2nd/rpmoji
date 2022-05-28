@@ -184,8 +184,6 @@ export function Character(
         ) }
       </div>
       <div className={ styles.charDetails }>
-        
-
         <div className={ styles.charStats }>
           <div className={ styles.mainCharStats }>
             <div className="hp-mp">

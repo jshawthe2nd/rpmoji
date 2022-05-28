@@ -13,7 +13,9 @@ import styles from "./Party.module.css";
  * 
  * update: we sorta kinda have redux going
  */
-export function Party( { children } ) {
+export function Party( props ) {
+
+  const { paused, children } = props;
     
   const party = useSelector( selectCharacterIds );
 

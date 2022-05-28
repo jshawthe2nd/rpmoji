@@ -8,6 +8,7 @@ export const slice = createSlice( {
     initialState: {
         mode: 'menu',
         dungeon: false,
+        paused: false,
         world: {
             regions: [
                 {
@@ -42,3 +43,10 @@ export const slice = createSlice( {
     }
 } );
 
+export const {
+    pauseGame
+} = slice.actions;
+
+export const isGamePaused = state => state.paused;
+
+export default slice.reducer;
