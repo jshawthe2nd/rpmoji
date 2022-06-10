@@ -35,9 +35,11 @@ export function Game({ children }) {
 
   const gamePaused = useSelector( isGamePaused );
 
-  const speed = 1;
+  const speed = 1.5;
 
   useKeyPress(['w','a','s','d','Enter','q'], (e) => {
+
+    if (e.repeat) return false;
 
     let dir;
 
@@ -45,7 +47,7 @@ export function Game({ children }) {
 
       case 'keydown':
 
-        
+          console.log(e);
 
           dir = keys[ e.key ];
           if( dir && heldDirections.indexOf(dir) === -1 ) {

@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { CSSTransition } from "react-transition-group";
 import { selectActiveItem, selectCharacterIds, selectGearToEquip } from "./partySlice";
 
 import { Character } from '../character/Character';
@@ -24,22 +25,22 @@ export function Party( props ) {
   const gearToEquip = useSelector( selectGearToEquip );
   
   return (
-    <div 
-      id="partyContainer" 
-      className={ 
-        `${styles.partyContainer} ${ activeItem ? `applyingItem` : `` } 
-         ${ gearToEquip ? `applyingItem` : ``}` 
-      }>
-      { party.map( ( characterId, index ) => {
-        
-        return (
-          <Character 
-            key={ characterId } 
-            charId={ characterId } 
-          />
-        )
-      } ) }
-      {children}
-    </div>
+      <div 
+        id="partyContainer" 
+        className={ 
+          `${styles.partyContainer} ${ activeItem ? `applyingItem` : `` } 
+          ${ gearToEquip ? `applyingItem` : ``}` 
+        }>
+        { party.map( ( characterId, index ) => {
+          
+          return (
+            <Character 
+              key={ characterId } 
+              charId={ characterId } 
+            />
+          )
+        } ) }
+        {children}
+      </div>
   );
 }
