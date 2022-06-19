@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Animated } from 'react-animated-css';
 
 import { World } from '../world/World';
 import { Map } from '../map/Map';
@@ -15,12 +16,6 @@ import { directions, keys } from '../../utils/meta';
 import styles from "./Game.module.css";
 
 
-/**
- * we can use React.Context here so the Game knows 
- * when the menu button is pressed so the components
- * change accordingly 
- */
-
 export function Game({ children }) {
 
   const dispatch = useDispatch();
@@ -29,13 +24,13 @@ export function Game({ children }) {
 
   const [ heldDirections, setHeldDirections ] = useState([]);
 
-  const [ heroCoords, setHeroCoords ] = useState({ x: 50, y: 50 });
+  const [ heroCoords, setHeroCoords ] = useState({ x: 340, y: 250 });
 
-  const [ camCoords, setCamCoords ] = useState({ x: 10, y: 10 });
+  const [ camCoords, setCamCoords ] = useState({ x: 0, y: 0 });
 
   const gamePaused = useSelector( isGamePaused );
 
-  const speed = 1.5;
+  const speed = 1.75;
 
   useKeyPress(['w','a','s','d','Enter','q'], (e) => {
 
@@ -107,11 +102,15 @@ export function Game({ children }) {
         if( heldDirection === directions.down ) heroCoords.y += speed;
         if( heldDirection === directions.up ) heroCoords.y -= speed;
 
-        console.log(heroCoords);
-        console.log(heldDirection);
+        
+        console.log(heldDirections);
 
         setHeroCoords( (heroCoords) => {
           return { x: heroCoords.x, y: heroCoords.y };
+        });
+
+        setCamCoords( (camCoords) => {
+          return { x: -heroCoords.x+340, y: -heroCoords.y+250 }
         });
 
     }
@@ -128,15 +127,37 @@ export function Game({ children }) {
     <div id="gameContainer" className={styles.gameContainer}>
       <>
         { !gamePaused && <World>
+          <Animated
+            animationIn="fadeIn"
+            animationOut="fadeOut"
+            animationInDuration={200}
+            animationOutDuration={200}
+            isVisible={!gamePaused}
+          >
           <Map x={camCoords.x} y={camCoords.y}>
 
-            <Hero x={heroCoords.x} y={heroCoords.y} />
+            <Hero x={heroCoords.x} y={heroCoords.y} 
+              isWalking={heldDirections[0]} 
+            />
 
           </Map>
-          
+          </Animated>
         </World> }
-        { gamePaused && <Party/> }
-        { gamePaused && <Menu/> }
+        { gamePaused && <Animated 
+          animationIn="slideInRight" 
+          animationOut="slideOutRight" 
+          isVisible={gamePaused}
+          animationInDuration={200}
+          animationOutDuration={200}
+          animateOnMount={true}
+          style={{ width: '100%', display: 'flex' }}
+        >
+          <Party/>
+          <Menu/>
+        </Animated>
+        }
+        {/* { gamePaused && <Party/> }
+        { gamePaused &&  } */}
       </>
     </div>
   );

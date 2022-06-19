@@ -13,9 +13,10 @@ export function Map(props) {
     const css = {
         imageRendering: 'pixelated',
         backgroundImage: 'url("https://assets.codepen.io/21542/CameraDemoMap.png")',
-        backgroundSize: '150%',
-        width: 'calc(13 * var(--grid-cell))',
-        height: 'calc(10 * var(--grid-cell))',
+        backgroundSize: '100%',
+        backgroundRepeat: 'no-repeat',
+        width: '720px',
+        height: '560px',
         position: 'relative',
         zIndex: 1,
         transform: `translate3d( ${x}px, ${y}px, 0)`

@@ -23,18 +23,31 @@ export function Hero( props ) {
 
     return (
         <div className='hero' style={{
-            width: '32px',
-            height: '32px',
-            fontSize: '24px',
+            width: '64px',
+            height: '64px',
+            fontSize: '32px',
             display: 'inline',
             position: 'absolute',
             zIndex: 5,
             transform: `translate3d( ${x}px, ${y}px, 0)`
         }}>
-
+            <span style={{
+                backgroundColor: 'rgba(50,50,50,0.8)',
+                display: 'block',
+                width: '47px',
+                height: '8px',
+                position: 'absolute',
+                top: '36px',
+                left: '-3px',
+                borderRadius: '50%',
+                transform: 'skew',
+                boxShadow: '0 0 5px rgba(50,50,50,0.8)',
+                zIndex: 1
+            }}/>
             <Icon
                 symbol={ getCharacterSymbolPath( partyHero ) }
                 label={ getCharacterIconLabel( partyHero ) } />
+            
 
         </div>
     );

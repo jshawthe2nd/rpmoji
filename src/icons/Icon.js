@@ -126,10 +126,14 @@ export function Icon( { symbol, label, cssClass = ``, status = false } ) {
   return (
     <span
       className={ `icon 
-        ${ getSymbol( symbol ) } 
+        ${symbol} 
         ${ ( status ) ? status : `` } 
         ${ cssClass }`
       }
+      style={{
+        position: 'absolute',
+        zIndex: 5
+      }}
       role="img"
       aria-label={label ? label : ``}
     >
