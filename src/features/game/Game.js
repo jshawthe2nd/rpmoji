@@ -22,10 +22,21 @@ export function Game({ children }) {
 
   const animRef = React.useRef();
 
+  /**
+   * heldDirections is for the times when you want to switch
+   * directions and might press the new direction at the same
+   * time as holding the original direction and won't cause
+   * your Hero component to stop
+   */
   const [ heldDirections, setHeldDirections ] = useState([]);
 
   const [ heroCoords, setHeroCoords ] = useState({ x: 340, y: 250 });
 
+
+  /**
+   * camCoords is used to actually move the background, 'overworld'
+   * image position in relation to the container and the Hero sprite
+   */
   const [ camCoords, setCamCoords ] = useState({ x: 0, y: 0 });
 
   const gamePaused = useSelector( isGamePaused );

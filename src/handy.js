@@ -1,4 +1,9 @@
 /**
+ * Just a handy file of stuff I normally forget about so I don't
+ * have to get outta the code editor to look up info on
+ */
+
+/**
  * The map() method creates a new array populated with the results of calling a provided function on every element in the calling array.
  */
 

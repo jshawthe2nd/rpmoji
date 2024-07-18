@@ -17,7 +17,12 @@ import {
 
 export function Hero( props ) {
 
-    const { x, y } = props;
+    const { x, y, isWalking } = props;
+
+    //TODO: Use isWalking prop to determine whether the Hero sprite should 
+    //      bounce or otherwise show some indication of movement other
+    //      than direction, considering it's a simple emoji
+    //
 
     const partyHero = useSelector( selectPartyHero );
 
