@@ -1,3 +1,9 @@
+:root {
+  --pixel-size: 2px;
+  --grid-cell: calc( var(--pixel-size) * 16);
+  --bg: #ccc;
+}
+
 @font-face {
   font-family: "Minitel";
   src: local("Minitel"), url('./fonts/minitel.ttf') format('truetype');
