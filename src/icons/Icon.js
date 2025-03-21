@@ -110,7 +110,8 @@ export const symbols = {
     dispel: `🔮`,
     fire: `🔥`,
     elec: `⚡`,
-    poison: `⚗️`
+    poison: `⚗️`,
+    revive: `💗`,
   },
   dialog: `💬`
 };

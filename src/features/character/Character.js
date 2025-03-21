@@ -8,7 +8,10 @@ import { openMenu } from "../menu/menuSlice";
 
 import {
   selectActiveItem,
-  setEquippingCharacter
+  setEquippingCharacter,
+  selectActiveSpell,
+  selectCastingSpell,
+  selectCloseMenu
 } from "../party/partySlice";
 
 import {
@@ -48,7 +51,13 @@ export function Character(
 
   const menuRef               = useSelector( selectMenuRef );
 
-  const doesItemApplyToChar   = canTheyUseIt( char, itemToUse ); 
+  const castingSpell          = useSelector( selectCastingSpell );
+
+  const activeSpell           = useSelector( selectActiveSpell );
+
+  const doesItemApplyToChar   = canTheyUseIt( char, itemToUse );
+
+  const canReceiveSpell       = canTheyUseIt( char, activeSpell );
 
   const [ wasWeaponEquipped,  setWasWeaponEquipped ] = useState( false );
 
@@ -60,11 +69,13 @@ export function Character(
 
   const [ openedSpellsMenu,   setOpenedSpellsMenu ]  = useState( false );
 
-  const [ castingCharacter,   setCastingCharacter ]  = useState( 0 );
+  const [ castingCharacter,   setCastingCharacter ]  = useState( 0 );  
+
+  const shouldCloseSpellMenu  = useSelector( selectCloseMenu );
+
+  console.log( shouldCloseSpellMenu );
 
   const onCharacterSelect = ( event ) => {
-
-    if( castingCharacter ) return;
 
     dispatch( characterSelected( charId, {} ) );  
 
@@ -86,6 +97,16 @@ export function Character(
 
       break;
 
+      case `spells`:
+
+        console.log(openedSpellsMenu);
+
+        setOpenedSpellsMenu( ( openedSpellsMenu ) ? false : true );
+
+        console.log(openedSpellsMenu);
+
+      break;
+
       default:
         return;
 
@@ -98,6 +119,16 @@ export function Character(
     dispatch( setEquippingCharacter( { charId } ) );
 
   }
+
+  const onRightClick = ( e ) => {
+
+    e.preventDefault();
+    
+    setOpenedSpellsMenu( false );
+
+    setCastingCharacter( 0 );
+
+  };
  
   
   return (
@@ -120,10 +151,21 @@ export function Character(
             ? styles.characterIsCasting 
             : ``
         }
+        ${
+          castingSpell && canReceiveSpell
+            ? styles.applyingToChar
+            : ``
+        }
+        ${
+          castingSpell && !canReceiveSpell
+            ? styles.dimCharacter
+            : ``
+        }
 
       ` }
 
       onClick={ onCharacterSelect }
+      onContextMenu={ onRightClick }
     >
       <h2>
           {char.name} L.<span>{ char.stats.level.current }</span>
@@ -210,8 +252,8 @@ export function Character(
               onClick={ ( e ) => {
                 e.preventDefault();
                 e.stopPropagation();
-                setOpenedSpellsMenu( !openedSpellsMenu );
                 setCastingCharacter( char.id );
+                setOpenedSpellsMenu( true );
               } }>
               <Icon 
                 symbol={ `magic.scroll` } 
@@ -222,7 +264,7 @@ export function Character(
           </div>
         </div>
       </div>
-      { char.id === castingCharacter && openedSpellsMenu && <SpellMenu spells={ char.gear.spells } /> }
+      { char.id === castingCharacter && openedSpellsMenu  && <SpellMenu spells={ char.gear.spells } spellCasterId={ char.id } /> }
     </div>
     
   );

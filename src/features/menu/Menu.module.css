@@ -130,3 +130,14 @@
   content: '👉';
   text-shadow: 1px 1px 1px #222;
 }
+
+.spellMenu .disableSpell {
+
+  color: #222;
+  cursor: not-allowed !important;
+
+}
+
+.spellMenu .disableSpell::before {
+  content: '' !important;
+}

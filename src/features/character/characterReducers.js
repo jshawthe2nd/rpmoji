@@ -67,9 +67,9 @@ export default {
 
     const char = { ...state.characters[ charId ] };
 
-    const healing = char.stats.hp.current + Math.floor( ( char.stats.level.current * 10 ) / 2 );
+    const healing = state.activeSpell.heal;
 
-    state.characters[ charId ].stats.hp.current = ( healing > char.stats.hp.max ) ? char.stats.hp.max : healing;
+    state.characters[ charId ].stats.hp.current = ( ( healing + char.stats.hp.current ) > char.stats.hp.max ) ? char.stats.hp.max : healing + char.stats.hp.current;
 
   },
 
@@ -82,6 +82,30 @@ export default {
     const healing = char.stats.mp.current + Math.floor( ( char.stats.level.current * 5 ) / 2 );
 
     state.characters[ charId ].stats.mp.current = ( healing > char.stats.mp.max ) ? char.stats.mp.max : healing;
+
+  },
+
+  reduceHP: ( state, action ) => {
+
+    const { charId, dmg } = action.payload;
+
+    const char = { ...state.characters[ charId ] };
+
+    const hp = ( ( char.stats.hp.current - dmg ) < 0 ) ? 0 : char.stats.hp.current - dmg;
+
+    state.characters[ charId ].stats.hp.current = hp;
+
+  },
+
+  reduceMP: ( state, action ) => {    
+
+    const { charId, cost } = action.payload;
+
+    const char = { ...state.characters[ charId ] };
+
+    const mp = ( ( char.stats.mp.current - cost ) < 0 ) ? 0 : char.stats.mp.current - cost;
+
+    state.characters[ charId ].stats.mp.current = mp;
 
   }
   

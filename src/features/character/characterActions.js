@@ -1,9 +1,12 @@
 import {
     decrementItemQty,
     deactivateItem,
+    deactivateSpell,
     equip,
     recoverHP,
     recoverMP,
+    reduceHP,
+    reduceMP,
     clearStatus,
     addToInventory,
     removeFromInventory
@@ -17,7 +20,7 @@ import {
     checkItem
 } from '../party/partyActions';
 
-export const checkCharacter = ( charId, itemUsed ) => {
+export const checkCharacter = ( charId, healer ) => {
     
     return( dispatch, getState ) => {
 
@@ -25,44 +28,90 @@ export const checkCharacter = ( charId, itemUsed ) => {
 
         const char = state.characters[ charId ];
 
-        switch( itemUsed.label ) {
+        switch( determineCharacterAction( state ) ) {
 
-            case `Potion`:
+            case 1:
 
-                if( char.stats.hp.current === char.stats.hp.max ) {
+                switch( healer.label ) {
 
-                    dispatch( deactivateItem() );
-
+                    case `Potion`:
+        
+                        if( char.stats.hp.current === char.stats.hp.max ) {
+        
+                            dispatch( deactivateItem() );
+        
+                        }
+        
+                    break;
+        
+                    case `Ether`:
+        
+                        if( char.stats.mp.current === char.stats.mp.max ) {
+        
+                            dispatch( deactivateItem() );
+        
+                        }
+        
+                    break;
+        
+                    case `Antidote`:
+                    case `Elixir`:
+        
+                        if( !char.status ) {
+        
+                            dispatch( deactivateItem() );
+        
+                        }
+        
+                    break;
+        
+                    default:
+        
+                    return;
+        
                 }
 
             break;
 
-            case `Ether`:
+            case 2:
 
-                if( char.stats.mp.current === char.stats.mp.max ) {
+                switch( healer.type ) {
 
-                    dispatch( deactivateItem() );
+                    case 'cure':
 
-                }
+                        let charactersAtMaxHP = 0;
 
-            break;
+                        Object.entries( state.characters ).map( ( [ characterId, character ] ) => {
 
-            case `Antidote`:
-            case `Elixir`:
+                            if( character.stats.hp.current === character.stats.hp.max ) {
 
-                if( !char.status ) {
+                                charactersAtMaxHP++;
 
-                    dispatch( deactivateItem() );
+                            }
+
+                        } );
+
+                        if( charactersAtMaxHP === Object.keys( state.characters ).length ) {
+        
+                            dispatch( deactivateSpell() );
+        
+                        }
+
+                    break;
+
+                    default:
+                        return;
 
                 }
 
             break;
 
             default:
-
-            return;
+                return;
 
         }
+
+        
 
     };
 }
@@ -73,41 +122,66 @@ export const characterSelected = ( characterId ) => {
 
         const state = getState().party;
 
-        const selectedItem = state.activeItem;
-
         const character = state.characters[ characterId ];
 
-        switch( getTypeOfItem( selectedItem ) ) {
+        console.log(state);
 
-            case `item`:
+        switch( determineCharacterAction( state ) ) {
 
-                dispatch( useItem( character ) );
+            // using item
+            case 1:
 
-                dispatch( checkCharacter( 
+                const selectedItem = state.activeItem;
 
-                    characterId, 
-                    selectedItem
+                switch( getTypeOfItem( selectedItem ) ) {
 
-                ) );
-            
+                    case `item`:
+        
+                        dispatch( useItem( character ) );
+        
+                        dispatch( checkCharacter( 
+        
+                            characterId, 
+                            selectedItem
+        
+                        ) );
+                    
+                    break;
+        
+                    case `gear`:
+        
+                        dispatch( equipGear( characterId, selectedItem ) );
+        
+                    break;
+        
+                    case `magic`:
+        
+                        dispatch( learnSpell( {
+        
+                            char: character,
+                            scroll: selectedItem
+        
+                        } ) );
+        
+                        dispatch( removeFromInventory( { gearItem: selectedItem } ) );
+        
+                    break;
+        
+                    default:
+                        return;
+        
+                }
+        
+                dispatch( deactivateItem() );
+
             break;
 
-            case `gear`:
+            //casting spell
+            case 2:
 
-                dispatch( equipGear( characterId, selectedItem ) );
+                dispatch( castSpell( character.id, state.castingCharacter ) );
 
-            break;
-
-            case `magic`:
-
-                dispatch( learnSpell( {
-
-                    char: character,
-                    scroll: selectedItem
-
-                } ) );
-
-                dispatch( removeFromInventory( { gearItem: selectedItem } ) );
+                //dispatch( deactivateSpell() );
 
             break;
 
@@ -115,8 +189,6 @@ export const characterSelected = ( characterId ) => {
                 return;
 
         }
-
-        dispatch( deactivateItem() );
 
     }
 
@@ -236,6 +308,65 @@ export const learnSpell = ( characterId, scroll ) => {
         character.spells.push( spell );
 
         dispatch( removeFromInventory( scroll ) );
+
+    }
+
+}
+
+export const castSpell = ( target, caster ) => {
+
+    return( dispatch, getState ) => {
+
+        const state = getState().party;
+
+        const character = state.characters[ target ];
+
+        const stat = state.activeSpell.stat;
+
+        console.log(caster);
+
+        switch( stat ) {
+
+            case 'hp':
+
+                dispatch( recoverHP( { charId: character.id } ) );
+
+            break;
+
+        }
+
+        dispatch( reduceMP( { charId: caster, cost: state.activeSpell.cost } ) );
+
+        dispatch( checkCharacter( target, state.activeSpell ) );
+
+        dispatch( checkCaster( caster ) );
+        
+
+    }
+
+}
+
+export const checkCaster = ( caster ) => {
+
+    return ( dispatch, getState ) => {
+
+        const state = getState().party;
+
+    }
+
+}
+
+const determineCharacterAction = ( state ) => {
+
+    if( state.applyingItem || state.gearToEquip !== null ) {
+
+        return 1;
+
+    }
+    
+    if( state.castingSpell ) {
+
+        return 2;
 
     }
 

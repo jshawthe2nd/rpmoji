@@ -14,7 +14,7 @@ export const slice = createSlice({
         gender: 1,
         stats: {
           hp: {
-            current: 50,
+            current: 20,
             max: 50
           },
           mp: {
@@ -94,7 +94,7 @@ export const slice = createSlice({
             max: 50
           },
           mp: {
-            current: 30,
+            current: 4,
             max: 35
           },
           level: {
@@ -124,16 +124,19 @@ export const slice = createSlice({
               cost: 4,
               dmg: 8,
               label: 'Ice',
-              symbol: 'spell.ice'         
+              symbol: 'spell.ice',
+              all: false         
             },
             {
               type: 'cure',
+              stat: 'hp',
               cost: 6,
               // possible formula for calculating heal:
               // (level * 10 / 2) + (cost / 2) 
               heal: ((1 * 10 /2 ) + (6 / 2)) + (Math.floor(Math.random() * Math.floor((1 * 10 / 2)))),
               label: 'Cure',
-              symbol: 'spell.cure'
+              symbol: 'spell.cure',
+              all: false
             }
           ]
         },
@@ -180,16 +183,19 @@ export const slice = createSlice({
               cost: 4,
               dmg: 8,
               label: 'Fire',
-              symbol: 'spell.fire'         
+              symbol: 'spell.fire',
+              all: false         
             },
             {
               type: 'cure',
+              stat: 'hp',
               cost: 6,
               // possible formula for calculating heal:
               // (level * 10 / 2) + (cost / 2) 
               heal: ((1 * 10 /2 ) + (6 / 2)) + (Math.floor(Math.random() * Math.floor((1 * 10 / 2)))),
               label: 'Cure',
-              symbol: 'spell.cure'
+              symbol: 'spell.cure',
+              all: false
             }
           ]
         },
@@ -288,7 +294,8 @@ export const slice = createSlice({
           qty:    1,
           type:   'heal',
           power:  1,
-          spellSymbol: 'spell.cure'
+          spellSymbol: 'spell.cure',
+          all:    false
         },
         {
           id:     801,
@@ -298,7 +305,8 @@ export const slice = createSlice({
           qty:    1,
           type:   'atk',
           power:  1,
-          spellSymbol: 'spell.fire'
+          spellSymbol: 'spell.fire',
+          all:    false
         }
       ]
     },
@@ -308,7 +316,9 @@ export const slice = createSlice({
     gearToEquip: null,
     equippingCharacter: null,
     selectedItem: null,
-    castingSpell: null
+    castingSpell: false,
+    activeSpell: null,
+    castingCharacter: null
   },
   reducers: {
     ...partyReducers,
@@ -326,6 +336,8 @@ export const {
   setApplyItem,
   recoverHP,
   recoverMP,
+  reduceHP,
+  reduceMP,
   clearStatus,
   setWeaponToEquip,
   setArmorToEquip,
@@ -335,7 +347,8 @@ export const {
   selectCharacter,
   equip,
   learnSpell,
-  setCastingSpell
+  setCastingSpell,
+  deactivateSpell
 } = slice.actions;
 
 export const selectInventory = ( state ) => state.party.inventory;
@@ -408,6 +421,32 @@ export const selectApplyingItem = ( state ) => {
 
 export const selectEquippingCharacter = ( state ) => {
   return state.party.equippingCharacter;
+}
+
+export const selectActiveSpell = ( state ) => {
+
+  return state.party.activeSpell;
+
+}
+
+export const selectCastingSpell = ( state ) => {
+
+  return state.party.castingSpell;
+
+}
+
+export const selectCloseMenu = ( state ) => {
+
+  return state.party.closeMenu;
+
+}
+
+export const selectCastingCharacter = ( state ) => {
+
+  console.log(state.party.characters[ state.party.castingCharacter ]);
+
+  return state.party.characters[ state.party.castingCharacter ];
+
 }
 
 export default slice.reducer;

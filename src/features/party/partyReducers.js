@@ -136,6 +136,15 @@ export default {
     
   },
 
+  deactivateSpell: ( state, action ) => {
+
+    state.activeSpell = null;
+    state.castingSpell = false;
+    state.castingCharacter = null;
+    state.closeMenu = true;
+
+  },
+
   setApplyItem: ( state, action ) => {
 
     state.applyingItem = action.payload.applying;
@@ -168,7 +177,13 @@ export default {
 
   setCastingSpell: ( state, action ) => {
 
-    state.castingSpell = action.payload.spell;
+    console.log( action );
+
+    state.activeSpell = action.payload.spell;
+
+    state.castingSpell = true;
+
+    state.castingCharacter = action.payload.spellCasterId;
 
   }
   
