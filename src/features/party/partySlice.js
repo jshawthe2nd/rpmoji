@@ -3,6 +3,11 @@ import { createSlice } from '@reduxjs/toolkit';
 import partyReducers from './partyReducers';
 import characterReducers from '../character/characterReducers';
 
+
+//TODO:   Add a 'setPartyOrder' action which would update the 
+//        characters object with the appropriate order
+//
+
 export const slice = createSlice({
   name: 'party',
   initialState: {
@@ -318,7 +323,8 @@ export const slice = createSlice({
     selectedItem: null,
     castingSpell: false,
     activeSpell: null,
-    castingCharacter: null
+    castingCharacter: null,
+    partyHero: 123
   },
   reducers: {
     ...partyReducers,
@@ -446,6 +452,12 @@ export const selectCastingCharacter = ( state ) => {
   console.log(state.party.characters[ state.party.castingCharacter ]);
 
   return state.party.characters[ state.party.castingCharacter ];
+
+}
+
+export const selectPartyHero = ( state ) => {
+
+  return state.party.characters[ state.party.partyHero ];
 
 }
 

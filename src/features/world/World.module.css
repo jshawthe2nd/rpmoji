@@ -1,0 +1,8 @@
+.camera {
+    width: 720px;
+    height: 480px;
+    overflow: hidden;
+    background: #ccc;
+    position: relative;
+}
+

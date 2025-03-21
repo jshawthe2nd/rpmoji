@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import styles from './Menu.module.css';
 
 import { Icon } from '../../icons/Icon';
-import { setCastingSpell, selectCastingCharacter, deactivateSpell } from '../party/partySlice';
+import { setCastingSpell } from '../party/partySlice';
 
 
 
@@ -17,8 +17,6 @@ export function SpellMenu( { spells, spellCasterId } ) {
     return state.party.characters[ spellCasterId ];
 
   } ); 
-
-  console.log(char);
 
   const [ spellToCast, setSpellToCast ] = useState( { } );
 

@@ -2,6 +2,14 @@ import {
   getTypeOfItem
 } from '../party/partyUtils';
 
+/**
+ * TODOS: 
+ *        1.  Establish reducer for setting the "lead" and/or re-ordering
+ *            party members, similar to the way Final Fantasy would allow
+ * 
+ *        2.  Update partySlice to help the party-reordering feature
+ */
+
 export default {
   incrementItemQty: ( state, action ) => {
     
@@ -176,8 +184,6 @@ export default {
   },
 
   setCastingSpell: ( state, action ) => {
-
-    console.log( action );
 
     state.activeSpell = action.payload.spell;
 
