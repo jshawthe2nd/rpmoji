@@ -39,8 +39,6 @@ export function SpellMenu( { spells, spellCasterId } ) {
     <div className={ styles.spellMenu }>
       { spells.map( ( spell, index ) => {
 
-        if( spell.type === 'cure' ) {
-
           return (
             <div key={ index } 
             className={ `
@@ -63,8 +61,6 @@ export function SpellMenu( { spells, spellCasterId } ) {
               { spell.label }
             </div>
           )
-          
-        }
 
         return true;
 
